@@ -1,0 +1,150 @@
+.timesheet-container {
+  padding: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.header-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+.company-info p,
+.employee-info p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.timesheet-table {
+  width: 100%;
+}
+
+th.mat-header-cell {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  color: #333;
+  font-size: 13px;
+}
+
+td.mat-cell {
+  font-size: 13px;
+  padding: 8px 16px;
+}
+
+.weekend-row {
+  background-color: #fafafa;
+  color: #999;
+}
+
+tr.mat-row:hover {
+  background-color: #f0f4ff;
+}
+.timesheet-table {
+  width: 100%;
+  margin-top: 40px; /* change this to whatever size you want */
+}
+
+
+.full-width textarea {
+  width: 80%;
+  min-height: 30px;
+}
+
+/* Override Angular Material default width */
+.task-description .mat-mdc-form-field {
+  width: 80%;
+}
+
+.table-datepicker {
+  width: 160px;
+  font-size: 12px;
+}
+
+.table-datepicker .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+/* Date picker and time picker inside table cells */
+.table-datepicker,
+.table-timepicker {
+  width: 150px;
+  font-size: 12px;
+}
+
+/* Remove extra spacing below the fields */
+.table-datepicker .mat-mdc-form-field-subscript-wrapper,
+.table-timepicker .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+/* Reduce internal padding of the input */
+.table-datepicker .mat-mdc-text-field-wrapper,
+.table-timepicker .mat-mdc-text-field-wrapper {
+  padding: 0 8px;
+}
+
+/* Reduce height of the form field */
+.table-datepicker .mat-mdc-form-field-infix,
+.table-timepicker .mat-mdc-form-field-infix {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  min-height: 40px;
+}
+
+/* Reduce font size of input */
+.table-datepicker input,
+.table-timepicker input {
+  font-size: 12px;
+}
+
+/* Remove label padding */
+.table-datepicker .mat-mdc-floating-label,
+.table-timepicker .mat-mdc-floating-label {
+  font-size: 12px;
+}
+
+/* Table cell padding */
+td.mat-mdc-cell {
+  padding: 4px 8px !important;
+  vertical-align: middle;
+}
+
+th.mat-mdc-header-cell {
+  padding: 8px !important;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* Footer row styling */
+td.mat-mdc-footer-cell {
+  padding: 8px !important;
+  font-weight: bold;
+  font-size: 13px;
+  background-color: #f5f5f5;
+}
+
+.reference-label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+.reference-label span {
+  background-color: #f0f4ff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid #c5cae9;
+}

@@ -1,25 +1,28 @@
 <div class="login-container">
-    <img 
-          src="assets/images/DEPARTMENT-OF-PUBLIC-WORKS-INFRASTRUCTURE.png" 
-          alt="Department of Public Works and Infrastructure - Republic of South Africa"
-          class="logo"/>
-
+  <img src="loginbackground.jpec" alt="">
 
   <mat-card>
+       <img src="logo.jpeg" alt="Department of Public Works and Infrastructure - Republic of South Africa"
+    class="logo" />
+   
     <mat-card-content>
-      <form color="primary">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
         <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
-          <input matInput formControlName="username" />
+          <input matInput formControlName="userName" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password" />
+          <input matInput type="password" formControlName="userPassword" />
         </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit">Login</button>
+        <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
+          {{ isLoading ? 'Logging in...' : 'Login' }}
+        </button>
 
         <p class="signup-link">Don't have an account? <a routerLink="/signup">Sign up</a></p>
 
