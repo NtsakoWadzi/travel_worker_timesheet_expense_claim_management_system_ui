@@ -58,4 +58,22 @@ export class AuthService {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('user');
   }
+
+
+  // auth.service.ts (add these methods)
+
+// Check if the current user has a "manager" role
+// auth.service.ts
+isManager(): boolean {
+  const user = this.getUser();
+  if (!user || !user.role || !Array.isArray(user.role)) return false;
+  return user.role.some((r: any) => r.roleName === 'Manager');
+}
+
+getPrimaryRole(): string {
+  const user = this.getUser();
+  if (!user || !user.role || user.role.length === 0) return '';
+  // Adjust based on your role structure
+  return user.role[0]?.authority || user.role[0];
+}
 }

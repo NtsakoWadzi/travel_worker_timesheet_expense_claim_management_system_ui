@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 export interface TimesheetRow {
   date: string;
@@ -16,6 +17,7 @@ export interface TimesheetRow {
   styleUrl: './timesheet.css',
 })
 export class Timesheet implements OnInit {
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     //this.timesheetReferenceNumber = this.generateReferenceNumber(); this will be used in the claims component
@@ -24,7 +26,6 @@ export class Timesheet implements OnInit {
 
   timesheetReferenceNumber: string = '';
   employeeName: string = 'Bob Smith';
-
 
   displayedColumns: string[] = [
     'date','worklocation' ,'starttime', 'endtime', 'totalWorkHours'
@@ -85,7 +86,9 @@ calculateGrandTotal(): void {
 //   const max = 999999;
 //   return Math.floor(Math.random() * (max - min + 1) + min).toString();
 // }
-
+onSubmitclick(){
+  this.router.navigate(['/claims']);
+}
 
   
 }

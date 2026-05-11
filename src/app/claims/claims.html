@@ -1,0 +1,54 @@
+<div class="claims-container">
+  <div class="claims-header">
+    <h2>Choose from the categories below</h2>
+  </div>
+  <div class="claims-list">
+    <mat-selection-list #claims>
+      @for (claim of typesOfClaims; track claim) {
+        <mat-list-option>{{ claim }}</mat-list-option>
+      }
+    </mat-selection-list>
+    <p class="selected-count">
+      Options selected: {{ claims.selectedOptions.selected.length }}
+    </p>
+    <div
+      class="dropzone"
+      appDrag
+      (files)="fileDropped($event)"
+    >
+      <input
+        #selectFile
+        type="file"
+        hidden
+        accept="image/*,.pdf"
+        (change)="onFileSelected($event)"
+      />
+      <div class="textdropzone">
+        Drag and drop file or
+        <a
+          class="browse"
+          href="javascript:void(0)"
+          (click)="selectFile.click()"
+        > browse </a>a file
+      </div>
+    </div>
+    @if (singleclaim.claimImages.length > 0) {
+      <div class="preview-list">
+        @for (image of singleclaim.claimImages; track image.file.name; let i = $index) {
+          <div class="preview-item">
+            <span>{{ image.file.name }}</span>
+            <button
+              type="button"
+              mat-button
+              color="warn"
+              (click)="removeImages(i)"
+            > Remove </button>
+          </div>
+        }
+      </div>
+    }
+    <div class="btn-right">
+      <button type="button" mat-raised-button color="primary">Submit Claim  </button>
+    </div>
+  </div>
+</div>

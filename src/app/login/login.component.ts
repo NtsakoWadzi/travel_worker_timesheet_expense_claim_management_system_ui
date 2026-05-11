@@ -1,99 +1,65 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
 import { Router } from '@angular/router';
-
 import { AuthService } from '../services/auth';
 
- 
-
 @Component({
-
   selector: 'app-login',
-
   standalone: false,
-
   templateUrl: './login.html',
-
   styleUrls: ['./login.css'],
-
 })
 
 export class LoginComponent implements OnInit {
-
   loginForm!: FormGroup;
-
   errorMessage = '';
-
   isLoading = false;
-
- 
-
   constructor(
-
     private authService: AuthService,
-
     private router: Router
-
-  ) {}
-
- 
+  ) { }
 
   ngOnInit() {
-
     this.loginForm = new FormGroup({
-
       userName: new FormControl('', Validators.required),
-
       userPassword: new FormControl('', Validators.required),
-
     });
-
   }
 
- 
+ onSubmit() {
+  if (this.loginForm.invalid) return;
+  this.isLoading = true;
+  this.errorMessage = '';
 
-  onSubmit() {
+  const { userName, userPassword } = this.loginForm.value;
 
-    if (this.loginForm.invalid) return;
+  this.authService.login(userName, userPassword).subscribe({
+    next: (response) => {
+      console.log('Full response:', response); // Debug: see entire response
+      console.log('User object:', response.user);
+      console.log('Role array:', response.user.role);
 
- 
+      this.authService.saveToken(response.jwtToken);
+      this.authService.saveUser(response.user);
 
-    this.isLoading = true;
+      // Check isManager after saving
+      console.log('Is manager?', this.authService.isManager());
 
-    this.errorMessage = '';
-
- 
-
-    const { userName, userPassword } = this.loginForm.value;
-
- 
-
-    this.authService.login(userName, userPassword).subscribe({
-
-      next: (response) => {
-
-        this.authService.saveToken(response.jwtToken);
-
-        this.authService.saveUser(response.user);
-
+      if (this.authService.isManager()) {
+        console.log('Navigating to approve-claims');
+        this.router.navigate(['/approve-claims']);
+      } else {
+        console.log('Navigating to timesheet');
         this.router.navigate(['/timesheet']);
+      }
 
-      },
-
-      error: (err) => {
-
-        this.isLoading = false;
-
-        this.errorMessage = 'Invalid username or password';
-
-        console.error(err);
-
-      },
-
-    });
-
-  }
-
+      this.isLoading = false;
+    },
+    error: (err) => {
+      this.isLoading = false;
+      this.errorMessage = 'Invalid username or password';
+      console.error(err);
+    },
+  });
+}
 }

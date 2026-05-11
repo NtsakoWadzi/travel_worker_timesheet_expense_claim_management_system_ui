@@ -1,4 +1,3 @@
-
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -7,11 +6,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';
 
-import { MatTableModule } from '@angular/material/table'
+import { MatTableModule } from '@angular/material/table';
 
 import { FormsModule } from '@angular/forms';
- 
-import {MatDatepickerModule} from '@angular/material/datepicker';
+
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { MatInputModule } from '@angular/material/input';
 
@@ -21,7 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { MatCardModule } from '@angular/material/card';
 
- import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing-module';
 
@@ -31,29 +30,22 @@ import { LoginComponent } from './login/login.component';
 
 import { Timesheet } from './timesheet/timesheet';
 
-
 import { MatIconModule } from '@angular/material/icon';
 
-
-import {MatTimepickerModule } from '@angular/material/timepicker';
+import { MatTimepickerModule } from '@angular/material/timepicker';
 import { MatSelectModule } from '@angular/material/select';
- 
+import { Claims } from './claims/claims';
+import { MatListModule } from '@angular/material/list';
+import { DragDirective } from './drag/drag';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ApproveClaims } from './approve-claims/approve-claims';
 
 @NgModule({
-
-  declarations: [
-
-    App,
-
-    LoginComponent,
-
-    Timesheet,
-
-  ],
+  declarations: [App, LoginComponent, Timesheet, Claims, DragDirective, ApproveClaims],
 
   imports: [
-
     BrowserModule,
+    BrowserAnimationsModule,
 
     AppRoutingModule,
 
@@ -69,41 +61,25 @@ import { MatSelectModule } from '@angular/material/select';
 
     MatCardModule,
 
-     MatTableModule,
+    MatTableModule,
 
-     MatDatepickerModule,
-     
-     FormsModule,
+    MatDatepickerModule,
 
+    FormsModule,
 
-MatNativeDateModule,
+    MatNativeDateModule,
 
-MatIconModule,
+    MatIconModule,
 
-MatTimepickerModule,
+    MatTimepickerModule,
 
-MatSelectModule
-
-
-
-
- 
-
-
+    MatSelectModule,
+    MatListModule,
+    MatOptionModule,
   ],
 
-  providers: [
+  providers: [provideBrowserGlobalErrorListeners()],
 
-    provideBrowserGlobalErrorListeners(),
-
-  ],
-
-  bootstrap: [
-
-    App,
-
-  ],
-
+  bootstrap: [App],
 })
-
 export class AppModule {}
