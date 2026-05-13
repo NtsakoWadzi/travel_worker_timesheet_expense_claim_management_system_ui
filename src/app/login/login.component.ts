@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth';
+import { ClaimsService } from '../services/claims-service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   isLoading = false;
   constructor(
     private authService: AuthService,
+    private claimsService: ClaimsService,
     private router: Router
   ) { }
 
@@ -48,12 +50,20 @@ export class LoginComponent implements OnInit {
       if (this.authService.isManager()) {
         console.log('Navigating to approve-claims');
         this.router.navigate(['/approve-claims']);
+        this.isLoading = false;
       } else {
         console.log('Navigating to timesheet');
-        this.router.navigate(['/timesheet']);
+        this.claimsService.refreshClaimStatus(response.user.userId).subscribe({
+          next: () => {
+            this.router.navigate(['/timesheet']);
+            this.isLoading = false;
+          },
+          error: () => {
+            this.router.navigate(['/timesheet']);
+            this.isLoading = false;
+          },
+        });
       }
-
-      this.isLoading = false;
     },
     error: (err) => {
       this.isLoading = false;

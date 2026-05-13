@@ -39,13 +39,16 @@ import { MatListModule } from '@angular/material/list';
 import { DragDirective } from './drag/drag';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ApproveClaims } from './approve-claims/approve-claims';
+import { HttpClientModule } from '@angular/common/http';
+import { ClaimStatus } from './claim-status/claim-status';
 
 @NgModule({
-  declarations: [App, LoginComponent, Timesheet, Claims, DragDirective, ApproveClaims],
+  declarations: [App, LoginComponent, Timesheet, Claims, DragDirective, ApproveClaims, ClaimStatus],
 
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
 
     AppRoutingModule,
 

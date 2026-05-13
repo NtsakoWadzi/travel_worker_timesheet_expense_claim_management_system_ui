@@ -1,1 +1,178 @@
-<p>approve-claims works!</p>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="Manager navigation">
+    <div class="sidebar-brand">
+      <img src="logo.jpeg" alt="Department of Public Works and Infrastructure" />
+      <div>
+        <strong>Travel Worker</strong>
+        <span>Manager Portal</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button type="button" class="nav-item active" (click)="goToApprovals()">
+        <mat-icon>fact_check</mat-icon>
+        <span>Claims</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-summary">
+        <mat-icon>supervisor_account</mat-icon>
+        <div>
+          <strong>{{ managerName }}</strong>
+          <span>Manager</span>
+        </div>
+      </div>
+      <button type="button" class="nav-item logout" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="manager-container">
+    <header class="manager-header">
+      <div>
+        <h2>Submitted Claims</h2>
+        <p>Review claims submitted by employees.</p>
+      </div>
+      <button type="button" mat-raised-button color="primary" (click)="loadClaims()" [disabled]="isLoading">
+        {{ isLoading ? 'Loading...' : 'Refresh' }}
+      </button>
+    </header>
+
+    @if (errorMessage) {
+      <p class="error-message">{{ errorMessage }}</p>
+    }
+
+    @if (!isLoading && claims.length === 0 && !errorMessage) {
+      <section class="empty-state">
+        <mat-icon>inbox</mat-icon>
+        <p>No claims have been submitted yet.</p>
+      </section>
+    }
+
+    @if (claims.length > 0) {
+      <section class="claims-table">
+        <div class="table-row table-head">
+          <span>Claim Reference</span>
+          <span>User Name</span>
+          <span>Claim Date</span>
+          <span>Categories</span>
+          <span>Status</span>
+          <span>Documents</span>
+          <span>Actions</span>
+        </div>
+
+        @for (claim of claims; track claim.claimId) {
+          <div class="table-row">
+            <span>{{ claim.claimReference || '-' }}</span>
+            <span>{{ claim.userName || '-' }}</span>
+            <span>{{ formatDate(claim.claimDate || claim.ClaimDate) }}</span>
+            <span>{{ claim.categories }}</span>
+            <span class="status">{{ claim.status || 'Submitted' }}</span>
+            <span class="actions">
+              <button type="button" mat-button color="primary" (click)="viewImages(claim)">View Images</button>
+              <button type="button" mat-button color="primary" (click)="calculateClaim(claim)">Calculate</button>
+            </span>
+            <span class="actions">
+              <button type="button" mat-button color="primary" (click)="updateStatus(claim, 'Approved')">Approve</button>
+              <button type="button" mat-button color="warn" (click)="updateStatus(claim, 'Rejected')">Reject</button>
+            </span>
+          </div>
+        }
+      </section>
+    }
+  </main>
+</div>
+
+@if (isImageDialogOpen) {
+  <div class="image-dialog-backdrop" role="presentation" (click)="closeImageDialog()">
+    <section class="image-dialog" role="alertdialog" aria-modal="true" [attr.aria-label]="imageDialogTitle" (click)="$event.stopPropagation()">
+      <header class="image-dialog-header">
+        <h3>{{ imageDialogTitle }}</h3>
+        <button type="button" mat-icon-button aria-label="Close image preview" (click)="closeImageDialog()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </header>
+
+      @if (isLoadingImages) {
+        <p class="image-dialog-message">Click here to see images...</p>
+      }
+
+      @if (!isLoadingImages && imageDialogMessage) {
+        <p class="image-dialog-message">{{ imageDialogMessage }}</p>
+      }
+
+      @if (!isLoadingImages && imagePreviews.length > 0) {
+        <div class="image-preview-grid">
+          @for (image of imagePreviews; track image.url) {
+            <figure class="image-preview-item">
+              @if (image.isImage) {
+                <img [src]="image.url" [alt]="image.fileName" />
+              } @else {
+                <a [href]="image.url" target="_blank" rel="noopener">{{ image.fileName }}</a>
+              }
+              <figcaption>{{ image.fileName }}</figcaption>
+            </figure>
+          }
+        </div>
+      }
+
+      <footer class="image-dialog-actions">
+        <button type="button" mat-raised-button color="primary" (click)="closeImageDialog()">Close</button>
+      </footer>
+    </section>
+  </div>
+}
+
+@if (isCalculationDialogOpen) {
+  <div class="image-dialog-backdrop" role="presentation" (click)="closeCalculationDialog()">
+    <section class="image-dialog" role="dialog" aria-modal="true" aria-label="Claim calculation" (click)="$event.stopPropagation()">
+      <header class="image-dialog-header">
+        <h3>Claim Calculation</h3>
+        <button type="button" mat-icon-button aria-label="Close calculation" (click)="closeCalculationDialog()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </header>
+
+      @if (isCalculating) {
+        <p class="image-dialog-message">Calculating claim details...</p>
+      }
+
+      @if (!isCalculating && calculation) {
+        <div class="calculation-body">
+          <div class="calculation-total">
+            <span>Claim {{ calculation.claimReference || calculation.claimId }}</span>
+            <strong>{{ formatCurrency(calculation.totalAmount) }}</strong>
+          </div>
+
+          @for (detail of calculation.details; track detail.claimDetailId) {
+            <div class="calculation-detail">
+              <strong>{{ detail.category }} {{ detail.detailType ? '- ' + detail.detailType : '' }}</strong>
+              @if (detail.description) {
+                <p>{{ detail.description }}</p>
+              }
+              @if (detail.kilometers) {
+                <p>Distance: {{ detail.kilometers }} km</p>
+              }
+              @if (detail.receiptTime) {
+                <p>Receipt time: {{ detail.receiptTime }}</p>
+              }
+              <p>Claimed: {{ formatCurrency(detail.amount) }}</p>
+              @if (detail.allowedAmount) {
+                <p>Allowed: {{ formatCurrency(detail.allowedAmount) }}</p>
+              }
+              <p>Included: {{ formatCurrency(detail.reimbursableAmount) }}</p>
+            </div>
+          }
+        </div>
+      }
+
+      <footer class="image-dialog-actions">
+        <button type="button" mat-button color="warn" (click)="closeCalculationDialog()">Close</button>
+        <button type="button" mat-raised-button color="primary" (click)="closeCalculationDialog()">Done</button>
+      </footer>
+    </section>
+  </div>
+}

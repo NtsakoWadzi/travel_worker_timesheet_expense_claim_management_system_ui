@@ -1,13 +1,74 @@
-<div class="claims-container">
-  <div class="claims-header">
-    <h2>Choose from the categories below</h2>
-  </div>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="Claims navigation">
+    <div class="sidebar-brand">
+      <img src="logo.jpeg" alt="Department of Public Works and Infrastructure" />
+      <div>
+        <strong>Travel Worker</strong>
+        <span>Claims Portal</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button type="button" class="nav-item" (click)="goToTimesheet()">
+        <mat-icon>schedule</mat-icon>
+        <span>Timesheet</span>
+      </button>
+      <button type="button" class="nav-item active" (click)="goToClaims()">
+        <mat-icon>receipt_long</mat-icon>
+        <span>Claims</span>
+      </button>
+      <button type="button" class="nav-item" (click)="goToClaimStatus()">
+        <mat-icon>fact_check</mat-icon>
+        <span>Status</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-summary">
+        <mat-icon>account_circle</mat-icon>
+        <div>
+          <strong>{{ employeeName }}</strong>
+          <span>Employee</span>
+        </div>
+      </div>
+      <button type="button" class="nav-item logout" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="claims-container">
+    <div class="claims-header">
+      <h2>Submit Claim</h2>
+      <p>Select the claim categories and attach supporting documents.</p>
+    </div>
+
   <div class="claims-list">
+    <mat-form-field appearance="outline">
+      <mat-label>Claim Date</mat-label>
+      <input matInput [matDatepicker]="claimDatePicker" [(ngModel)]="singleclaim.ClaimDate">
+      <mat-datepicker-toggle matIconSuffix [for]="claimDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #claimDatePicker></mat-datepicker>
+    </mat-form-field>
+
     <mat-selection-list #claims>
       @for (claim of typesOfClaims; track claim) {
-        <mat-list-option>{{ claim }}</mat-list-option>
+        <mat-list-option [value]="claim">
+          {{ claim }}
+          @if (hasClaimDetail(claim)) {
+            <span class="detail-saved">Details saved</span>
+          }
+        </mat-list-option>
       }
     </mat-selection-list>
+    <div class="detail-actions">
+      @for (claim of claims.selectedOptions.selected; track claim.value) {
+        <button type="button" mat-button color="primary" (click)="openDetailDialog(claim.value)">
+          {{ hasClaimDetail(claim.value) ? 'Edit' : 'Add' }} {{ claim.value }} Details
+        </button>
+      }
+    </div>
     <p class="selected-count">
       Options selected: {{ claims.selectedOptions.selected.length }}
     </p>
@@ -47,8 +108,158 @@
         }
       </div>
     }
+    @if (errorMessage) {
+      <p class="error-message">{{ errorMessage }}</p>
+    }
+    @if (successMessage) {
+      <p class="success-message">{{ successMessage }}</p>
+    }
     <div class="btn-right">
-      <button type="button" mat-raised-button color="primary">Submit Claim  </button>
+      <button
+        type="button"
+        mat-raised-button
+        color="primary"
+        [disabled]="isSubmitting"
+        (click)="submitClaim(claims.selectedOptions.selected.map(option => option.value))"
+      >
+        {{ isSubmitting ? 'Submitting...' : 'Submit Claim' }}
+      </button>
     </div>
   </div>
+</main>
 </div>
+
+@if (isConfirmationDialogOpen) {
+  <div class="claim-dialog-backdrop" role="presentation" (click)="closeConfirmationDialog()">
+    <section class="claim-dialog" role="alertdialog" aria-modal="true" aria-label="Claim submitted" (click)="$event.stopPropagation()">
+      <header class="claim-dialog-header">
+        <div class="claim-dialog-title">
+          <mat-icon>task_alt</mat-icon>
+          <h3>Claim Submitted</h3>
+        </div>
+        <button type="button" mat-icon-button aria-label="Close confirmation" (click)="closeConfirmationDialog()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </header>
+
+      <div class="claim-dialog-body">
+        <p>Your claim will be processed by the manager.</p>
+        <div class="reference-panel">
+          <span>Claim Reference</span>
+          <strong>{{ submittedClaimReference }}</strong>
+        </div>
+      </div>
+
+      <footer class="claim-dialog-actions">
+        <button type="button" mat-raised-button color="primary" (click)="closeConfirmationDialog()">Done</button>
+      </footer>
+    </section>
+  </div>
+}
+
+@if (isDetailDialogOpen) {
+  <div class="claim-dialog-backdrop" role="presentation" (click)="closeDetailDialog()">
+    <section class="claim-dialog" role="dialog" aria-modal="true" aria-label="Claim detail" (click)="$event.stopPropagation()">
+      <header class="claim-dialog-header">
+        <div class="claim-dialog-title">
+          <mat-icon>edit_note</mat-icon>
+          <h3>{{ activeDetailCategory }} Details</h3>
+        </div>
+        <button type="button" mat-icon-button aria-label="Close details" (click)="closeDetailDialog()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </header>
+
+      <div class="claim-dialog-body">
+        @if (activeDetailCategory === 'Distance Travelled') {
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Kilometers travelled</mat-label>
+            <input matInput type="number" min="0" [(ngModel)]="detailForm.kilometers">
+          </mat-form-field>
+        }
+
+        @if (activeDetailCategory === 'Meals') {
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Meal type</mat-label>
+            <mat-select [(ngModel)]="detailForm.detailType" (ngModelChange)="onMealTypeChanged()">
+              @for (mealType of mealTypes; track mealType) {
+                <mat-option [value]="mealType">{{ mealType }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <div class="receipt-ai-panel">
+            <input #detailReceipt type="file" hidden accept="image/*" (change)="onDetailReceiptSelected($event)" />
+            <button type="button" mat-stroked-button color="primary" [disabled]="isAnalyzingReceipt" (click)="detailReceipt.click()">
+              <mat-icon>auto_awesome</mat-icon>
+              {{ isAnalyzingReceipt ? 'Reading Slip...' : 'Upload Slip for AI Reading' }}
+            </button>
+            @if (detailForm.receiptFileName) {
+              <span>{{ detailForm.receiptFileName }}</span>
+            }
+          </div>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Receipt time</mat-label>
+            <input matInput type="time" [(ngModel)]="detailForm.receiptTime" (ngModelChange)="onReceiptTimeChanged()">
+          </mat-form-field>
+          @if (mealTypeErrorMessage) {
+            <p class="meal-validation-message">
+              <mat-icon>error_outline</mat-icon>
+              <span>{{ mealTypeErrorMessage }}</span>
+            </p>
+          }
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Receipt amount</mat-label>
+            <input matInput type="number" min="0" [(ngModel)]="detailForm.amount">
+          </mat-form-field>
+        }
+
+        @if (activeDetailCategory === 'Toll Fees') {
+          <div class="receipt-ai-panel">
+            <input #detailReceipt type="file" hidden accept="image/*" (change)="onDetailReceiptSelected($event)" />
+            <button type="button" mat-stroked-button color="primary" [disabled]="isAnalyzingReceipt" (click)="detailReceipt.click()">
+              <mat-icon>auto_awesome</mat-icon>
+              {{ isAnalyzingReceipt ? 'Reading Slip...' : 'Upload Slip for AI Reading' }}
+            </button>
+            @if (detailForm.receiptFileName) {
+              <span>{{ detailForm.receiptFileName }}</span>
+            }
+          </div>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Toll receipt amount</mat-label>
+            <input matInput type="number" min="0" [(ngModel)]="detailForm.amount">
+          </mat-form-field>
+        }
+
+        @if (activeDetailCategory === 'Other') {
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput rows="3" [(ngModel)]="detailForm.description"></textarea>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Receipt amount</mat-label>
+            <input matInput type="number" min="0" [(ngModel)]="detailForm.amount">
+          </mat-form-field>
+          <div class="receipt-ai-panel">
+            <input #detailReceipt type="file" hidden accept="image/*" (change)="onDetailReceiptSelected($event)" />
+            <button type="button" mat-stroked-button color="primary" [disabled]="isAnalyzingReceipt" (click)="detailReceipt.click()">
+              <mat-icon>auto_awesome</mat-icon>
+              {{ isAnalyzingReceipt ? 'Reading Slip...' : 'Upload Slip for AI Reading' }}
+            </button>
+            @if (detailForm.receiptFileName) {
+              <span>{{ detailForm.receiptFileName }}</span>
+            }
+          </div>
+        }
+
+        @if (receiptAnalysisMessage) {
+          <p class="receipt-ai-message" [class.loading]="isAnalyzingReceipt">{{ receiptAnalysisMessage }}</p>
+        }
+      </div>
+
+      <footer class="claim-dialog-actions">
+        <button type="button" mat-button (click)="closeDetailDialog()">Close</button>
+        <button type="button" mat-raised-button color="primary" [disabled]="isMealTypeInvalid()" (click)="saveClaimDetail()">Save Claim Details</button>
+      </footer>
+    </section>
+  </div>
+}

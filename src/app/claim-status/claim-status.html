@@ -1,0 +1,116 @@
+<div class="app-shell">
+  <aside class="sidebar" aria-label="Claim status navigation">
+    <div class="sidebar-brand">
+      <img src="logo.jpeg" alt="Department of Public Works and Infrastructure" />
+      <div>
+        <strong>Travel Worker</strong>
+        <span>Claims Portal</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button type="button" class="nav-item" (click)="goToTimesheet()">
+        <mat-icon>schedule</mat-icon>
+        <span>Timesheet</span>
+      </button>
+      <button type="button" class="nav-item" (click)="goToClaims()">
+        <mat-icon>receipt_long</mat-icon>
+        <span>Claims</span>
+      </button>
+      <button type="button" class="nav-item active" (click)="goToClaimStatus()">
+        <mat-icon>fact_check</mat-icon>
+        <span>Status</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-summary">
+        <mat-icon>account_circle</mat-icon>
+        <div>
+          <strong>{{ employeeName }}</strong>
+          <span>Employee</span>
+        </div>
+      </div>
+      <button type="button" class="nav-item logout" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="status-container">
+    <header class="status-header">
+      <div>
+        <h2>Claim Status</h2>
+        <p>Track manager decisions for your submitted claims.</p>
+      </div>
+      <button type="button" mat-raised-button color="primary" [disabled]="isLoading" (click)="loadClaims()">
+        {{ isLoading ? 'Loading...' : 'Refresh' }}
+      </button>
+    </header>
+
+    @if (latestDecision) {
+      <section class="decision-banner" [class.rejected]="isRejected(latestDecision)">
+        <mat-icon>{{ getStatusIcon(latestDecision.status) }}</mat-icon>
+        <div>
+          <strong>
+            Claim {{ latestDecision.claimReference || latestDecision.claimId }} was {{ getStatusLabel(latestDecision.status) }}
+          </strong>
+          <span>
+            @if (isApproved(latestDecision)) {
+              Your claim has been approved by the manager.
+            } @else {
+              Your claim has been rejected by the manager.
+            }
+          </span>
+        </div>
+      </section>
+    }
+
+    <section class="status-summary">
+      <div class="summary-item">
+        <span>Submitted</span>
+        <strong>{{ hasLoadedClaims ? userSubmissionCount : '...' }}</strong>
+      </div>
+      <div class="summary-item approved">
+        <span>Approved</span>
+        <strong>{{ hasLoadedClaims ? approvedClaims.length : '...' }}</strong>
+      </div>
+      <div class="summary-item rejected">
+        <span>Rejected</span>
+        <strong>{{ hasLoadedClaims ? rejectedClaims.length : '...' }}</strong>
+      </div>
+    </section>
+
+    @if (errorMessage) {
+      <p class="error-message">{{ errorMessage }}</p>
+    }
+
+    @if (!isLoading && claims.length === 0 && !errorMessage) {
+      <section class="empty-state">
+        <mat-icon>inbox</mat-icon>
+        <p>No claims have been submitted yet.</p>
+      </section>
+    }
+
+    @if (claims.length > 0) {
+      <section class="status-list">
+        @for (claim of claims; track claim.claimId) {
+          <article class="status-card" [class.approved]="isApproved(claim)" [class.rejected]="isRejected(claim)">
+            <div class="status-icon">
+              <mat-icon>{{ getStatusIcon(claim.status) }}</mat-icon>
+            </div>
+            <div class="status-content">
+              <div class="status-card-head">
+                <strong>{{ claim.claimReference || '-' }}</strong>
+                <span>{{ getStatusLabel(claim.status) }}</span>
+              </div>
+              <p>{{ claim.categories }}</p>
+              <small>Claim date: {{ formatDate(claim.claimDate || claim.ClaimDate) }}</small>
+            </div>
+          </article>
+        }
+      </section>
+    }
+  </main>
+</div>

@@ -1,4 +1,44 @@
-<div class="timesheet-container">
+<div class="timesheet-page">
+    <aside class="sidebar" aria-label="Timesheet navigation">
+        <div class="sidebar-brand">
+            <img src="logo.jpeg" alt="Department of Public Works and Infrastructure" />
+            <div>
+                <strong>Travel Worker</strong>
+                <span>Claims Portal</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <button type="button" class="nav-item active" (click)="goToTimesheet()">
+                <mat-icon>schedule</mat-icon>
+                <span>Timesheet</span>
+            </button>
+            <button type="button" class="nav-item" (click)="goToClaims()">
+                <mat-icon>receipt_long</mat-icon>
+                <span>Claims</span>
+            </button>
+            <button type="button" class="nav-item" (click)="goToClaimStatus()">
+                <mat-icon>fact_check</mat-icon>
+                <span>Status</span>
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-summary">
+                <mat-icon>account_circle</mat-icon>
+                <div>
+                    <strong>{{ employeeName }}</strong>
+                    <span>Employee</span>
+                </div>
+            </div>
+            <button type="button" class="nav-item logout" (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <main class="timesheet-container">
     <h2 class="title">Timesheet</h2>
 
     <div class="header-info">
@@ -16,7 +56,7 @@
     <div class="task-description">
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Task Description</mat-label>
-            <textarea matInput rows="4" placeholder="Enter task description here..."></textarea>
+            <textarea matInput rows="4" placeholder="Enter task description here..." [(ngModel)]="taskDescription"></textarea>
         </mat-form-field>
     </div>
 
@@ -110,7 +150,18 @@
 
     <!-- Submit button aligned to the right -->
     <div class="btn-right">
-        <button mat-raised-button color="primary" (click)="onSubmitclick()">Submit</button>
+        <div class="submit-status">
+            @if (errorMessage) {
+                <p class="error-message">{{ errorMessage }}</p>
+            }
+            @if (successMessage) {
+                <p class="success-message">{{ successMessage }}</p>
+            }
+        </div>
+        <button mat-raised-button color="primary" [disabled]="isSubmitting" (click)="onSubmitclick()">
+            {{ isSubmitting ? 'Submitting...' : 'Submit' }}
+        </button>
     </div>
 
+</main>
 </div>

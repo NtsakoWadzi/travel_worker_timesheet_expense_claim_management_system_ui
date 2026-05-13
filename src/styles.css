@@ -1,1 +1,103 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  min-height: 100%;
+  background: #f3f4f6;
+}
+
+body {
+  margin: 0;
+  color: #333;
+}
+
+button[mat-raised-button].mat-primary,
+.mat-mdc-raised-button.mat-primary {
+  background-color: #f58220;
+  color: #fff;
+}
+
+.mat-mdc-form-field-focus-overlay {
+  background-color: rgba(245, 130, 32, 0.08);
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) {
+  color: #f58220;
+}
+
+@keyframes ui-hover-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+:where(
+  button:not(:disabled),
+  a,
+  .nav-item,
+  .claims-list,
+  .dropzone,
+  .preview-item,
+  .detail-saved,
+  .claim-dialog,
+  .image-dialog,
+  .mat-mdc-form-field,
+  .mat-mdc-list-option,
+  .mat-mdc-option,
+  .mat-mdc-card,
+  .table-row,
+  .claims-table,
+  .summary-item,
+  .status-card,
+  .decision-banner,
+  .empty-state,
+  .error-message,
+  .success-message,
+  .receipt-ai-panel,
+  .receipt-ai-message,
+  .meal-validation-message,
+  .reference-panel,
+  .calculation-total,
+  .calculation-detail,
+  .image-preview-item
+):hover {
+  animation: ui-hover-float 900ms ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(
+    button:not(:disabled),
+    a,
+    .nav-item,
+    .claims-list,
+    .dropzone,
+    .preview-item,
+    .detail-saved,
+    .claim-dialog,
+    .image-dialog,
+    .mat-mdc-form-field,
+    .mat-mdc-list-option,
+    .mat-mdc-option,
+    .mat-mdc-card,
+    .table-row,
+    .claims-table,
+    .summary-item,
+    .status-card,
+    .decision-banner,
+    .empty-state,
+    .error-message,
+    .success-message,
+    .receipt-ai-panel,
+    .receipt-ai-message,
+    .meal-validation-message,
+    .reference-panel,
+    .calculation-total,
+    .calculation-detail,
+    .image-preview-item
+  ):hover {
+    animation: none;
+  }
+}
