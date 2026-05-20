@@ -1,0 +1,65 @@
+<div class="claim-details-shell">
+  <aside class="sidebar" aria-label="Claim details navigation">
+    <div class="sidebar-brand">
+      <img src="logo.jpeg" alt="Department of Public Works and Infrastructure" />
+      <div>
+        <strong>Travel Worker</strong>
+        <span>Claims Portal</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button type="button" class="nav-item active" (click)="selectStep('timesheet')">
+        <mat-icon>receipt_long</mat-icon>
+        <span>Claim Details</span>
+      </button>
+      <button type="button" class="nav-item" (click)="goToClaimStatus()">
+        <mat-icon>fact_check</mat-icon>
+        <span>Status</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-summary">
+        <mat-icon>account_circle</mat-icon>
+        <div>
+          <strong>{{ employeeName }}</strong>
+          <span>Employee</span>
+        </div>
+      </div>
+      <button type="button" class="nav-item logout" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="claim-details-container">
+    <header class="claim-details-header">
+      <div>
+        <h1>DPWI S&T PW 1516 Subsistence and Travelling Claim Form.</h1>
+       
+      </div>
+    </header>
+
+    <mat-stepper #claimStepper class="claim-details-stepper" orientation="horizontal" [linear]="false">
+      <mat-step label="Personal Particulars">
+        <ng-template matStepContent>
+          <app-timesheet [embedded]="true" (stepRequested)="selectStep($event)"></app-timesheet>
+        </ng-template>
+      </mat-step>
+
+      <mat-step label="Claim">
+        <ng-template matStepContent>
+          <app-claims [embedded]="true" (stepRequested)="selectStep($event)"></app-claims>
+        </ng-template>
+      </mat-step>
+
+      <mat-step label="Allocation">
+        <ng-template matStepContent>
+          <app-bank-details [embedded]="true" (stepRequested)="selectStep($event)"></app-bank-details>
+        </ng-template>
+      </mat-step>
+    </mat-stepper>
+  </main>
+</div>

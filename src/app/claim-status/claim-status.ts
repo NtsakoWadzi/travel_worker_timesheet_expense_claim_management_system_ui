@@ -6,6 +6,9 @@ import { Claim } from '../Model/claim.model';
 import { AuthService } from '../services/auth';
 import { ClaimsService } from '../services/claims-service';
 
+type ClaimStatusFilter = 'all' | 'submitted' | 'approved' | 'rejected';
+type DateSortDirection = 'asc' | 'desc';
+
 @Component({
   selector: 'app-claim-status',
   standalone: false,
@@ -17,9 +20,20 @@ export class ClaimStatus implements OnInit, OnDestroy {
   employeeName = 'Employee';
   errorMessage = '';
   isLoading = true;
+  isRefreshing = false;
   hasLoadedClaims = false;
   userSubmissionCount = 0;
-  private refreshIntervalId?: number;
+  statusFilter: ClaimStatusFilter = 'all';
+  dateSortDirection: DateSortDirection = 'desc';
+  pageSize = 8;
+  pageIndex = 0;
+  readonly statusFilterOptions: { label: string; value: ClaimStatusFilter }[] = [
+    { label: 'All claims', value: 'all' },
+    { label: 'Submitted', value: 'submitted' },
+    { label: 'Approved', value: 'approved' },
+    { label: 'Rejected', value: 'rejected' },
+  ];
+  readonly pageSizeOptions = [5, 8, 10, 20];
   private routerSubscription?: Subscription;
   private summarySubscription?: Subscription;
   private visibilityChangeHandler = () => {
@@ -47,12 +61,16 @@ export class ClaimStatus implements OnInit, OnDestroy {
     }
 
     this.loadClaims();
-    this.refreshIntervalId = window.setInterval(() => this.loadClaims(false), 2000);
+    const userId = Number(this.authService.getUser()?.userId);
+    if (userId) {
+      this.claimsService.startClaimStatusAutoRefresh(userId);
+    }
     this.summarySubscription = this.claimsService.claimStatusSummary$.subscribe((summary) => {
       this.claims = summary.claims;
       this.userSubmissionCount = summary.submittedCount;
       this.hasLoadedClaims = summary.hasLoaded;
       this.isLoading = false;
+      this.clampPageIndex();
     });
     this.routerSubscription = this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
@@ -66,9 +84,6 @@ export class ClaimStatus implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.refreshIntervalId) {
-      window.clearInterval(this.refreshIntervalId);
-    }
     this.routerSubscription?.unsubscribe();
     this.summarySubscription?.unsubscribe();
     document.removeEventListener('visibilitychange', this.visibilityChangeHandler);
@@ -82,7 +97,8 @@ export class ClaimStatus implements OnInit, OnDestroy {
       return;
     }
 
-    this.isLoading = showLoading;
+    this.isLoading = showLoading && !this.hasLoadedClaims;
+    this.isRefreshing = showLoading;
     this.errorMessage = '';
 
     const userId = Number(user.userId);
@@ -90,6 +106,7 @@ export class ClaimStatus implements OnInit, OnDestroy {
     this.claimsService.refreshClaimStatus(userId).pipe(
       finalize(() => {
         this.isLoading = false;
+        this.isRefreshing = false;
       })
     ).subscribe({
       error: (error) => {
@@ -112,7 +129,35 @@ export class ClaimStatus implements OnInit, OnDestroy {
   }
 
   get latestDecision(): Claim | undefined {
-    return [...this.approvedClaims, ...this.rejectedClaims][0];
+    return this.sortClaimsByDate(
+      this.claims.filter((claim) => ['approved', 'rejected'].includes(this.getStatusValue(claim.status))),
+      'desc'
+    )[0];
+  }
+
+  get filteredClaims(): Claim[] {
+    const claims = this.statusFilter === 'all'
+      ? this.claims
+      : this.claims.filter((claim) => this.getStatusValue(claim.status) === this.statusFilter);
+
+    return this.sortClaimsByDate(claims, this.dateSortDirection);
+  }
+
+  get pagedClaims(): Claim[] {
+    const start = this.pageIndex * this.pageSize;
+    return this.filteredClaims.slice(start, start + this.pageSize);
+  }
+
+  get totalPages(): number {
+    return Math.max(1, Math.ceil(this.filteredClaims.length / this.pageSize));
+  }
+
+  get pageStart(): number {
+    return this.filteredClaims.length === 0 ? 0 : this.pageIndex * this.pageSize + 1;
+  }
+
+  get pageEnd(): number {
+    return Math.min((this.pageIndex + 1) * this.pageSize, this.filteredClaims.length);
   }
 
   formatDate(value: Date | string | undefined): string {
@@ -152,6 +197,58 @@ export class ClaimStatus implements OnInit, OnDestroy {
     return 'Submitted';
   }
 
+  getCategoriesLabel(categories: Claim['categories']): string {
+    return Array.isArray(categories) ? categories.join(', ') : categories || '-';
+  }
+
+  getManagerDecisionMessage(claim: Claim): string {
+    const explicitMessage = [
+      claim.managerMessage,
+      claim.decisionReason,
+      claim.statusReason,
+      claim.managerComment,
+      claim.managerRemarks,
+      claim.approvalReason,
+      claim.rejectionReason,
+    ].find((message) => typeof message === 'string' && message.trim().length > 0);
+
+    if (explicitMessage) {
+      return explicitMessage.trim();
+    }
+
+    if (this.isApproved(claim)) {
+      return 'Accepted by the manager because the claim passed review and the supporting details were accepted.';
+    }
+
+    if (this.isRejected(claim)) {
+      return 'Rejected by the manager because the claim requires correction or the supporting details were not accepted.';
+    }
+
+    return 'Awaiting manager review.';
+  }
+
+  onStatusFilterChanged(): void {
+    this.pageIndex = 0;
+  }
+
+  onPageSizeChanged(): void {
+    this.pageIndex = 0;
+    this.clampPageIndex();
+  }
+
+  toggleDateSort(): void {
+    this.dateSortDirection = this.dateSortDirection === 'desc' ? 'asc' : 'desc';
+    this.pageIndex = 0;
+  }
+
+  previousPage(): void {
+    this.pageIndex = Math.max(0, this.pageIndex - 1);
+  }
+
+  nextPage(): void {
+    this.pageIndex = Math.min(this.totalPages - 1, this.pageIndex + 1);
+  }
+
   isApproved(claim: Claim): boolean {
     return this.getStatusValue(claim.status) === 'approved';
   }
@@ -172,12 +269,31 @@ export class ClaimStatus implements OnInit, OnDestroy {
     return String(status).trim().toLowerCase();
   }
 
-  goToTimesheet(): void {
-    this.router.navigate(['/timesheet']);
+  private sortClaimsByDate(claims: Claim[], direction: DateSortDirection): Claim[] {
+    const multiplier = direction === 'desc' ? -1 : 1;
+
+    return [...claims].sort((a, b) => {
+      const dateDifference = this.getClaimTimestamp(a) - this.getClaimTimestamp(b);
+
+      if (dateDifference !== 0) {
+        return dateDifference * multiplier;
+      }
+
+      return Number(a.claimId || 0) > Number(b.claimId || 0) ? -1 : 1;
+    });
   }
 
-  goToClaims(): void {
-    this.router.navigate(['/claims']);
+  private getClaimTimestamp(claim: Claim): number {
+    const date = new Date(claim.claimDate || claim.ClaimDate || 0).getTime();
+    return Number.isNaN(date) ? 0 : date;
+  }
+
+  private clampPageIndex(): void {
+    this.pageIndex = Math.min(this.pageIndex, this.totalPages - 1);
+  }
+
+  goToClaimDetails(): void {
+    this.router.navigate(['/claim-details']);
   }
 
   goToClaimStatus(): void {
@@ -186,6 +302,7 @@ export class ClaimStatus implements OnInit, OnDestroy {
   }
 
   logout(): void {
+    this.claimsService.clearClaimStatus();
     this.authService.logout();
     this.router.navigate(['/']);
   }

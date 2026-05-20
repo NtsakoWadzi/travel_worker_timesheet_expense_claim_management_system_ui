@@ -60,8 +60,8 @@
           <span>Claim Date</span>
           <span>Categories</span>
           <span>Status</span>
-          <span>Documents</span>
-          <span>Actions</span>
+          <span>Review</span>
+          <span>Calculate</span>
         </div>
 
         @for (claim of claims; track claim.claimId) {
@@ -69,15 +69,13 @@
             <span>{{ claim.claimReference || '-' }}</span>
             <span>{{ claim.userName || '-' }}</span>
             <span>{{ formatDate(claim.claimDate || claim.ClaimDate) }}</span>
-            <span>{{ claim.categories }}</span>
+            <span>{{ getCategoryLabel(claim.categories) }}</span>
             <span class="status">{{ claim.status || 'Submitted' }}</span>
             <span class="actions">
-              <button type="button" mat-button color="primary" (click)="viewImages(claim)">View Images</button>
-              <button type="button" mat-button color="primary" (click)="calculateClaim(claim)">Calculate</button>
+              <button type="button" mat-button color="primary" (click)="viewClaim(claim)">View Claims</button>
             </span>
             <span class="actions">
-              <button type="button" mat-button color="primary" (click)="updateStatus(claim, 'Approved')">Approve</button>
-              <button type="button" mat-button color="warn" (click)="updateStatus(claim, 'Rejected')">Reject</button>
+              <button type="button" mat-button color="primary" (click)="calculateClaim(claim)">Calculate</button>
             </span>
           </div>
         }
@@ -86,42 +84,138 @@
   </main>
 </div>
 
-@if (isImageDialogOpen) {
-  <div class="image-dialog-backdrop" role="presentation" (click)="closeImageDialog()">
+@if (isReviewDialogOpen) {
+  <div class="image-dialog-backdrop" role="presentation" (click)="closeReviewDialog()">
     <section class="image-dialog" role="alertdialog" aria-modal="true" [attr.aria-label]="imageDialogTitle" (click)="$event.stopPropagation()">
       <header class="image-dialog-header">
         <h3>{{ imageDialogTitle }}</h3>
-        <button type="button" mat-icon-button aria-label="Close image preview" (click)="closeImageDialog()">
+        <button type="button" mat-icon-button aria-label="Close claim review" (click)="closeReviewDialog()">
           <mat-icon>close</mat-icon>
         </button>
       </header>
 
-      @if (isLoadingImages) {
-        <p class="image-dialog-message">Click here to see images...</p>
-      }
+      <div class="review-dialog-body">
+        @if (isLoadingReview) {
+          <p class="image-dialog-message">Loading claim review...</p>
+        }
 
-      @if (!isLoadingImages && imageDialogMessage) {
-        <p class="image-dialog-message">{{ imageDialogMessage }}</p>
-      }
+        @if (!isLoadingReview && selectedClaim) {
+          <section class="review-section">
+            <h4>Timesheet</h4>
+            @if (reviewTimesheets.length > 0) {
+              <div class="review-table timesheet-review-table">
+                <div class="review-row review-head">
+                  <span>Date</span>
+                  <span>Start</span>
+                  <span>End</span>
+                  <span>Hours</span>
+                  <span>Location</span>
+                  <span>Description</span>
+                </div>
+                @for (timesheet of reviewTimesheets; track getTimesheetTrackKey(timesheet)) {
+                  <div class="review-row">
+                    <span>{{ formatDate(timesheet.workDate) }}</span>
+                    <span>{{ formatDate(timesheet.startTime) }}</span>
+                    <span>{{ formatDate(timesheet.endTime) }}</span>
+                    <span>{{ getTimesheetTotalHours(timesheet) }}</span>
+                    <span>{{ timesheet.location || '-' }}</span>
+                    <span>{{ timesheet.description || '-' }}</span>
+                  </div>
+                }
+              </div>
+            } @else {
+              <p class="review-empty">No timesheet rows were found for this employee.</p>
+            }
+          </section>
 
-      @if (!isLoadingImages && imagePreviews.length > 0) {
-        <div class="image-preview-grid">
-          @for (image of imagePreviews; track image.url) {
-            <figure class="image-preview-item">
-              @if (image.isImage) {
-                <img [src]="image.url" [alt]="image.fileName" />
-              } @else {
-                <a [href]="image.url" target="_blank" rel="noopener">{{ image.fileName }}</a>
-              }
-              <figcaption>{{ image.fileName }}</figcaption>
-            </figure>
-          }
-        </div>
-      }
+          <section class="review-section">
+            <h4>Claim</h4>
+            <div class="claim-review-summary">
+              <span><strong>Reference:</strong> {{ selectedClaim.claimReference || selectedClaim.claimId || '-' }}</span>
+              <span><strong>Employee:</strong> {{ selectedClaim.userName || '-' }}</span>
+              <span><strong>Date:</strong> {{ formatDate(selectedClaim.claimDate || selectedClaim.ClaimDate) }}</span>
+              <span><strong>Categories:</strong> {{ getCategoryLabel(selectedClaim.categories) }}</span>
+              <span><strong>Status:</strong> {{ selectedClaim.status || 'Submitted' }}</span>
+            </div>
 
-      <footer class="image-dialog-actions">
-        <button type="button" mat-raised-button color="primary" (click)="closeImageDialog()">Close</button>
-      </footer>
+            @if (selectedClaim.claimDetails?.length) {
+              <div class="calculation-body review-claim-details">
+                @for (detail of selectedClaim.claimDetails; track detail.claimDetailId || detail.category + detail.detailType) {
+                  <div class="calculation-detail">
+                    <strong>{{ detail.category }} {{ detail.detailType ? '- ' + detail.detailType : '' }}</strong>
+                    @if (detail.description) {
+                      <p>{{ detail.description }}</p>
+                    }
+                    @if (detail.kilometers) {
+                      <p>Distance: {{ detail.kilometers }} km</p>
+                    }
+                    @if (detail.vehicleType) {
+                      <p>Vehicle type: {{ detail.vehicleType }}</p>
+                    }
+                    @if (detail.engineSizeCc) {
+                      <p>Engine size: {{ detail.engineSizeCc }} cc</p>
+                    }
+                    @if (detail.receiptTime) {
+                      <p>Receipt time: {{ detail.receiptTime }}</p>
+                    }
+                    @if (detail.amount || detail.reimbursableAmount) {
+                      <p>Amount: {{ formatCurrency(detail.amount || detail.reimbursableAmount) }}</p>
+                    }
+                  </div>
+                }
+              </div>
+            }
+
+            <h4>Uploaded Images</h4>
+            @if (!isLoadingImages && imageDialogMessage) {
+              <p class="review-empty">{{ imageDialogMessage }}</p>
+            }
+
+            @if (!isLoadingImages && imagePreviews.length > 0) {
+              <div class="image-preview-grid">
+                @for (image of imagePreviews; track image.url) {
+                  <figure class="image-preview-item">
+                    @if (image.isImage) {
+                      <img [src]="image.url" [alt]="image.fileName" />
+                    } @else {
+                      <a [href]="image.url" target="_blank" rel="noopener">{{ image.fileName }}</a>
+                    }
+                    <figcaption>{{ image.fileName }}</figcaption>
+                  </figure>
+                }
+              </div>
+            }
+          </section>
+
+          <section class="review-section">
+            <h4>Bank Details</h4>
+            @if (reviewBankDetails) {
+              <div class="bank-detail">
+                <p><strong>Bank:</strong> {{ reviewBankDetails.bankName }}</p>
+                <p><strong>Account number:</strong> {{ reviewBankDetails.accountNumber }}</p>
+                <p><strong>Account type:</strong> {{ reviewBankDetails.accountType }}</p>
+              </div>
+            } @else {
+              <p class="review-empty">No bank details were found for this claim.</p>
+            }
+          </section>
+
+          <section class="review-section decision-section">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Message to employee</mat-label>
+              <textarea matInput rows="3" [(ngModel)]="managerDecisionMessage"></textarea>
+            </mat-form-field>
+            <div class="decision-actions">
+              <button type="button" mat-raised-button color="primary" [disabled]="isUpdatingStatus" (click)="approveSelectedClaim()">
+                {{ isUpdatingStatus ? 'Saving...' : 'Approve' }}
+              </button>
+              <button type="button" mat-raised-button color="warn" [disabled]="isUpdatingStatus" (click)="rejectSelectedClaim()">
+                {{ isUpdatingStatus ? 'Saving...' : 'Reject' }}
+              </button>
+            </div>
+          </section>
+        }
+      </div>
     </section>
   </div>
 }
@@ -143,11 +237,22 @@
       @if (!isCalculating && calculation) {
         <div class="calculation-body">
           <div class="calculation-total">
-            <span>Claim {{ calculation.claimReference || calculation.claimId }}</span>
-            <strong>{{ formatCurrency(calculation.totalAmount) }}</strong>
+            <span>Claim Reference: {{ calculation.claimReference || calculation.claimId }}</span>
+            <small>Claim Date: {{ formatDate(calculation.claimDate) }}</small>
+            <small>Total in rands</small>
+            <strong>{{ formatCurrency(getCalculationTotal()) }}</strong>
           </div>
 
-          @for (detail of calculation.details; track detail.claimDetailId) {
+          @if (calculation.bankDetails) {
+            <div class="calculation-detail bank-detail">
+              <strong>Bank Details</strong>
+              <p>Bank: {{ calculation.bankDetails.bankName }}</p>
+              <p>Account number: {{ calculation.bankDetails.accountNumber }}</p>
+              <p>Account type: {{ calculation.bankDetails.accountType }}</p>
+            </div>
+          }
+
+          @for (detail of calculationDetails; track detail.claimDetailId || detail.category + detail.detailType) {
             <div class="calculation-detail">
               <strong>{{ detail.category }} {{ detail.detailType ? '- ' + detail.detailType : '' }}</strong>
               @if (detail.description) {
@@ -156,6 +261,13 @@
               @if (detail.kilometers) {
                 <p>Distance: {{ detail.kilometers }} km</p>
               }
+              @if (detail.vehicleType) {
+                <p>Vehicle type: {{ detail.vehicleType }}</p>
+              }
+              @if (detail.engineSizeCc) {
+                <p>Engine size: {{ detail.engineSizeCc }} cc</p>
+                <p>Distance rate: {{ formatRate(detail) }}</p>
+              }
               @if (detail.receiptTime) {
                 <p>Receipt time: {{ detail.receiptTime }}</p>
               }
@@ -163,16 +275,26 @@
               @if (detail.allowedAmount) {
                 <p>Allowed: {{ formatCurrency(detail.allowedAmount) }}</p>
               }
-              <p>Included: {{ formatCurrency(detail.reimbursableAmount) }}</p>
+              <p>Included: {{ formatCurrency(getDetailIncludedAmount(detail)) }}</p>
             </div>
           }
         </div>
       }
 
-      <footer class="image-dialog-actions">
-        <button type="button" mat-button color="warn" (click)="closeCalculationDialog()">Close</button>
-        <button type="button" mat-raised-button color="primary" (click)="closeCalculationDialog()">Done</button>
-      </footer>
+      @if (!isCalculating && calculation) {
+        <footer class="image-dialog-actions">
+          <mat-form-field appearance="outline" class="calculation-message">
+            <mat-label>Message to employee</mat-label>
+            <textarea matInput rows="2" [(ngModel)]="managerDecisionMessage"></textarea>
+          </mat-form-field>
+          <button type="button" mat-raised-button color="primary" [disabled]="isUpdatingStatus" (click)="approveCalculatedClaim()">
+            {{ isUpdatingStatus ? 'Saving...' : 'Approve' }}
+          </button>
+          <button type="button" mat-raised-button color="warn" [disabled]="isUpdatingStatus" (click)="rejectCalculatedClaim()">
+            {{ isUpdatingStatus ? 'Saving...' : 'Reject' }}
+          </button>
+        </footer>
+      }
     </section>
   </div>
 }

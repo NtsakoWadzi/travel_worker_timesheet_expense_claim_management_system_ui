@@ -137,7 +137,7 @@
 
 .table-row {
   display: grid;
-  grid-template-columns: 130px 150px 130px minmax(160px, 1fr) 110px 130px 190px;
+  grid-template-columns: 140px 150px 130px minmax(180px, 1fr) 110px 130px 130px;
   gap: 12px;
   align-items: center;
   min-width: 1120px;
@@ -195,7 +195,7 @@
 }
 
 .image-dialog {
-  width: min(880px, 100%);
+  width: min(1040px, 100%);
   max-height: calc(100vh - 48px);
   display: flex;
   flex-direction: column;
@@ -227,10 +227,94 @@
   border-bottom: 0;
 }
 
+.calculation-message {
+  flex: 1;
+  min-width: 260px;
+}
+
 .image-dialog-message {
   margin: 0;
   padding: 22px 18px;
   color: #555;
+}
+
+.review-dialog-body {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  overflow: auto;
+}
+
+.review-section {
+  padding: 14px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.review-section h4 {
+  margin: 0 0 12px;
+  color: #333;
+  font-size: 16px;
+}
+
+.claim-review-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 14px;
+  margin-bottom: 12px;
+  color: #555;
+}
+
+.review-table {
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+.review-row {
+  display: grid;
+  grid-template-columns: 120px 120px 120px 90px 140px minmax(180px, 1fr);
+  gap: 10px;
+  min-width: 790px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #eef0f3;
+}
+
+.review-row:last-child {
+  border-bottom: 0;
+}
+
+.review-head {
+  color: #fff;
+  background: #4a4a4a;
+  font-weight: 700;
+}
+
+.review-empty {
+  margin: 0;
+  color: #666;
+}
+
+.review-claim-details {
+  padding: 0;
+}
+
+.decision-section {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  background: #f8fafc;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.decision-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .image-preview-grid {
@@ -297,8 +381,16 @@
 }
 
 .calculation-total span,
+.calculation-total small,
 .calculation-total strong {
   display: block;
+}
+
+.calculation-total small {
+  margin-top: 6px;
+  color: #666;
+  font-size: 12px;
+  text-transform: uppercase;
 }
 
 .calculation-total strong {
@@ -310,6 +402,16 @@
 .calculation-detail p {
   margin: 6px 0 0;
   color: #555;
+}
+
+.bank-detail {
+  border-left: 4px solid #4a4a4a;
+}
+
+.payment-message {
+  margin-right: auto;
+  color: #1b5e20;
+  font-size: 13px;
 }
 
 @media (max-width: 900px) {
@@ -349,6 +451,10 @@
   }
 
   .image-preview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .claim-review-summary {
     grid-template-columns: 1fr;
   }
 }

@@ -34,6 +34,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { MatTimepickerModule } from '@angular/material/timepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
 import { Claims } from './claims/claims';
 import { MatListModule } from '@angular/material/list';
 import { DragDirective } from './drag/drag';
@@ -41,9 +42,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ApproveClaims } from './approve-claims/approve-claims';
 import { HttpClientModule } from '@angular/common/http';
 import { ClaimStatus } from './claim-status/claim-status';
+import { BankDetailsComponent } from './bank-details/bank-details';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard';
+import { ClaimDetailsComponent } from './claim-details/claim-details';
+import { GenerateReportsComponent } from './generate-reports/generate-reports';
+import { PayClaimsComponent } from './pay-claims/pay-claims';
 
 @NgModule({
-  declarations: [App, LoginComponent, Timesheet, Claims, DragDirective, ApproveClaims, ClaimStatus],
+  declarations: [App, LoginComponent, Timesheet, Claims, DragDirective, ApproveClaims, ClaimStatus, BankDetailsComponent, AdminDashboardComponent, ClaimDetailsComponent, GenerateReportsComponent, PayClaimsComponent],
 
   imports: [
     BrowserModule,
@@ -79,6 +85,7 @@ import { ClaimStatus } from './claim-status/claim-status';
     MatSelectModule,
     MatListModule,
     MatOptionModule,
+    MatStepperModule,
   ],
 
   providers: [provideBrowserGlobalErrorListeners()],

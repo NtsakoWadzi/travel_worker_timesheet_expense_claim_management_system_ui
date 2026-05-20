@@ -5,6 +5,12 @@
   background: #f3f4f6;
 }
 
+.timesheet-page.timesheet-embedded {
+  display: block;
+  min-height: auto;
+  background: transparent;
+}
+
 .sidebar {
   position: sticky;
   top: 0;
@@ -110,12 +116,54 @@
 
 .timesheet-container {
   padding: 24px;
-  max-width: 1100px;
+  max-width: 1180px;
   width: calc(100% - 48px);
   margin: 24px auto;
-  background: #fff;
+  background: transparent;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: box-shadow 180ms ease, filter 180ms ease;
+}
+
+.timesheet-embedded .timesheet-container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.timesheet-embedded .title {
+  margin: 0 0 12px;
+}
+
+.timesheet-embedded .header-info {
+  margin-bottom: 12px;
+  padding: 12px 16px;
+}
+
+.timesheet-embedded .timesheet-dialog-header {
+  padding: 14px 18px;
+}
+
+.timesheet-embedded .task-description {
+  padding: 14px 18px 4px;
+}
+
+.timesheet-embedded .timesheet-table-wrap {
+  margin: 0 18px 14px;
+}
+
+.timesheet-embedded .timesheet-dialog-actions {
+  padding: 14px 18px;
+}
+
+.timesheet-entry-active .sidebar,
+.timesheet-entry-active .title,
+.timesheet-entry-active .header-info {
+  filter: brightness(0.78);
+}
+
+.timesheet-entry-active .timesheet-dialog {
+  box-shadow: 0 26px 70px rgba(245, 130, 32, 0.28), 0 20px 48px rgba(17, 24, 39, 0.22);
 }
 
 .title {
@@ -126,34 +174,123 @@
 }
 
 .header-info {
-  display: flex;
-  justify-content: space-between;
   margin-bottom: 24px;
-  padding: 16px;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
+  padding: 0;
+  background: #fff;
 }
 
-.company-info p,
-.employee-info p {
-  margin: 4px 0;
-  font-size: 14px;
+.personal-particulars-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #d1d5db;
+}
+
+.personal-particulars-table th,
+.personal-particulars-table td {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  vertical-align: middle;
+}
+
+.personal-particulars-table th {
+  width: 18%;
+  color: #333;
+  background: #f8fafc;
+  text-align: left;
+  font-size: 13px;
+}
+
+.personal-particulars-table input[type="text"],
+.personal-particulars-table input[type="tel"] {
+  width: 100%;
+  min-height: 34px;
+  padding: 6px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.checkbox-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 34px;
+  color: #333;
+  font-weight: 600;
+}
+
+.checkbox-cell input {
+  width: 18px;
+  height: 18px;
+}
+
+.timesheet-dialog {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-top: 6px solid #f58220;
+  border-radius: 8px;
+  box-shadow: 0 18px 46px rgba(17, 24, 39, 0.16);
+}
+
+.timesheet-dialog-logo-panel {
+  display: grid;
+  place-items: center;
+  padding: 18px 22px 14px;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.timesheet-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  color: #fff;
+  background: #4a4a4a;
+}
+
+.timesheet-dialog-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.timesheet-dialog-logo {
+  width: min(360px, 82%);
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.timesheet-dialog-title h3 {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.timesheet-dialog-title span {
+  display: block;
+  margin-top: 3px;
+  color: #f3f4f6;
+  font-size: 13px;
+}
+
+.timesheet-table-wrap {
+  margin: 0 22px 18px;
+  overflow: auto;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
 }
 
 .timesheet-table {
   width: 100%;
-}
-
-th.mat-header-cell {
-  background-color: #f5f5f5;
-  font-weight: bold;
-  color: #333;
-  font-size: 13px;
-}
-
-td.mat-cell {
-  font-size: 13px;
-  padding: 8px 16px;
+  min-width: 920px;
+  position: relative;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 .weekend-row {
@@ -161,23 +298,48 @@ td.mat-cell {
   color: #999;
 }
 
-tr.mat-row:hover {
-  background-color: #fff3e7;
-}
-.timesheet-table {
-  width: 100%;
-  margin-top: 40px; /* change this to whatever size you want */
+.timesheet-table .mat-mdc-row {
+  transition: background-color 160ms ease, filter 160ms ease, opacity 160ms ease, box-shadow 160ms ease;
 }
 
+.timesheet-table .active-timesheet-row {
+  position: relative;
+  z-index: 1;
+  background: #fff7ed;
+  filter: brightness(1.12);
+  box-shadow: inset 5px 0 0 #f58220, 0 8px 24px rgba(245, 130, 32, 0.2);
+}
+
+.timesheet-table .inactive-timesheet-row {
+  filter: brightness(0.78);
+  opacity: 0.66;
+}
+
+.timesheet-table .inactive-timesheet-row:hover {
+  opacity: 0.82;
+}
+
+.add-row-button {
+  color: #f58220;
+}
+
+.add-row-button mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
 
 .full-width textarea {
-  width: 80%;
+  width: 100%;
   min-height: 30px;
 }
 
-/* Override Angular Material default width */
 .task-description .mat-mdc-form-field {
-  width: 80%;
+  width: 100%;
+}
+
+.task-description {
+  padding: 18px 22px 8px;
 }
 
 .table-datepicker {
@@ -188,26 +350,22 @@ tr.mat-row:hover {
 .table-datepicker .mat-mdc-form-field-subscript-wrapper {
   display: none;
 }
-/* Date picker and time picker inside table cells */
 .table-datepicker,
 .table-timepicker {
   width: 150px;
   font-size: 12px;
 }
 
-/* Remove extra spacing below the fields */
 .table-datepicker .mat-mdc-form-field-subscript-wrapper,
 .table-timepicker .mat-mdc-form-field-subscript-wrapper {
   display: none;
 }
 
-/* Reduce internal padding of the input */
 .table-datepicker .mat-mdc-text-field-wrapper,
 .table-timepicker .mat-mdc-text-field-wrapper {
   padding: 0 8px;
 }
 
-/* Reduce height of the form field */
 .table-datepicker .mat-mdc-form-field-infix,
 .table-timepicker .mat-mdc-form-field-infix {
   padding-top: 8px !important;
@@ -215,36 +373,43 @@ tr.mat-row:hover {
   min-height: 40px;
 }
 
-/* Reduce font size of input */
 .table-datepicker input,
 .table-timepicker input {
   font-size: 12px;
 }
 
-/* Remove label padding */
 .table-datepicker .mat-mdc-floating-label,
 .table-timepicker .mat-mdc-floating-label {
   font-size: 12px;
 }
 
-/* Table cell padding */
 td.mat-mdc-cell {
-  padding: 4px 8px !important;
+  padding: 10px 12px !important;
   vertical-align: middle;
+  border-bottom: 1px solid #f1f5f9;
 }
 
 th.mat-mdc-header-cell {
-  padding: 8px !important;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 12px !important;
   font-weight: bold;
   font-size: 13px;
+  color: #fff;
+  background: #3f3f46;
+  border-bottom: 3px solid #f58220;
 }
 
-/* Footer row styling */
 td.mat-mdc-footer-cell {
-  padding: 8px !important;
+  position: sticky;
+  bottom: 0;
+  padding: 12px !important;
   font-weight: bold;
   font-size: 13px;
-  background-color: #f5f5f5;
+  color: #333;
+  background: #fff7ed;
+  border-top: 2px solid #fed7aa;
 }
 
 .reference-label {
@@ -260,24 +425,35 @@ td.mat-mdc-footer-cell {
   border: 1px solid #c5cae9;
 }
 .btn-right {
-    display: flex;
+  display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 16px;
-    width: 100%;
-    margin-top: 16px;
-    margin-bottom: 16px;
-      position: relative;
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  position: relative;
   z-index: 999;
 }
-
-
-
 
 .btn-right button {
   position: relative;
   z-index: 999;
   pointer-events: all;
+}
+
+.timesheet-dialog-actions {
+  justify-content: center;
+  margin: 0;
+  padding: 16px 22px;
+  background: #f8fafc;
+  border-top: 1px solid #e5e7eb;
+}
+
+.timesheet-dialog-actions .submit-status {
+  position: absolute;
+  left: 22px;
+  max-width: calc(50% - 44px);
 }
 
 .submit-status {
@@ -328,5 +504,17 @@ td.mat-mdc-footer-cell {
     width: calc(100% - 32px);
     margin: 16px auto;
     overflow-x: auto;
+  }
+
+  .timesheet-dialog-header {
+    align-items: flex-start;
+  }
+
+  .timesheet-dialog-title {
+    align-items: flex-start;
+  }
+
+  .timesheet-dialog-logo {
+    width: min(280px, 88%);
   }
 }

@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FileHandle } from '../Model/file-handle.model';
 import { Claim } from '../Model/claim.model';
 import { ClaimsService } from '../services/claims-service';
 import { AuthService } from '../services/auth';
 import { Router } from '@angular/router';
+import { BankDetailsService } from '../services/bank-details-service';
 
 @Component({
   selector: 'app-claims',
@@ -13,7 +14,10 @@ import { Router } from '@angular/router';
   styleUrl: './claims.css',
 })
 
-export class Claims {
+export class Claims implements OnDestroy {
+  @Input() embedded = false;
+  @Output() stepRequested = new EventEmitter<'timesheet' | 'claims' | 'bank-details' | 'status'>();
+
   typesOfClaims: string[] = ['Meals', 'Toll Fees', 'Other', 'Distance Travelled'];
   employeeName = 'Employee';
   errorMessage = '';
@@ -23,14 +27,16 @@ export class Claims {
   submittedClaimReference = '';
   activeDetailCategory = '';
   isDetailDialogOpen = false;
-  isAnalyzingReceipt = false;
-  receiptAnalysisMessage = '';
   mealTypeErrorMessage = '';
+  hasShownEngineSizeHint = false;
   mealTypes: string[] = ['Breakfast', 'Lunch', 'Supper'];
+  selectedCategories: string[] = [];
   detailForm = {
     receiptTime: '',
     amount: undefined as number | undefined,
     kilometers: undefined as number | undefined,
+    vehicleType: '',
+    engineSizeCc: undefined as number | undefined,
     description: '',
     receiptFileName: '',
     detailType: '',
@@ -47,15 +53,28 @@ export class Claims {
     private sanitizer: DomSanitizer,
     private claimsService: ClaimsService,
     private authService: AuthService,
+    private bankDetailsService: BankDetailsService,
     private router: Router
   ) {
     const user = this.authService.getUser();
     this.employeeName = user?.userFirstName && user?.userLastName
       ? `${user.userFirstName} ${user.userLastName}`
       : user?.userName || 'Employee';
+
+    const draft = this.claimsService.getClaimDraft();
+    if (draft) {
+      this.singleclaim = draft;
+      this.selectedCategories = Array.isArray(draft.categories) ? [...draft.categories] : this.toCategoryArray(draft.categories);
+    }
   }
+
+  ngOnDestroy(): void {
+    this.saveDraft();
+  }
+
   fileDropped(fileHandle: FileHandle): void {
     this.singleclaim.claimImages.push(fileHandle);
+    this.saveDraft();
   }
 
   onFileSelected(event: Event): void {
@@ -72,40 +91,39 @@ export class Claims {
     };
     this.singleclaim.claimImages.push(fileHandle);
     input.value = '';
+    this.saveDraft();
   }
 
   removeImages(i: number): void {
     this.singleclaim.claimImages.splice(i, 1);
+    this.saveDraft();
+  }
+
+  onCategoriesChanged(): void {
+    this.singleclaim.categories = [...this.selectedCategories];
+    this.saveDraft();
   }
 
   submitClaim(selectedCategories: string[]): void {
     this.errorMessage = '';
     this.successMessage = '';
 
-    if (selectedCategories.length === 0) {
-      this.errorMessage = 'Please select at least one claim category.';
+    if (!this.validateClaimBeforeSubmit(selectedCategories, true)) {
       return;
     }
 
-    if (!this.authService.isLoggedIn()) {
-      this.errorMessage = 'Please log in before submitting a claim.';
-      return;
-    }
-
-    const missingCategory = selectedCategories.find((category) => !this.hasClaimDetail(category));
-    if (missingCategory) {
-      this.openDetailDialog(missingCategory);
-      return;
-    }
-
+    const bankDetails = this.bankDetailsService.getBankDetails();
     const user = this.authService.getUser();
     this.singleclaim.userId = user?.userId;
     this.singleclaim.categories = selectedCategories;
+    this.singleclaim.bankDetails = bankDetails;
     this.isSubmitting = true;
 
     this.claimsService.submitClaim(this.singleclaim).subscribe({
       next: (claim) => {
         this.isSubmitting = false;
+        this.claimsService.clearClaimDraft();
+        this.claimsService.clearTimesheetDraft();
         const claimReference = claim.claimReference || 'Unavailable';
         this.submittedClaimReference = claimReference;
         this.successMessage = `Claim submitted successfully. Reference: ${claimReference}`;
@@ -117,6 +135,7 @@ export class Claims {
           claimImages: [],
           claimDetails: [],
         };
+        this.selectedCategories = [];
         if (user?.userId) {
           this.claimsService.refreshClaimStatus(user.userId).subscribe();
         }
@@ -127,6 +146,49 @@ export class Claims {
         console.error(error);
       },
     });
+  }
+
+  continueToBankDetails(): void {
+    this.errorMessage = '';
+    this.successMessage = '';
+
+    if (!this.validateClaimBeforeSubmit(this.selectedCategories, false)) {
+      return;
+    }
+
+    const user = this.authService.getUser();
+    this.singleclaim.userId = user?.userId;
+    this.singleclaim.categories = [...this.selectedCategories];
+    this.saveDraft();
+    this.goToBankDetails();
+  }
+
+  private validateClaimBeforeSubmit(selectedCategories: string[], requireBankDetails: boolean): boolean {
+    if (selectedCategories.length === 0) {
+      this.errorMessage = 'Please select at least one claim category.';
+      return false;
+    }
+
+    if (!this.authService.isLoggedIn()) {
+      this.errorMessage = 'Please log in before submitting a claim.';
+      return false;
+    }
+
+    const missingCategory = selectedCategories.find((category) => !this.hasClaimDetail(category));
+    if (missingCategory) {
+      this.openDetailDialog(missingCategory);
+      return false;
+    }
+
+    if (requireBankDetails) {
+      const bankDetails = this.bankDetailsService.getBankDetails();
+      if (!bankDetails?.bankName || !bankDetails.accountNumber || !bankDetails.accountType) {
+        this.errorMessage = 'Please capture bank details before submitting a claim.';
+        return false;
+      }
+    }
+
+    return true;
   }
 
   closeConfirmationDialog(): void {
@@ -140,13 +202,13 @@ export class Claims {
       receiptTime: existingDetail?.receiptTime || '',
       amount: existingDetail?.amount,
       kilometers: existingDetail?.kilometers,
+      vehicleType: existingDetail?.vehicleType || '',
+      engineSizeCc: existingDetail?.engineSizeCc,
       description: existingDetail?.description || '',
       receiptFileName: existingDetail?.receiptFileName || '',
       detailType: existingDetail?.detailType || '',
     };
-    this.receiptAnalysisMessage = '';
     this.mealTypeErrorMessage = '';
-    this.isAnalyzingReceipt = false;
     this.isDetailDialogOpen = true;
     this.validateMealTypeAgainstTime();
   }
@@ -169,6 +231,8 @@ export class Claims {
       receiptTime: this.detailForm.receiptTime || undefined,
       amount: this.detailForm.amount,
       kilometers: this.detailForm.kilometers,
+      vehicleType: this.detailForm.vehicleType,
+      engineSizeCc: this.detailForm.engineSizeCc,
       description: this.detailForm.description,
       receiptFileName: this.detailForm.receiptFileName,
       detailType: this.detailForm.detailType,
@@ -179,6 +243,7 @@ export class Claims {
       detail,
     ];
     this.isDetailDialogOpen = false;
+    this.saveDraft();
   }
 
   onDetailReceiptSelected(event: Event): void {
@@ -188,14 +253,8 @@ export class Claims {
     }
 
     const file = input.files[0];
-    const fileHandle: FileHandle = {
-      file,
-      url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file)),
-    };
-    this.singleclaim.claimImages.push(fileHandle);
-    this.detailForm.receiptFileName = file.name;
     input.value = '';
-    this.analyzeReceipt(file);
+    this.attachReceipt(file);
   }
 
   hasClaimDetail(category: string): boolean {
@@ -205,7 +264,11 @@ export class Claims {
     }
 
     if (category === 'Distance Travelled') {
-      return !!detail.kilometers && detail.kilometers > 0;
+      return !!detail.kilometers
+        && detail.kilometers > 0
+        && !!detail.vehicleType
+        && !!detail.engineSizeCc
+        && detail.engineSizeCc > 0;
     }
 
     if (category === 'Other') {
@@ -223,37 +286,14 @@ export class Claims {
     return !!detail.amount && detail.amount > 0;
   }
 
-  private analyzeReceipt(file: File): void {
-    if (!file.type.startsWith('image/')) {
-      this.receiptAnalysisMessage = 'AI Vision can read image receipts only. You can still enter the details manually.';
-      return;
-    }
-
-    this.isAnalyzingReceipt = true;
-    this.receiptAnalysisMessage = 'Reading receipt with AI Vision...';
-
-    this.claimsService.analyzeReceipt(file, this.activeDetailCategory).subscribe({
-      next: (analysis) => {
-        this.isAnalyzingReceipt = false;
-
-        if (analysis.amount !== undefined && analysis.amount !== null) {
-          this.detailForm.amount = analysis.amount;
-        }
-
-        if (this.activeDetailCategory === 'Meals' && analysis.receiptTime) {
-          this.detailForm.receiptTime = analysis.receiptTime;
-        }
-
-        const mealType = analysis.mealType ? ` ${analysis.mealType} detected.` : '';
-        this.receiptAnalysisMessage = `${analysis.message || 'Receipt details were extracted.'}${mealType}`;
-        this.validateMealTypeAgainstTime();
-      },
-      error: (error) => {
-        this.isAnalyzingReceipt = false;
-        this.receiptAnalysisMessage = 'AI Vision could not read this receipt. Please enter the details manually.';
-        console.error(error);
-      },
-    });
+  private attachReceipt(file: File): void {
+    const fileHandle: FileHandle = {
+      file,
+      url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file)),
+    };
+    this.singleclaim.claimImages.push(fileHandle);
+    this.detailForm.receiptFileName = file.name;
+    this.saveDraft();
   }
 
   onMealTypeChanged(): void {
@@ -262,6 +302,23 @@ export class Claims {
 
   onReceiptTimeChanged(): void {
     this.validateMealTypeAgainstTime();
+  }
+
+  showEngineSizeHint(): void {
+    if (this.hasShownEngineSizeHint) {
+      return;
+    }
+
+    this.hasShownEngineSizeHint = true;
+    window.alert([
+      'Engine size guide:',
+      '1000cc = 1.0 litre',
+      '1400cc = 1.4 litre',
+      '1600cc = 1.6 litre',
+      '2000cc = 2.0 litre',
+      '2500cc = 2.5 litre',
+      '3000cc = 3.0 litre',
+    ].join('\n'));
   }
 
   isMealTypeInvalid(): boolean {
@@ -313,20 +370,63 @@ export class Claims {
   }
 
   goToTimesheet(): void {
+    this.saveDraft();
+    if (this.embedded) {
+      this.stepRequested.emit('timesheet');
+      return;
+    }
     this.router.navigate(['/timesheet']);
   }
 
   goToClaims(): void {
+    this.saveDraft();
+    if (this.embedded) {
+      this.stepRequested.emit('claims');
+      return;
+    }
     this.router.navigate(['/claims']);
   }
 
+  goToBankDetails(): void {
+    this.saveDraft();
+    if (this.embedded) {
+      this.stepRequested.emit('bank-details');
+      return;
+    }
+    this.router.navigate(['/bank-details']);
+  }
+
   goToClaimStatus(): void {
+    this.saveDraft();
+    if (this.embedded) {
+      this.stepRequested.emit('status');
+      return;
+    }
     this.router.navigate(['/claim-status']);
   }
 
   logout(): void {
+    this.claimsService.clearClaimDraft();
+    this.claimsService.clearTimesheetDraft();
     this.claimsService.clearClaimStatus();
     this.authService.logout();
     this.router.navigate(['/']);
+  }
+
+  private saveDraft(): void {
+    this.singleclaim.categories = [...this.selectedCategories];
+    this.claimsService.saveClaimDraft(this.singleclaim);
+  }
+
+  private toCategoryArray(categories: string[] | string | undefined): string[] {
+    if (!categories) {
+      return [];
+    }
+
+    if (Array.isArray(categories)) {
+      return categories;
+    }
+
+    return categories.split(',').map((category) => category.trim()).filter(Boolean);
   }
 }

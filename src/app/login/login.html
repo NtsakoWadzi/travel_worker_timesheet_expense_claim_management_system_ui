@@ -1,20 +1,26 @@
 <div class="login-container">
   <mat-card>
-       <img src="logo.jpeg" alt="Department of Public Works and Infrastructure - Republic of South Africa"
-    class="logo" />
-   
+    <img
+      src="logo.jpeg"
+      alt="Department of Public Works and Infrastructure - Republic of South Africa"
+      class="logo"
+    />
+
     <mat-card-content>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="username-field">
           <mat-label>Username</mat-label>
-          <input matInput formControlName="userName" />
+          <input matInput formControlName="userName" autocomplete="username" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
           <input
-           matInput type="password" formControlName="userPassword" />
+            matInput
+            type="password"
+            formControlName="userPassword"
+            autocomplete="current-password"
+          />
         </mat-form-field>
 
         <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
@@ -22,9 +28,6 @@
         <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
           {{ isLoading ? 'Logging in...' : 'Login' }}
         </button>
-
-        <p class="signup-link">Don't have an account? <a routerLink="/signup">Sign up</a></p>
-
       </form>
     </mat-card-content>
   </mat-card>

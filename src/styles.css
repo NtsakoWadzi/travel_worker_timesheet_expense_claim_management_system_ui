@@ -9,6 +9,30 @@ body {
   color: #333;
 }
 
+.sidebar {
+  box-sizing: border-box !important;
+  height: 100vh !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.user-summary div {
+  min-width: 0;
+}
+
+.user-summary strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
+
 button[mat-raised-button].mat-primary,
 .mat-mdc-raised-button.mat-primary {
   background-color: #f58220;
@@ -56,8 +80,7 @@ button[mat-raised-button].mat-primary,
   .empty-state,
   .error-message,
   .success-message,
-  .receipt-ai-panel,
-  .receipt-ai-message,
+  .receipt-upload-panel,
   .meal-validation-message,
   .reference-panel,
   .calculation-total,
@@ -65,6 +88,40 @@ button[mat-raised-button].mat-primary,
   .image-preview-item
 ):hover {
   animation: ui-hover-float 900ms ease-in-out infinite;
+}
+
+.claims-disable-float,
+.claims-disable-float :where(
+  button:not(:disabled),
+  a,
+  .nav-item,
+  .claims-list,
+  .dropzone,
+  .preview-item,
+  .detail-saved,
+  .claim-dialog,
+  .image-dialog,
+  .mat-mdc-form-field,
+  .mat-mdc-list-option,
+  .mat-mdc-option,
+  .mat-mdc-card,
+  .table-row,
+  .claims-table,
+  .summary-item,
+  .status-card,
+  .decision-banner,
+  .empty-state,
+  .error-message,
+  .success-message,
+  .receipt-upload-panel,
+  .meal-validation-message,
+  .reference-panel,
+  .calculation-total,
+  .calculation-detail,
+  .image-preview-item
+):hover {
+  animation: none !important;
+  transform: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -90,8 +147,7 @@ button[mat-raised-button].mat-primary,
     .empty-state,
     .error-message,
     .success-message,
-    .receipt-ai-panel,
-    .receipt-ai-message,
+    .receipt-upload-panel,
     .meal-validation-message,
     .reference-panel,
     .calculation-total,

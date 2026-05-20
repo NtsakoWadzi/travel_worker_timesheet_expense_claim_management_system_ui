@@ -9,13 +9,9 @@
     </div>
 
     <nav class="sidebar-nav">
-      <button type="button" class="nav-item" (click)="goToTimesheet()">
-        <mat-icon>schedule</mat-icon>
-        <span>Timesheet</span>
-      </button>
-      <button type="button" class="nav-item" (click)="goToClaims()">
+      <button type="button" class="nav-item" (click)="goToClaimDetails()">
         <mat-icon>receipt_long</mat-icon>
-        <span>Claims</span>
+        <span>Claim Details</span>
       </button>
       <button type="button" class="nav-item active" (click)="goToClaimStatus()">
         <mat-icon>fact_check</mat-icon>
@@ -44,25 +40,20 @@
         <h2>Claim Status</h2>
         <p>Track manager decisions for your submitted claims.</p>
       </div>
-      <button type="button" mat-raised-button color="primary" [disabled]="isLoading" (click)="loadClaims()">
-        {{ isLoading ? 'Loading...' : 'Refresh' }}
+      <button type="button" mat-raised-button color="primary" [disabled]="isRefreshing" (click)="loadClaims()">
+        <mat-icon>{{ isRefreshing ? 'hourglass_top' : 'refresh' }}</mat-icon>
+        {{ isRefreshing ? 'Loading' : 'Refresh' }}
       </button>
     </header>
 
     @if (latestDecision) {
-      <section class="decision-banner" [class.rejected]="isRejected(latestDecision)">
+      <section class="decision-banner" role="alert" [class.rejected]="isRejected(latestDecision)">
         <mat-icon>{{ getStatusIcon(latestDecision.status) }}</mat-icon>
         <div>
           <strong>
             Claim {{ latestDecision.claimReference || latestDecision.claimId }} was {{ getStatusLabel(latestDecision.status) }}
           </strong>
-          <span>
-            @if (isApproved(latestDecision)) {
-              Your claim has been approved by the manager.
-            } @else {
-              Your claim has been rejected by the manager.
-            }
-          </span>
+          <span>{{ getManagerDecisionMessage(latestDecision) }}</span>
         </div>
       </section>
     }
@@ -94,21 +85,74 @@
     }
 
     @if (claims.length > 0) {
-      <section class="status-list">
-        @for (claim of claims; track claim.claimId) {
-          <article class="status-card" [class.approved]="isApproved(claim)" [class.rejected]="isRejected(claim)">
-            <div class="status-icon">
-              <mat-icon>{{ getStatusIcon(claim.status) }}</mat-icon>
+      <section class="claims-panel" aria-label="Claim status records">
+        <div class="table-toolbar">
+          <mat-form-field appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select [(ngModel)]="statusFilter" (ngModelChange)="onStatusFilterChanged()">
+              @for (option of statusFilterOptions; track option.value) {
+                <mat-option [value]="option.value">{{ option.label }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <button type="button" mat-stroked-button color="primary" (click)="toggleDateSort()">
+            <mat-icon>{{ dateSortDirection === 'desc' ? 'south' : 'north' }}</mat-icon>
+            Date {{ dateSortDirection === 'desc' ? 'newest first' : 'oldest first' }}
+          </button>
+        </div>
+
+        @if (filteredClaims.length === 0) {
+          <section class="empty-state">
+            <mat-icon>filter_alt_off</mat-icon>
+            <p>No claims match the selected status.</p>
+          </section>
+        } @else {
+          <div class="claims-table">
+            <div class="table-row table-head">
+              <span>Claim Reference</span>
+              <span>Claim Date</span>
+              <span>Categories</span>
+              <span>Status</span>
+              <span>Manager Message</span>
             </div>
-            <div class="status-content">
-              <div class="status-card-head">
-                <strong>{{ claim.claimReference || '-' }}</strong>
-                <span>{{ getStatusLabel(claim.status) }}</span>
+
+            @for (claim of pagedClaims; track claim.claimId) {
+              <div class="table-row" [class.approved]="isApproved(claim)" [class.rejected]="isRejected(claim)">
+                <span>{{ claim.claimReference || claim.claimId || '-' }}</span>
+                <span>{{ formatDate(claim.claimDate || claim.ClaimDate) }}</span>
+                <span>{{ getCategoriesLabel(claim.categories) }}</span>
+                <span>
+                  <span class="status-pill">
+                    <mat-icon>{{ getStatusIcon(claim.status) }}</mat-icon>
+                    {{ getStatusLabel(claim.status) }}
+                  </span>
+                </span>
+                <span>{{ getManagerDecisionMessage(claim) }}</span>
               </div>
-              <p>{{ claim.categories }}</p>
-              <small>Claim date: {{ formatDate(claim.claimDate || claim.ClaimDate) }}</small>
+            }
+          </div>
+
+          <div class="pagination-bar" aria-label="Claims pagination">
+            <span>Showing {{ pageStart }}-{{ pageEnd }} of {{ filteredClaims.length }}</span>
+            <mat-form-field appearance="outline">
+              <mat-label>Rows</mat-label>
+              <mat-select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChanged()">
+                @for (size of pageSizeOptions; track size) {
+                  <mat-option [value]="size">{{ size }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <div class="pagination-actions">
+              <button type="button" mat-icon-button aria-label="Previous page" [disabled]="pageIndex === 0" (click)="previousPage()">
+                <mat-icon>chevron_left</mat-icon>
+              </button>
+              <span>Page {{ pageIndex + 1 }} of {{ totalPages }}</span>
+              <button type="button" mat-icon-button aria-label="Next page" [disabled]="pageIndex >= totalPages - 1" (click)="nextPage()">
+                <mat-icon>chevron_right</mat-icon>
+              </button>
             </div>
-          </article>
+          </div>
         }
       </section>
     }

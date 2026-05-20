@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_BASE_URL } from './api-config';
 
 export interface JwtRequest {
   userName: string;
@@ -24,7 +25,7 @@ export interface JwtResponse {
 })
 export class AuthService {
 
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = API_BASE_URL;
 
   constructor(private http: HttpClient) {}
 
@@ -68,6 +69,12 @@ isManager(): boolean {
   const user = this.getUser();
   if (!user || !user.role || !Array.isArray(user.role)) return false;
   return user.role.some((r: any) => r.roleName === 'Manager');
+}
+
+isAdmin(): boolean {
+  const user = this.getUser();
+  if (!user || !user.role || !Array.isArray(user.role)) return false;
+  return user.role.some((r: any) => r.roleName === 'Admin');
 }
 
 getPrimaryRole(): string {

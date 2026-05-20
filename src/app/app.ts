@@ -7,5 +7,5 @@ import { Component, signal } from '@angular/core';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('travel_work_timesheet_expense_claim_management_system');
+  protected readonly title = signal('KHOKHA SYSTEM UI');
 }

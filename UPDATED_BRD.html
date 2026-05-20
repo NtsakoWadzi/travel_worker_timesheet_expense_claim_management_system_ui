@@ -1,0 +1,359 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Business Requirements Document</title>
+<style>
+  @page { size: A4; margin: 16mm 14mm; }
+  body { font-family: Arial, Helvetica, sans-serif; color: #1f2933; line-height: 1.45; font-size: 10.5pt; }
+  h1 { font-size: 22pt; margin: 0 0 14px; color: #102a43; }
+  h2 { font-size: 15pt; margin: 24px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #bcccdc; color: #102a43; page-break-after: avoid; }
+  h3 { font-size: 12.5pt; margin: 18px 0 6px; color: #243b53; page-break-after: avoid; }
+  h4 { font-size: 11pt; margin: 14px 0 5px; color: #334e68; page-break-after: avoid; }
+  p { margin: 5px 0 9px; }
+  ul, ol { margin: 5px 0 10px 20px; padding: 0; }
+  li { margin: 2px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0 14px; font-size: 8.5pt; page-break-inside: auto; }
+  th, td { border: 1px solid #9fb3c8; padding: 5px 6px; vertical-align: top; }
+  th { background: #d9e2ec; color: #102a43; font-weight: 700; }
+  tr { page-break-inside: avoid; page-break-after: auto; }
+  code { font-family: Consolas, 'Courier New', monospace; background: #f0f4f8; padding: 1px 3px; border-radius: 3px; }
+  pre.code { white-space: pre-wrap; word-break: break-word; background: #f0f4f8; border: 1px solid #bcccdc; padding: 10px; border-radius: 4px; font-size: 8pt; page-break-inside: avoid; }
+  pre.mermaid::before { content: 'Diagram source (Mermaid)'; display: block; font-family: Arial, Helvetica, sans-serif; font-weight: 700; margin-bottom: 6px; color: #334e68; }
+</style>
+</head>
+<body>
+<h1>Business Requirements Document</h1>
+<p>Project: Travel Worker Timesheet and Expense Claim Management System  </p>
+<p>Version: Updated from implemented frontend and backend  </p>
+<p>Date: 2026-05-15  </p>
+<p>Frontend: <code>travel_worker_timesheet_expense_claim_management_system_ui</code>  </p>
+<p>Backend: <code>travel_worker_timesheet_expense_claim_management_backend</code></p>
+<h2>1. Purpose</h2>
+<p>The system enables travelling workers to submit timesheets and travel-related expense claims, and enables managers to review, approve, reject, calculate, and pay those claims. The implemented solution consists of an Angular frontend, a Spring Boot REST API, JWT authentication, Spring Security authorization, and a MySQL database.</p>
+<h2>2. Scope</h2>
+<p>In scope:</p>
+<ul>
+<li>User login using JWT authentication.</li>
+<li>Role-based routing for employees and managers.</li>
+<li>Employee timesheet capture and submission.</li>
+<li>Expense claim capture with categories, claim details, receipts, supporting files, and bank details.</li>
+<li>Claim status tracking for employees.</li>
+<li>Manager claim review, document preview, status update, calculation, and payment processing.</li>
+<li>Backend storage of users, roles, timesheets, claims, claim details, claim images, bank account details, and payments.</li>
+</ul>
+<p>Out of scope:</p>
+<ul>
+<li>Password reset and email notifications.</li>
+<li>Payroll or external banking integration.</li>
+<li>Audit trail beyond saved claim/payment status fields.</li>
+<li>Advanced reporting dashboards.</li>
+</ul>
+<h2>3. Users and Roles</h2>
+<table><thead><tr><th>Role</th><th>Description</th><th>Main Access</th></tr></thead><tbody><tr><td>User</td><td>Travelling worker or employee submitting timesheets and claims.</td><td>Timesheet, claim submission, bank details, claim status.</td></tr><tr><td>Manager</td><td>Reviewer responsible for approving, rejecting, calculating, and paying claims.</td><td>Claim approval dashboard and payment action.</td></tr><tr><td>Admin</td><td>Seeded administrative role.</td><td>Protected admin endpoint exists, but no Angular admin screen is implemented.</td></tr></tbody></table>
+<p>Seeded users and roles are created on backend startup when missing:</p>
+<ul>
+<li><code>admin123</code> / <code>admin@pass</code> with role <code>Admin</code></li>
+<li><code>manager123</code> / <code>manager@pass</code> with role <code>Manager</code></li>
+<li><code>user</code> / <code>user@123</code> with role <code>User</code></li>
+</ul>
+<h2>4. Functional Requirements</h2>
+<table><thead><tr><th>ID</th><th>Requirement</th><th>Implemented Behavior</th></tr></thead><tbody><tr><td>FR-001</td><td>Authenticate users.</td><td>Users submit username and password to <code>/authenticate</code>; backend returns a JWT and user profile.</td></tr><tr><td>FR-002</td><td>Store user session on frontend.</td><td>JWT and user object are saved in browser local storage.</td></tr><tr><td>FR-003</td><td>Route managers to approvals.</td><td>A user with role <code>Manager</code> is routed to <code>/approve-claims</code> after login.</td></tr><tr><td>FR-004</td><td>Route employees to timesheets.</td><td>Non-manager users are routed to <code>/timesheet</code> after login.</td></tr><tr><td>FR-005</td><td>Capture timesheet rows.</td><td>Employee captures work date, location, start time, end time, and task description.</td></tr><tr><td>FR-006</td><td>Calculate timesheet hours.</td><td>Frontend calculates row totals and grand total from start/end time.</td></tr><tr><td>FR-007</td><td>Submit timesheets.</td><td>Completed rows are posted to <code>/timesheets/save</code> with JWT authorization.</td></tr><tr><td>FR-008</td><td>Capture bank details.</td><td>Employee stores bank name, account number, and account type in local storage for claim submission.</td></tr><tr><td>FR-009</td><td>Capture claim categories.</td><td>Employee can select Meals, Toll Fees, Other, and Distance Travelled.</td></tr><tr><td>FR-010</td><td>Require claim details.</td><td>A selected claim category must have required detail fields before submission.</td></tr><tr><td>FR-011</td><td>Validate meal time.</td><td>Meal claim type must match receipt time: before 12:00 Breakfast, 12:00-15:59 Lunch, 16:00+ Supper.</td></tr><tr><td>FR-012</td><td>Capture distance details.</td><td>Distance Travelled requires kilometers, vehicle type, and engine size in cc.</td></tr><tr><td>FR-013</td><td>Upload supporting documents.</td><td>Claim files are uploaded as multipart files and saved as <code>ClaimImage</code> BLOB records.</td></tr><tr><td>FR-014</td><td>Save detailed receipts.</td><td>Claim detail receipt file names are matched to uploaded files and saved as BLOB data when present.</td></tr><tr><td>FR-015</td><td>Generate claim reference.</td><td>Backend generates a unique 10-digit reference using claim date and current time.</td></tr><tr><td>FR-016</td><td>Default claim status.</td><td>New claims default to <code>Submitted</code>.</td></tr><tr><td>FR-017</td><td>Track employee claim status.</td><td>Employee status screen refreshes claim status every 2 seconds and on focus/navigation events.</td></tr><tr><td>FR-018</td><td>List all claims for manager.</td><td>Manager dashboard loads all claims from <code>/claims</code>.</td></tr><tr><td>FR-019</td><td>View claim documents.</td><td>Manager can request image metadata and retrieve each claim image as a blob.</td></tr><tr><td>FR-020</td><td>Approve or reject claims.</td><td>Manager updates claim status through <code>/claims/{claimId}/status</code>.</td></tr><tr><td>FR-021</td><td>Calculate claim total.</td><td>Manager calls <code>/claims/{claimId}/calculate</code>; backend sums reimbursable claim detail values.</td></tr><tr><td>FR-022</td><td>Display bank details during calculation.</td><td>Calculation response includes bank details attached to the claim.</td></tr><tr><td>FR-023</td><td>Process claim payment.</td><td>Manager calls <code>/claims/{claimId}/pay</code>; backend creates a <code>Payment</code> and marks claim as <code>Paid</code>.</td></tr><tr><td>FR-024</td><td>Protect API endpoints.</td><td>Most endpoints require JWT; <code>/authenticate</code>, <code>/registerNewUser</code>, GET <code>/claims/**</code>, and OPTIONS requests are permitted.</td></tr></tbody></table>
+<h2>5. Non-Functional Requirements</h2>
+<table><thead><tr><th>ID</th><th>Requirement</th><th>Current Implementation</th></tr></thead><tbody><tr><td>NFR-001</td><td>Security</td><td>JWT authentication, BCrypt password encoding, stateless Spring Security sessions.</td></tr><tr><td>NFR-002</td><td>Data persistence</td><td>MySQL database <code>travelworker</code>; Hibernate <code>ddl-auto=update</code>.</td></tr><tr><td>NFR-003</td><td>Cross-origin access</td><td>Backend allows all origins, methods GET/POST/PUT/DELETE/OPTIONS, and all headers.</td></tr><tr><td>NFR-004</td><td>Usability</td><td>Angular Material controls are used for forms, dialogs, lists, and date/time inputs.</td></tr><tr><td>NFR-005</td><td>Responsiveness</td><td>Screens include responsive CSS for smaller viewports.</td></tr><tr><td>NFR-006</td><td>File storage</td><td>Uploaded images and receipts are stored in database BLOB columns.</td></tr><tr><td>NFR-007</td><td>Availability</td><td>Local development assumes backend at <code>http://localhost:8080</code> and Angular app at <code>ng serve</code> default port.</td></tr></tbody></table>
+<h2>6. Frontend Screens</h2>
+<table><thead><tr><th>Route</th><th>Screen</th><th>Main Functions</th></tr></thead><tbody><tr><td><code>/</code></td><td>Login</td><td>Capture username/password, authenticate, save JWT/user, route by role.</td></tr><tr><td><code>/timesheet</code></td><td>Timesheet</td><td>Capture rows, calculate hours, submit timesheet, navigate to claims/status.</td></tr><tr><td><code>/claims</code></td><td>Claims</td><td>Select categories, capture details, attach files, validate bank details, submit claim.</td></tr><tr><td><code>/bank-details</code></td><td>Bank Details</td><td>Capture and locally save bank name, account number, and account type.</td></tr><tr><td><code>/claim-status</code></td><td>Claim Status</td><td>Display submitted, approved, and rejected claims for the employee.</td></tr><tr><td><code>/approve-claims</code></td><td>Approve Claims</td><td>List all claims, view documents, calculate totals, approve/reject, process payment.</td></tr></tbody></table>
+<h2>7. Data Models and Entities</h2>
+<h3>7.1 Backend Entities</h3>
+<h4>User</h4>
+<table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>userId</td><td>Long</td><td>Primary key, auto generated.</td></tr><tr><td>userName</td><td>String</td><td>Login username.</td></tr><tr><td>userFirstName</td><td>String</td><td>First name.</td></tr><tr><td>userLastName</td><td>String</td><td>Last name.</td></tr><tr><td>userEmail</td><td>String</td><td>Email address.</td></tr><tr><td>userPassword</td><td>String</td><td>BCrypt encoded password.</td></tr><tr><td>role</td><td>Set&lt;Role&gt;</td><td>Many-to-many through <code>USER_ROLE</code>.</td></tr><tr><td>created_at</td><td>String</td><td>Created date/time string.</td></tr><tr><td>status</td><td>boolean</td><td>Active/inactive flag.</td></tr></tbody></table>
+<h4>Role</h4>
+<table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>roleName</td><td>String</td><td>Primary key, examples: Admin, Manager, User.</td></tr><tr><td>roleDescription</td><td>String</td><td>Role description.</td></tr></tbody></table>
+<h4>Timesheet</h4>
+<table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>timesheetId</td><td>Long</td><td>Primary key, auto generated.</td></tr><tr><td>userId</td><td>Long</td><td>References employee user.</td></tr><tr><td>workDate</td><td>String</td><td>Date worked, submitted as ISO string.</td></tr><tr><td>startTime</td><td>String</td><td>Start time/date value.</td></tr><tr><td>endTime</td><td>String</td><td>End time/date value.</td></tr><tr><td>total_hours</td><td>Double</td><td>Calculated hours for the row.</td></tr><tr><td>location</td><td>String</td><td>Work location.</td></tr><tr><td>description</td><td>String</td><td>Task description.</td></tr><tr><td>status</td><td>Boolean</td><td>Submission/status flag.</td></tr></tbody></table>
+<h4>Claim</h4>
+<table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>claimId</td><td>Long</td><td>Primary key, auto generated.</td></tr><tr><td>userId</td><td>Long</td><td>Employee user id.</td></tr><tr><td>claimReference</td><td>String</td><td>Generated unique reference.</td></tr><tr><td>claimDate</td><td>Date</td><td>Date claim was issued.</td></tr><tr><td>categories</td><td>String</td><td>Comma-separated selected categories.</td></tr><tr><td>claimImages</td><td>List&lt;String&gt;</td><td>Element collection of uploaded file names.</td></tr><tr><td>status</td><td>String</td><td>Submitted, Approved, Rejected, Paid.</td></tr><tr><td>total_amount</td><td>Double</td><td>Calculated total.</td></tr><tr><td>managerId</td><td>Long</td><td>Manager identifier if used.</td></tr><tr><td>userName</td><td>String</td><td>Transient display field.</td></tr><tr><td>userSubmissionCount</td><td>Long</td><td>Transient count field.</td></tr></tbody></table>
+<h4>ClaimDetail</h4>
+<table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>claimDetailId</td><td>Long</td><td>Primary key, auto generated.</td></tr><tr><td>claimId</td><td>Long</td><td>Parent claim id.</td></tr><tr><td>category</td><td>String</td><td>Meals, Toll Fees, Other, Distance Travelled.</td></tr><tr><td>detailType</td><td>String</td><td>Meal type or Distance.</td></tr><tr><td>description</td><td>String</td><td>Description for Other and supporting detail.</td></tr><tr><td>kilometers</td><td>Double</td><td>Distance travelled.</td></tr><tr><td>vehicleType</td><td>String</td><td>Petrol or Diesel.</td></tr><tr><td>engineSizeCc</td><td>Double</td><td>Engine size used for rate.</td></tr><tr><td>receiptTime</td><td>LocalTime</td><td>Used for meal classification.</td></tr><tr><td>amount</td><td>Double</td><td>Claimed amount.</td></tr><tr><td>allowedAmount</td><td>Double</td><td>Meal allowance reference amount.</td></tr><tr><td>reimbursableAmount</td><td>Double</td><td>Normalized reimbursement value.</td></tr><tr><td>receiptFileName</td><td>String</td><td>Uploaded receipt file name.</td></tr><tr><td>receiptContentType</td><td>String</td><td>Receipt MIME type.</td></tr><tr><td>receiptData</td><td>byte[]</td><td>Receipt BLOB.</td></tr><tr><td>receiptUrl</td><td>String</td><td>Transient URL for receipt download/view.</td></tr></tbody></table>
+<h4>ClaimImage</h4>
+<table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>imageId</td><td>Long</td><td>Primary key, auto generated.</td></tr><tr><td>claimId</td><td>Long</td><td>Parent claim id.</td></tr><tr><td>fileName</td><td>String</td><td>Original uploaded file name.</td></tr><tr><td>contentType</td><td>String</td><td>MIME type.</td></tr><tr><td>data</td><td>byte[]</td><td>File BLOB.</td></tr></tbody></table>
+<h4>BankAccountDetails</h4>
+<table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>bankDetailsId</td><td>Long</td><td>Primary key, auto generated.</td></tr><tr><td>claimId</td><td>Long</td><td>Claim id.</td></tr><tr><td>userId</td><td>Long</td><td>Employee user id.</td></tr><tr><td>bankName</td><td>String</td><td>Bank name.</td></tr><tr><td>accountNumber</td><td>String</td><td>Account number.</td></tr><tr><td>accountType</td><td>String</td><td>Cheque, Savings, or Transmission.</td></tr></tbody></table>
+<h4>Payment</h4>
+<table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>paymentId</td><td>Long</td><td>Primary key, auto generated.</td></tr><tr><td>claimId</td><td>Long</td><td>Paid claim id.</td></tr><tr><td>paymentDate</td><td>Date</td><td>Payment processing date.</td></tr><tr><td>reference</td><td>String</td><td><code>PAY-</code> plus claim reference or claim id.</td></tr><tr><td>status</td><td>Boolean</td><td>True when payment processed.</td></tr><tr><td>processedBy</td><td>String</td><td>Manager/processor name.</td></tr></tbody></table>
+<h3>7.2 API DTOs and Response Models</h3>
+<table><thead><tr><th>Model</th><th>Fields</th></tr></thead><tbody><tr><td>JwtRequest</td><td>userName, userPassword</td></tr><tr><td>JwtResponse</td><td>user, jwtToken</td></tr><tr><td>ClaimImageResponse</td><td>imageId, fileName, contentType, imageUrl</td></tr><tr><td>ClaimCalculationResponse</td><td>claimId, claimReference, claimDate, totalAmount, details, bankDetails</td></tr><tr><td>UserClaimCountResponse</td><td>userSubmissionCount</td></tr><tr><td>PaymentResponse</td><td>paymentId, claimId, paymentDate, reference, status, processedBy</td></tr></tbody></table>
+<h2>8. Business Rules</h2>
+<h3>8.1 Claim Status Rules</h3>
+<ul>
+<li>New claims are saved as <code>Submitted</code>.</li>
+<li>Manager may update status to <code>Approved</code> or <code>Rejected</code>.</li>
+<li>Payment processing changes claim status to <code>Paid</code>.</li>
+<li>Employee status screen treats missing, boolean <code>true</code>, or empty status as <code>Submitted</code>.</li>
+</ul>
+<h3>8.2 Meal Rules</h3>
+<table><thead><tr><th>Receipt Time</th><th>Meal Type</th><th>Allowed Amount</th></tr></thead><tbody><tr><td>Before 12:00</td><td>Breakfast</td><td>R150.00</td></tr><tr><td>12:00 to 15:59</td><td>Lunch</td><td>R190.00</td></tr><tr><td>16:00 and later</td><td>Supper</td><td>R210.00</td></tr></tbody></table>
+<p>Frontend validation requires the selected meal type to match the receipt time. Backend normalizes the meal type and allowance from the submitted receipt time.</p>
+<h3>8.3 Distance Rate Rules</h3>
+<p>Petrol reimbursement rates:</p>
+<table><thead><tr><th>Engine Size</th><th>Rate per km</th></tr></thead><tbody><tr><td>&lt;= 1250 cc</td><td>R3.172</td></tr><tr><td>&lt;= 1550 cc</td><td>R3.992</td></tr><tr><td>&lt;= 1750 cc</td><td>R4.337</td></tr><tr><td>&lt;= 1950 cc</td><td>R4.999</td></tr><tr><td>&lt;= 2150 cc</td><td>R5.359</td></tr><tr><td>&lt;= 2500 cc</td><td>R6.068</td></tr><tr><td>&lt;= 3500 cc</td><td>R7.576</td></tr><tr><td>&gt; 3500 cc</td><td>R8.952</td></tr></tbody></table>
+<p>Diesel reimbursement rates:</p>
+<table><thead><tr><th>Engine Size</th><th>Rate per km</th></tr></thead><tbody><tr><td>&lt;= 1250 cc</td><td>R3.197</td></tr><tr><td>&lt;= 1550 cc</td><td>R3.828</td></tr><tr><td>&lt;= 1750 cc</td><td>R4.248</td></tr><tr><td>&lt;= 1950 cc</td><td>R4.448</td></tr><tr><td>&lt;= 2150 cc</td><td>R5.196</td></tr><tr><td>&lt;= 2500 cc</td><td>R5.942</td></tr><tr><td>&gt; 2500 cc</td><td>R7.375</td></tr></tbody></table>
+<p>Distance amount = kilometers multiplied by the rate determined by vehicle type and engine size.</p>
+<h3>8.4 Calculation Rules</h3>
+<ul>
+<li>Distance Travelled: included amount is kilometers multiplied by applicable fuel/engine rate.</li>
+<li>Meals: included amount is the submitted amount.</li>
+<li>Toll Fees: included amount is the submitted amount.</li>
+<li>Other: included amount is the submitted amount.</li>
+<li>The calculated claim total is saved to <code>Claim.total_amount</code>.</li>
+</ul>
+<h2>9. Use Cases</h2>
+<h3>UC-001 Login</h3>
+<p>Actor: User, Manager, Admin  </p>
+<p>Preconditions: Account exists and is active.  </p>
+<p>Main flow:</p>
+<ol>
+<li>Actor opens login screen.</li>
+<li>Actor enters username and password.</li>
+<li>Frontend posts credentials to <code>/authenticate</code>.</li>
+<li>Backend validates credentials and returns JWT plus user profile.</li>
+<li>Frontend stores JWT and user profile.</li>
+<li>Manager is redirected to approvals; other users are redirected to timesheet.</li>
+</ol>
+<h3>UC-002 Submit Timesheet</h3>
+<p>Actor: User  </p>
+<p>Preconditions: User is logged in.  </p>
+<p>Main flow:</p>
+<ol>
+<li>User opens timesheet screen.</li>
+<li>User enters work date, location, start time, end time, and task description.</li>
+<li>Frontend calculates total hours per row and grand total.</li>
+<li>User submits completed rows.</li>
+<li>Frontend posts rows to <code>/timesheets/save</code>.</li>
+<li>Backend saves timesheets.</li>
+<li>User is routed to claims screen.</li>
+</ol>
+<h3>UC-003 Capture Bank Details</h3>
+<p>Actor: User  </p>
+<p>Preconditions: User is logged in.  </p>
+<p>Main flow:</p>
+<ol>
+<li>User opens bank details screen.</li>
+<li>User enters bank name, account number, and account type.</li>
+<li>Frontend validates required fields.</li>
+<li>Frontend stores bank details locally for the next claim submission.</li>
+</ol>
+<h3>UC-004 Submit Claim</h3>
+<p>Actor: User  </p>
+<p>Preconditions: User is logged in and bank details are captured.  </p>
+<p>Main flow:</p>
+<ol>
+<li>User opens claims screen.</li>
+<li>User selects one or more claim categories.</li>
+<li>User captures required category detail.</li>
+<li>User attaches supporting documents or receipts.</li>
+<li>Frontend validates selected categories and bank details.</li>
+<li>Frontend posts a multipart request to <code>/claims/save</code>.</li>
+<li>Backend saves claim, files, details, bank details, and generated reference.</li>
+<li>Frontend displays confirmation with claim reference.</li>
+</ol>
+<h3>UC-005 Track Claim Status</h3>
+<p>Actor: User  </p>
+<p>Preconditions: User has submitted one or more claims.  </p>
+<p>Main flow:</p>
+<ol>
+<li>User opens claim status screen.</li>
+<li>Frontend refreshes user claims from <code>/claims/user/{userId}</code> and count from <code>/claims/user/{userId}/count</code>.</li>
+<li>Screen displays submitted, approved, and rejected claims.</li>
+<li>Screen refreshes periodically and when browser focus returns.</li>
+</ol>
+<h3>UC-006 Review and Decide Claim</h3>
+<p>Actor: Manager  </p>
+<p>Preconditions: Manager is logged in.  </p>
+<p>Main flow:</p>
+<ol>
+<li>Manager opens approve claims screen.</li>
+<li>Frontend loads claims from <code>/claims</code>.</li>
+<li>Manager views claim fields and supporting documents.</li>
+<li>Manager approves or rejects a claim.</li>
+<li>Frontend sends status update to <code>/claims/{claimId}/status</code>.</li>
+<li>Backend saves the new status.</li>
+</ol>
+<h3>UC-007 Calculate and Pay Claim</h3>
+<p>Actor: Manager  </p>
+<p>Preconditions: Claim exists and has claim details.  </p>
+<p>Main flow:</p>
+<ol>
+<li>Manager selects Calculate on a claim.</li>
+<li>Frontend calls <code>/claims/{claimId}/calculate</code>.</li>
+<li>Backend calculates total amount and returns details plus bank details.</li>
+<li>Manager reviews calculation and selects Pay.</li>
+<li>Frontend posts processor name to <code>/claims/{claimId}/pay</code>.</li>
+<li>Backend creates payment record and marks claim as Paid.</li>
+</ol>
+<h2>10. Suggested API Endpoints</h2>
+<p>Base URL: <code>http://localhost:8080</code></p>
+<table><thead><tr><th>Method</th><th>Endpoint</th><th>Purpose</th><th>Auth</th></tr></thead><tbody><tr><td>POST</td><td><code>/authenticate</code></td><td>Login and receive JWT.</td><td>Public</td></tr><tr><td>POST</td><td><code>/registerNewUser</code></td><td>Register a new user with User role.</td><td>Public</td></tr><tr><td>POST</td><td><code>/createNewRole</code></td><td>Create a role.</td><td>JWT</td></tr><tr><td>GET</td><td><code>/forAdmin</code></td><td>Admin-only protected test endpoint.</td><td>Admin</td></tr><tr><td>GET</td><td><code>/forUser</code></td><td>User-only protected test endpoint.</td><td>User</td></tr><tr><td>POST</td><td><code>/timesheets/save</code></td><td>Save submitted timesheet rows.</td><td>JWT</td></tr><tr><td>GET</td><td><code>/timesheets</code></td><td>List all timesheets.</td><td>JWT</td></tr><tr><td>POST</td><td><code>/claims/save</code></td><td>Save claim as multipart form data.</td><td>JWT</td></tr><tr><td>GET</td><td><code>/claims</code></td><td>List all claims.</td><td>Public in current security config</td></tr><tr><td>GET</td><td><code>/claims/user/{userId}</code></td><td>List claims for one user.</td><td>Public in current security config</td></tr><tr><td>GET</td><td><code>/claims/user/{userId}/count</code></td><td>Count claims for one user.</td><td>Public in current security config</td></tr><tr><td>GET</td><td><code>/claims/{claimId}/images</code></td><td>Get claim image metadata.</td><td>Public in current security config</td></tr><tr><td>GET</td><td><code>/claims/{claimId}/images/{imageId}</code></td><td>Get image BLOB.</td><td>Public in current security config</td></tr><tr><td>GET</td><td><code>/claims/{claimId}/details</code></td><td>Get claim details.</td><td>Public in current security config</td></tr><tr><td>GET</td><td><code>/claims/{claimId}/details/{detailId}/receipt</code></td><td>Get claim detail receipt BLOB.</td><td>Public in current security config</td></tr><tr><td>GET</td><td><code>/claims/{claimId}/calculate</code></td><td>Calculate and persist claim total.</td><td>Public in current security config</td></tr><tr><td>PUT</td><td><code>/claims/{claimId}/status</code></td><td>Update claim status.</td><td>JWT</td></tr><tr><td>POST</td><td><code>/claims/{claimId}/pay</code></td><td>Create payment and mark claim Paid.</td><td>JWT</td></tr></tbody></table>
+<p>Recommended future endpoint hardening:</p>
+<ul>
+<li>Restrict GET <code>/claims/**</code> to authenticated users.</li>
+<li>Restrict manager-only actions such as status updates, calculation, and payment to role <code>Manager</code>.</li>
+<li>Add user ownership checks for employee claim status endpoints.</li>
+<li>Add CRUD endpoints for bank details if bank details should persist independently before claim submission.</li>
+</ul>
+<h2>11. ERD</h2>
+<pre class="code mermaid"><code>erDiagram
+    USER {
+        long userId PK
+        string userName
+        string userFirstName
+        string userLastName
+        string userEmail
+        string userPassword
+        string created_at
+        boolean status
+    }
+
+    ROLE {
+        string roleName PK
+        string roleDescription
+    }
+
+    USER_ROLE {
+        long USER_ID FK
+        string ROLE_ID FK
+    }
+
+    TIMESHEET {
+        long timesheetId PK
+        long userId FK
+        string workDate
+        string startTime
+        string endTime
+        double total_hours
+        string location
+        string description
+        boolean status
+    }
+
+    CLAIM {
+        long claimId PK
+        long userId FK
+        string claimReference
+        date claimDate
+        string categories
+        string status
+        double total_amount
+        long managerId
+    }
+
+    CLAIM_DETAIL {
+        long claimDetailId PK
+        long claimId FK
+        string category
+        string detailType
+        string description
+        double kilometers
+        string vehicleType
+        double engineSizeCc
+        time receiptTime
+        double amount
+        double allowedAmount
+        double reimbursableAmount
+        string receiptFileName
+        string receiptContentType
+        blob receiptData
+    }
+
+    CLAIM_IMAGE {
+        long imageId PK
+        long claimId FK
+        string fileName
+        string contentType
+        blob data
+    }
+
+    BANK_ACCOUNT_DETAILS {
+        long bankDetailsId PK
+        long claimId FK
+        long userId FK
+        string bankName
+        string accountNumber
+        string accountType
+    }
+
+    PAYMENT {
+        long paymentId PK
+        long claimId FK
+        date paymentDate
+        string reference
+        boolean status
+        string processedBy
+    }
+
+    USER ||--o{ TIMESHEET : submits
+    USER ||--o{ CLAIM : submits
+    USER ||--o{ BANK_ACCOUNT_DETAILS : owns
+    USER }o--o{ ROLE : has
+    USER_ROLE }o--|| USER : maps
+    USER_ROLE }o--|| ROLE : maps
+    CLAIM ||--o{ CLAIM_DETAIL : contains
+    CLAIM ||--o{ CLAIM_IMAGE : has
+    CLAIM ||--o| BANK_ACCOUNT_DETAILS : uses
+    CLAIM ||--o| PAYMENT : paid_by</code></pre>
+<h2>12. Process Flow Diagrams</h2>
+<h3>12.1 Authentication and Routing</h3>
+<pre class="code mermaid"><code>flowchart TD
+    A[Open Login Screen] --&gt; B[Enter username and password]
+    B --&gt; C[POST /authenticate]
+    C --&gt; D{Valid credentials?}
+    D -- No --&gt; E[Show invalid username or password]
+    D -- Yes --&gt; F[Save JWT and user profile]
+    F --&gt; G{User has Manager role?}
+    G -- Yes --&gt; H[Go to /approve-claims]
+    G -- No --&gt; I[Refresh claim status]
+    I --&gt; J[Go to /timesheet]</code></pre>
+<h3>12.2 Employee Timesheet and Claim Submission</h3>
+<pre class="code mermaid"><code>flowchart TD
+    A[Employee logs in] --&gt; B[Capture timesheet rows]
+    B --&gt; C[Calculate row and grand total hours]
+    C --&gt; D{At least one complete row?}
+    D -- No --&gt; E[Show validation message]
+    D -- Yes --&gt; F[POST /timesheets/save]
+    F --&gt; G[Open claims screen]
+    G --&gt; H[Select claim categories]
+    H --&gt; I[Capture required category details]
+    I --&gt; J[Attach supporting documents]
+    J --&gt; K{Bank details available?}
+    K -- No --&gt; L[Open bank details screen]
+    K -- Yes --&gt; M[POST multipart /claims/save]
+    M --&gt; N[Backend saves claim, details, files, bank details]
+    N --&gt; O[Show claim reference]</code></pre>
+<h3>12.3 Manager Approval, Calculation, and Payment</h3>
+<pre class="code mermaid"><code>flowchart TD
+    A[Manager logs in] --&gt; B[Load all claims]
+    B --&gt; C[Review claim list]
+    C --&gt; D[View documents]
+    C --&gt; E[Approve or reject]
+    E --&gt; F[PUT /claims/{claimId}/status]
+    C --&gt; G[Calculate claim]
+    G --&gt; H[GET /claims/{claimId}/calculate]
+    H --&gt; I[Show details, bank details, total]
+    I --&gt; J[Process payment]
+    J --&gt; K[POST /claims/{claimId}/pay]
+    K --&gt; L[Create Payment and mark claim Paid]</code></pre>
+<h2>13. Test Scenarios</h2>
+<table><thead><tr><th>ID</th><th>Scenario</th><th>Expected Result</th></tr></thead><tbody><tr><td>TS-001</td><td>Login with valid employee credentials.</td><td>JWT and user are saved; employee is routed to <code>/timesheet</code>.</td></tr><tr><td>TS-002</td><td>Login with valid manager credentials.</td><td>JWT and user are saved; manager is routed to <code>/approve-claims</code>.</td></tr><tr><td>TS-003</td><td>Login with invalid credentials.</td><td>Error message <code>Invalid username or password</code> is shown.</td></tr><tr><td>TS-004</td><td>Submit timesheet without login.</td><td>Error message asks user to log in.</td></tr><tr><td>TS-005</td><td>Submit timesheet with no complete rows.</td><td>Validation message asks for at least one row.</td></tr><tr><td>TS-006</td><td>Enter end time before start time.</td><td>Row total displays <code>Invalid</code>; invalid total is excluded from grand total.</td></tr><tr><td>TS-007</td><td>Submit a valid timesheet row.</td><td>Backend saves row and frontend navigates to claims screen.</td></tr><tr><td>TS-008</td><td>Save blank bank details.</td><td>Validation requires bank name, account number, and account type.</td></tr><tr><td>TS-009</td><td>Save complete bank details.</td><td>Details are stored locally and success message is shown.</td></tr><tr><td>TS-010</td><td>Submit claim without category.</td><td>Validation asks user to select at least one claim category.</td></tr><tr><td>TS-011</td><td>Submit claim without bank details.</td><td>Validation asks user to capture bank details before submission.</td></tr><tr><td>TS-012</td><td>Select Meals without detail.</td><td>Detail dialog opens before submission.</td></tr><tr><td>TS-013</td><td>Select Breakfast with receipt time 13:00.</td><td>Frontend blocks save and says slip time is treated as Lunch.</td></tr><tr><td>TS-014</td><td>Submit Distance Travelled without kilometers.</td><td>Category remains incomplete and submission is blocked.</td></tr><tr><td>TS-015</td><td>Submit valid claim with files and bank details.</td><td>Backend saves claim, generated reference is returned, confirmation dialog appears.</td></tr><tr><td>TS-016</td><td>Manager loads approvals.</td><td>All claims are displayed or an error appears if unavailable.</td></tr><tr><td>TS-017</td><td>Manager views claim images.</td><td>Image metadata loads and BLOB previews are created.</td></tr><tr><td>TS-018</td><td>Manager approves a claim.</td><td>Claim status changes to Approved and persists on backend.</td></tr><tr><td>TS-019</td><td>Manager rejects a claim.</td><td>Claim status changes to Rejected and persists on backend.</td></tr><tr><td>TS-020</td><td>Employee opens status screen after approval.</td><td>Approved claim appears with approved status/icon.</td></tr><tr><td>TS-021</td><td>Calculate claim with Meals detail.</td><td>Total includes submitted meal amount.</td></tr><tr><td>TS-022</td><td>Calculate claim with Toll Fees detail.</td><td>Total includes submitted toll amount.</td></tr><tr><td>TS-023</td><td>Calculate claim with Other detail.</td><td>Total includes submitted other amount.</td></tr><tr><td>TS-024</td><td>Calculate petrol distance claim.</td><td>Total equals kilometers multiplied by petrol cc rate.</td></tr><tr><td>TS-025</td><td>Calculate diesel distance claim.</td><td>Total equals kilometers multiplied by diesel cc rate.</td></tr><tr><td>TS-026</td><td>Pay a calculated claim.</td><td>Payment is saved, reference starts with <code>PAY-</code>, claim status becomes Paid.</td></tr><tr><td>TS-027</td><td>Access protected POST without JWT.</td><td>Backend returns unauthorized response.</td></tr><tr><td>TS-028</td><td>Register a new user.</td><td>User is saved with encoded password and User role.</td></tr></tbody></table>
+<h2>14. Assumptions and Open Items</h2>
+<ul>
+<li>The previous PDF could not be extracted in this environment because no local PDF text extraction tool or Python PDF library is installed.</li>
+<li>The current backend permits GET access to <code>/claims/**</code>; this is useful during development but should be restricted for production.</li>
+<li>Bank details are saved in browser local storage until a claim is submitted, then persisted with that claim.</li>
+<li>No frontend registration screen exists although <code>/registerNewUser</code> exists on the backend.</li>
+<li>No Angular route guard is implemented; routing checks are handled inside components.</li>
+<li>Existing unit test files are mostly generated skeletons and should be expanded around the scenarios listed above.</li>
+</ul>
+
+</body>
+</html>

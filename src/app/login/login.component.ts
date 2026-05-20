@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   errorMessage = '';
   isLoading = false;
+
   constructor(
     private authService: AuthService,
     private claimsService: ClaimsService,
@@ -47,19 +48,23 @@ export class LoginComponent implements OnInit {
       // Check isManager after saving
       console.log('Is manager?', this.authService.isManager());
 
-      if (this.authService.isManager()) {
+      if (this.authService.isAdmin()) {
+        this.router.navigate(['/admin-dashboard']);
+        this.isLoading = false;
+      } else if (this.authService.isManager()) {
         console.log('Navigating to approve-claims');
         this.router.navigate(['/approve-claims']);
         this.isLoading = false;
       } else {
-        console.log('Navigating to timesheet');
+        console.log('Navigating to claim details');
+        this.claimsService.startClaimStatusAutoRefresh(response.user.userId);
         this.claimsService.refreshClaimStatus(response.user.userId).subscribe({
           next: () => {
-            this.router.navigate(['/timesheet']);
+            this.router.navigate(['/claim-details']);
             this.isLoading = false;
           },
           error: () => {
-            this.router.navigate(['/timesheet']);
+            this.router.navigate(['/claim-details']);
             this.isLoading = false;
           },
         });

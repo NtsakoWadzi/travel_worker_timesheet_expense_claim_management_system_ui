@@ -1,0 +1,3676 @@
+%PDF-1.4
+%“Œ‹ž Styled BRD
+1 0 obj
+<< /Type /Catalog /PageMode /UseNone /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R 20 0 R 22 0 R 24 0 R 26 0 R 28 0 R 30 0 R 32 0 R 34 0 R 36 0 R 38 0 R 40 0 R] /Count 18 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 8269 >>
+stream
+0.121569 0.305882 0.474510 rg
+BT /F2 18.00 Tf 1 0 0 1 113.14 778.00 Tm (Travel Worker Timesheet and Expense Claim) Tj ET
+0.121569 0.305882 0.474510 rg
+BT /F2 18.00 Tf 1 0 0 1 221.14 755.00 Tm (Management System) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.00 Tf 1 0 0 1 147.71 710.00 Tm (Mini Project Pack for Development Team \(BA + Dev Handover\)) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.00 Tf 1 0 0 1 145.12 695.00 Tm (Updated Version - Admin Dashboard and Session Refresh Added) Tj ET
+0.121569 0.305882 0.474510 rg
+BT /F2 14.00 Tf 1 0 0 1 51.35 650.00 Tm (1. Purpose) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 624.00 Tm (The system enables travelling workers to submit timesheets and travel-related expense claims,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 611.00 Tm (enables managers to review, approve, reject, calculate, and pay those claims, and enables) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 598.00 Tm (administrators to maintain claims, timesheets, and bank detail records. The implemented) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 585.00 Tm (solution consists of an Angular frontend, a Spring Boot REST API, JWT authentication, Spring) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 572.00 Tm (Security authorization, and a MySQL database.) Tj ET
+0.121569 0.305882 0.474510 rg
+BT /F2 14.00 Tf 1 0 0 1 51.35 547.00 Tm (2. Scope) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 521.00 Tm (In scope:) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 500.00 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 500.00 Tm (User login using JWT authentication.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 487.00 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 487.00 Tm (Role-based routing for employees, managers, and administrators.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 474.00 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 474.00 Tm (Employee timesheet capture and submission.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 461.00 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 461.00 Tm (Expense claim capture with categories, claim details, receipts, supporting files, and bank) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 448.00 Tm (details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 435.00 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 435.00 Tm (Claim status tracking for employees.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 422.00 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 422.00 Tm (Manager claim review, document preview, status update, calculation, and payment processing.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 409.00 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 409.00 Tm (Admin dashboard for viewing, searching, creating, updating, and deleting claims,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 396.00 Tm (timesheets, and bank details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 383.00 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 383.00 Tm (Session-based claim draft preservation while users navigate between sidebar screens.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 370.00 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 370.00 Tm (Periodic status refresh so employee and admin views reflect manager decisions during active) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 357.00 Tm (sessions.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 344.00 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 344.00 Tm (Backend storage of users, roles, timesheets, claims, claim details, claim images, bank) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 331.00 Tm (account details, and payments.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 313.00 Tm (Out of scope:) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 292.00 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 292.00 Tm (Password reset and email notifications.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 279.00 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 279.00 Tm (Payroll or external banking integration.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 266.00 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 266.00 Tm (Audit trail beyond saved claim/payment status fields.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 253.00 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 253.00 Tm (Advanced reporting dashboards beyond operational admin tables.) Tj ET
+0.121569 0.305882 0.474510 rg
+BT /F2 14.00 Tf 1 0 0 1 51.35 231.00 Tm (3. Users and Roles) Tj ET
+0.917647 0.949020 0.972549 rg
+n 51.35 186.00 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 192.00 Tm (Role) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 192.00 Tm (Description) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 192.00 Tm (Main Access) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 173.00 Tm (User) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 173.00 Tm (Travelling worker or employee) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 162.00 Tm (submitting timesheets and claims.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 173.00 Tm (Timesheet, claim submission, bank) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 162.00 Tm (details, claim status.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 143.00 Tm (Manager) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 143.00 Tm (Reviewer responsible for approving,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 132.00 Tm (rejecting, calculating, and paying) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 121.00 Tm (claims.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 143.00 Tm (Claim approval dashboard and payment) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 132.00 Tm (action.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 102.00 Tm (Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 102.00 Tm (Seeded administrative role) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 91.00 Tm (responsible for operational record) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 80.00 Tm (maintenance.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 102.00 Tm (Admin dashboard, all-user claims table,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 91.00 Tm (timesheets table, bank details table,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 80.00 Tm (search, and CRUD actions.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 205.00 m 504.90 205.00 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 186.00 m 504.90 186.00 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 156.00 m 504.90 156.00 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 115.00 m 504.90 115.00 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 74.00 m 504.90 74.00 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 205.00 m 51.35 74.00 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 205.00 m 151.13 74.00 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 205.00 m 314.41 74.00 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 205.00 m 504.90 74.00 l S
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 59.00 Tm (Seeded users and roles are created on backend startup when missing:) Tj ET
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (1) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 10912 >>
+stream
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 783.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 783.20 Tm (admin123 / admin@pass with role Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 770.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 770.20 Tm (manager123 / manager@pass with role Manager) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 757.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 757.20 Tm (user / user@123 with role User) Tj ET
+0.121569 0.305882 0.474510 rg
+BT /F2 14.00 Tf 1 0 0 1 51.35 735.20 Tm (4. Functional Requirements) Tj ET
+0.917647 0.949020 0.972549 rg
+n 51.35 690.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 696.20 Tm (ID) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 696.20 Tm (Requirement) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 696.20 Tm (Implemented Behavior) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 677.20 Tm (FR-001) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 677.20 Tm (Authenticate users.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 677.20 Tm (Users submit username and password to) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 666.20 Tm (/authenticate; backend returns a JWT and) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 655.20 Tm (user profile.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 636.20 Tm (FR-002) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 636.20 Tm (Store user session on frontend.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 636.20 Tm (JWT and user object are saved in browser) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 625.20 Tm (local storage.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 606.20 Tm (FR-003) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 606.20 Tm (Route managers to approvals.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 606.20 Tm (A user with role Manager is routed to) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 595.20 Tm (/approve-claims after login.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 576.20 Tm (FR-004) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 576.20 Tm (Route employees to timesheets.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 576.20 Tm (Non-admin, non-manager users are routed) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 565.20 Tm (to /timesheet after login.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 546.20 Tm (FR-005) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 546.20 Tm (Capture timesheet rows.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 546.20 Tm (Employee captures work date, location,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 535.20 Tm (start time, end time, and task) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 524.20 Tm (description.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 505.20 Tm (FR-006) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 505.20 Tm (Calculate timesheet hours.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 505.20 Tm (Frontend calculates row totals and grand) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 494.20 Tm (total from start/end time.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 475.20 Tm (FR-007) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 475.20 Tm (Submit timesheets.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 475.20 Tm (Completed rows are posted to) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 464.20 Tm (/timesheets/save with JWT authorization.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 445.20 Tm (FR-008) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 445.20 Tm (Capture bank details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 445.20 Tm (Employee stores bank name, account) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 434.20 Tm (number, and account type in local storage) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 423.20 Tm (for claim submission.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 404.20 Tm (FR-009) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 404.20 Tm (Capture claim categories.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 404.20 Tm (Employee can select Meals, Toll Fees,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 393.20 Tm (Other, and Distance Travelled.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 374.20 Tm (FR-010) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 374.20 Tm (Require claim details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 374.20 Tm (A selected claim category must have) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 363.20 Tm (required detail fields before submission.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 344.20 Tm (FR-011) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 344.20 Tm (Validate meal time.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 344.20 Tm (Meal claim type must match receipt time:) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 333.20 Tm (before 12:00 Breakfast, 12:00-15:59) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 322.20 Tm (Lunch, 16:00+ Supper.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 303.20 Tm (FR-012) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 303.20 Tm (Capture distance details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 303.20 Tm (Distance Travelled requires kilometers,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 292.20 Tm (vehicle type, and engine size in cc.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 273.20 Tm (FR-013) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 273.20 Tm (Upload supporting documents.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 273.20 Tm (Claim files are uploaded as multipart) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 262.20 Tm (files and saved as ClaimImage BLOB) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 251.20 Tm (records.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 232.20 Tm (FR-014) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 232.20 Tm (Save detailed receipts.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 232.20 Tm (Claim detail receipt file names are) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 221.20 Tm (matched to uploaded files and saved as) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 210.20 Tm (BLOB data when present.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 191.20 Tm (FR-015) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 191.20 Tm (Generate claim reference.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 191.20 Tm (Backend generates a unique 10-digit) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 180.20 Tm (reference using claim date and current) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 169.20 Tm (time.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 150.20 Tm (FR-016) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 150.20 Tm (Default claim status.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 150.20 Tm (New claims default to Submitted.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 131.20 Tm (FR-017) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 131.20 Tm (Track employee claim status.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 131.20 Tm (Employee status screen refreshes claim) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 120.20 Tm (status every 2 seconds and on) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 109.20 Tm (focus/navigation events.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 90.20 Tm (FR-018) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 90.20 Tm (List all claims for manager.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 90.20 Tm (Manager dashboard loads all claims from) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 79.20 Tm (/claims.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 709.20 m 504.90 709.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 690.20 m 504.90 690.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 649.20 m 504.90 649.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 619.20 m 504.90 619.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 589.20 m 504.90 589.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 559.20 m 504.90 559.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 518.20 m 504.90 518.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 488.20 m 504.90 488.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 458.20 m 504.90 458.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 417.20 m 504.90 417.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 387.20 m 504.90 387.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 357.20 m 504.90 357.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 316.20 m 504.90 316.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 286.20 m 504.90 286.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 245.20 m 504.90 245.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 204.20 m 504.90 204.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 163.20 m 504.90 163.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 144.20 m 504.90 144.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 103.20 m 504.90 103.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 73.20 m 504.90 73.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 709.20 m 51.35 73.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 709.20 m 151.13 73.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 709.20 m 314.41 73.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 709.20 m 504.90 73.20 l S
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (2) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 10557 >>
+stream
+0.917647 0.949020 0.972549 rg
+n 51.35 764.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 770.20 Tm (ID) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 770.20 Tm (Requirement) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 770.20 Tm (Implemented Behavior) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 751.20 Tm (FR-019) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 751.20 Tm (View claim documents.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 751.20 Tm (Manager can request image metadata and) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 740.20 Tm (retrieve each claim image as a blob.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 721.20 Tm (FR-020) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 721.20 Tm (Approve or reject claims.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 721.20 Tm (Manager updates claim status through) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 710.20 Tm (/claims/{claimId}/status.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 691.20 Tm (FR-021) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 691.20 Tm (Calculate claim total.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 691.20 Tm (Manager calls /claims/{claimId}/calculate) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 680.20 Tm (; backend sums reimbursable claim detail) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 669.20 Tm (values.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 650.20 Tm (FR-022) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 650.20 Tm (Display bank details during) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 639.20 Tm (calculation.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 650.20 Tm (Calculation response includes bank) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 639.20 Tm (details attached to the claim.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 620.20 Tm (FR-023) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 620.20 Tm (Process claim payment.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 620.20 Tm (Manager calls /claims/{claimId}/pay;) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 609.20 Tm (backend creates a Payment and marks claim) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 598.20 Tm (as Paid.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 579.20 Tm (FR-024) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 579.20 Tm (Protect API endpoints.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 579.20 Tm (Most endpoints require JWT;) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 568.20 Tm (/authenticate, /registerNewUser, GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 557.20 Tm (/claims/**, and OPTIONS requests are) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 546.20 Tm (permitted.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 527.20 Tm (FR-025) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 527.20 Tm (Route admins to admin dashboard.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 527.20 Tm (A user with role Admin is routed to) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 516.20 Tm (/admin-dashboard after login.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 497.20 Tm (FR-026) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 497.20 Tm (View all operational records as) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 486.20 Tm (admin.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 497.20 Tm (Admin can view claims, timesheets, and) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 486.20 Tm (bank details for all users.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 467.20 Tm (FR-027) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 467.20 Tm (Search admin records.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 467.20 Tm (Admin can search table records by values) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 456.20 Tm (such as user, reference, status, bank,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 445.20 Tm (date, and IDs.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 426.20 Tm (FR-028) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 426.20 Tm (Maintain claims as admin.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 426.20 Tm (Admin can create, update, and delete) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 415.20 Tm (claim records through /admin/claims.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 396.20 Tm (FR-029) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 396.20 Tm (Maintain timesheets as admin.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 396.20 Tm (Admin can create, update, and delete) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 385.20 Tm (timesheet records through) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 374.20 Tm (/admin/timesheets.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 355.20 Tm (FR-030) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 355.20 Tm (Maintain bank details as admin.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 355.20 Tm (Admin can create, update, and delete bank) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 344.20 Tm (detail records through) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 333.20 Tm (/admin/bank-details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 314.20 Tm (FR-031) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 314.20 Tm (Preserve in-progress claim draft.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 314.20 Tm (The claim form keeps selected categories,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 303.20 Tm (date, details, and attached files when) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 292.20 Tm (the employee navigates to bank details,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 281.20 Tm (timesheet, or status screens during the) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 270.20 Tm (same SPA session.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 251.20 Tm (FR-032) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 251.20 Tm (Refresh employee claim status) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 240.20 Tm (during session.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 251.20 Tm (Employee claim status is refreshed every) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 240.20 Tm (2 seconds while the user session is) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 229.20 Tm (active.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 210.20 Tm (FR-033) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 210.20 Tm (Refresh admin dashboard during) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 199.20 Tm (session.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 210.20 Tm (Admin dashboard records are refreshed) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 199.20 Tm (every 2 seconds so manager) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 188.20 Tm (approval/rejection changes are reflected) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 177.20 Tm (without manual refresh.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 158.20 Tm (FR-034) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 158.20 Tm (Remove unsupported signup UI.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 158.20 Tm (The login screen no longer displays a) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 147.20 Tm (sign-up link because registration is not) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 136.20 Tm (implemented in the frontend.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 504.90 783.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 764.20 m 504.90 764.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 734.20 m 504.90 734.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 704.20 m 504.90 704.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 663.20 m 504.90 663.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 633.20 m 504.90 633.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 592.20 m 504.90 592.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 540.20 m 504.90 540.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 510.20 m 504.90 510.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 480.20 m 504.90 480.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 439.20 m 504.90 439.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 409.20 m 504.90 409.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 368.20 m 504.90 368.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 327.20 m 504.90 327.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 264.20 m 504.90 264.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 223.20 m 504.90 223.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 171.20 m 504.90 171.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 130.20 m 504.90 130.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 51.35 130.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 783.20 m 151.13 130.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 783.20 m 314.41 130.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 783.20 m 504.90 130.20 l S
+0.121569 0.305882 0.474510 rg
+BT /F2 14.00 Tf 1 0 0 1 51.35 111.20 Tm (5. Non-Functional Requirements) Tj ET
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (3) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 10400 >>
+stream
+0.917647 0.949020 0.972549 rg
+n 51.35 764.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 770.20 Tm (ID) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 770.20 Tm (Requirement) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 770.20 Tm (Current Implementation) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 751.20 Tm (NFR-001) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 751.20 Tm (Security) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 751.20 Tm (JWT authentication, BCrypt password) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 740.20 Tm (encoding, stateless Spring Security) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 729.20 Tm (sessions.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 710.20 Tm (NFR-002) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 710.20 Tm (Data persistence) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 710.20 Tm (MySQL database travelworker; Hibernate) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 699.20 Tm (ddl-auto=update.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 680.20 Tm (NFR-003) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 680.20 Tm (Cross-origin access) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 680.20 Tm (Backend allows all origins, methods) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 669.20 Tm (GET/POST/PUT/DELETE/OPTIONS, and all) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 658.20 Tm (headers.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 639.20 Tm (NFR-004) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 639.20 Tm (Usability) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 639.20 Tm (Angular Material controls are used for) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 628.20 Tm (forms, dialogs, lists, and date/time) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 617.20 Tm (inputs.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 598.20 Tm (NFR-005) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 598.20 Tm (Responsiveness) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 598.20 Tm (Screens include responsive CSS for) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 587.20 Tm (smaller viewports.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 568.20 Tm (NFR-006) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 568.20 Tm (File storage) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 568.20 Tm (Uploaded images and receipts are stored) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 557.20 Tm (in database BLOB columns.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 538.20 Tm (NFR-007) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 538.20 Tm (Availability) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 538.20 Tm (Local development assumes backend at) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 527.20 Tm (http://localhost:8080 and Angular app at) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 516.20 Tm (ng serve default port.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 497.20 Tm (NFR-008) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 497.20 Tm (Near real-time updates) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 497.20 Tm (Active employee and admin screens use) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 486.20 Tm (lightweight polling every 2 seconds to) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 475.20 Tm (reflect manager decisions.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 456.20 Tm (NFR-009) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 456.20 Tm (Session continuity) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 456.20 Tm (In-progress claim data is retained in) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 445.20 Tm (Angular service memory while the browser) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 434.20 Tm (session remains active and the user does) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 423.20 Tm (not log out.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 504.90 783.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 764.20 m 504.90 764.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 723.20 m 504.90 723.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 693.20 m 504.90 693.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 652.20 m 504.90 652.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 611.20 m 504.90 611.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 581.20 m 504.90 581.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 551.20 m 504.90 551.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 510.20 m 504.90 510.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 469.20 m 504.90 469.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 417.20 m 504.90 417.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 51.35 417.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 783.20 m 151.13 417.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 783.20 m 314.41 417.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 783.20 m 504.90 417.20 l S
+0.121569 0.305882 0.474510 rg
+BT /F2 14.00 Tf 1 0 0 1 51.35 398.20 Tm (6. Frontend Screens) Tj ET
+0.917647 0.949020 0.972549 rg
+n 51.35 353.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 359.20 Tm (Route) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 359.20 Tm (Screen) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 359.20 Tm (Main Functions) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 340.20 Tm (/) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 340.20 Tm (Login) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 340.20 Tm (Capture username/password, authenticate,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 329.20 Tm (save JWT/user, route by role.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 310.20 Tm (/timesheet) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 310.20 Tm (Timesheet) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 310.20 Tm (Capture rows, calculate hours, submit) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 299.20 Tm (timesheet, navigate to claims/status.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 280.20 Tm (/claims) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 280.20 Tm (Claims) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 280.20 Tm (Select categories, capture details,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 269.20 Tm (attach files, validate bank details,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 258.20 Tm (submit claim.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 239.20 Tm (/bank-details) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 239.20 Tm (Bank Details) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 239.20 Tm (Capture and locally save bank name,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 228.20 Tm (account number, and account type.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 209.20 Tm (/claim-status) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 209.20 Tm (Claim Status) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 209.20 Tm (Display submitted, approved, and rejected) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 198.20 Tm (claims for the employee.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 179.20 Tm (/approve-claims) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 179.20 Tm (Approve Claims) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 179.20 Tm (List all claims, view documents,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 168.20 Tm (calculate totals, approve/reject, process) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 157.20 Tm (payment.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 138.20 Tm (/admin-dashboard) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 138.20 Tm (Admin Dashboard) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 138.20 Tm (Admin view of claims, timesheets, and) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 127.20 Tm (bank details; search; create; update;) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 116.20 Tm (delete; refresh.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 372.20 m 504.90 372.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 353.20 m 504.90 353.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 323.20 m 504.90 323.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 293.20 m 504.90 293.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 252.20 m 504.90 252.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 222.20 m 504.90 222.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 192.20 m 504.90 192.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 151.20 m 504.90 151.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 110.20 m 504.90 110.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 372.20 m 51.35 110.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 372.20 m 151.13 110.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 372.20 m 314.41 110.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 372.20 m 504.90 110.20 l S
+0.121569 0.305882 0.474510 rg
+BT /F2 14.00 Tf 1 0 0 1 51.35 91.20 Tm (7. Data Models and Entities) Tj ET
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (4) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 9751 >>
+stream
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 783.20 Tm (7.1 Backend Entities) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 10.50 Tf 1 0 0 1 51.35 760.20 Tm (User) Tj ET
+0.917647 0.949020 0.972549 rg
+n 51.35 720.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 726.20 Tm (Field) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 726.20 Tm (Type) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 726.20 Tm (Notes) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 707.20 Tm (userId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 707.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 707.20 Tm (Primary key, auto generated.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 688.20 Tm (userName) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 688.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 688.20 Tm (Login username.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 669.20 Tm (userFirstName) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 669.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 669.20 Tm (First name.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 650.20 Tm (userLastName) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 650.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 650.20 Tm (Last name.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 631.20 Tm (userEmail) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 631.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 631.20 Tm (Email address.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 612.20 Tm (userPassword) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 612.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 612.20 Tm (BCrypt encoded password.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 593.20 Tm (role) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 593.20 Tm (Set<Role>) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 593.20 Tm (Many-to-many through USER_ROLE.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 574.20 Tm (created_at) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 574.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 574.20 Tm (Created date/time string.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 555.20 Tm (status) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 555.20 Tm (boolean) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 555.20 Tm (Active/inactive flag.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 739.20 m 504.90 739.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 720.20 m 504.90 720.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 701.20 m 504.90 701.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 682.20 m 504.90 682.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 663.20 m 504.90 663.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 644.20 m 504.90 644.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 625.20 m 504.90 625.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 606.20 m 504.90 606.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 587.20 m 504.90 587.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 568.20 m 504.90 568.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 549.20 m 504.90 549.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 739.20 m 51.35 549.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 739.20 m 151.13 549.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 739.20 m 314.41 549.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 739.20 m 504.90 549.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F2 10.50 Tf 1 0 0 1 51.35 534.20 Tm (Role) Tj ET
+0.917647 0.949020 0.972549 rg
+n 51.35 494.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 500.20 Tm (Field) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 500.20 Tm (Type) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 500.20 Tm (Notes) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 481.20 Tm (roleName) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 481.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 481.20 Tm (Primary key, examples: Admin, Manager,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 470.20 Tm (User.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 451.20 Tm (roleDescription) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 451.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 451.20 Tm (Role description.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 513.20 m 504.90 513.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 494.20 m 504.90 494.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 464.20 m 504.90 464.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 445.20 m 504.90 445.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 513.20 m 51.35 445.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 513.20 m 151.13 445.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 513.20 m 314.41 445.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 513.20 m 504.90 445.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F2 10.50 Tf 1 0 0 1 51.35 430.20 Tm (Timesheet) Tj ET
+0.917647 0.949020 0.972549 rg
+n 51.35 390.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 396.20 Tm (Field) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 396.20 Tm (Type) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 396.20 Tm (Notes) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 377.20 Tm (timesheetId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 377.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 377.20 Tm (Primary key, auto generated.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 358.20 Tm (userId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 358.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 358.20 Tm (References employee user.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 339.20 Tm (workDate) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 339.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 339.20 Tm (Date worked, submitted as ISO string.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 320.20 Tm (startTime) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 320.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 320.20 Tm (Start time/date value.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 301.20 Tm (endTime) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 301.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 301.20 Tm (End time/date value.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 282.20 Tm (total_hours) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 282.20 Tm (Double) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 282.20 Tm (Calculated hours for the row.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 263.20 Tm (location) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 263.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 263.20 Tm (Work location.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 244.20 Tm (description) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 244.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 244.20 Tm (Task description.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 225.20 Tm (status) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 225.20 Tm (Boolean) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 225.20 Tm (Submission/status flag.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 409.20 m 504.90 409.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 390.20 m 504.90 390.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 371.20 m 504.90 371.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 352.20 m 504.90 352.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 333.20 m 504.90 333.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 314.20 m 504.90 314.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 295.20 m 504.90 295.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 276.20 m 504.90 276.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 257.20 m 504.90 257.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 238.20 m 504.90 238.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 219.20 m 504.90 219.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 409.20 m 51.35 219.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 409.20 m 151.13 219.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 409.20 m 314.41 219.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 409.20 m 504.90 219.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F2 10.50 Tf 1 0 0 1 51.35 204.20 Tm (Claim) Tj ET
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (5) Tj ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 11474 >>
+stream
+0.917647 0.949020 0.972549 rg
+n 51.35 764.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 770.20 Tm (Field) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 770.20 Tm (Type) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 770.20 Tm (Notes) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 751.20 Tm (claimId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 751.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 751.20 Tm (Primary key, auto generated.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 732.20 Tm (userId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 732.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 732.20 Tm (Employee user id.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 713.20 Tm (claimReference) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 713.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 713.20 Tm (Generated unique reference.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 694.20 Tm (claimDate) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 694.20 Tm (Date) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 694.20 Tm (Date claim was issued.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 675.20 Tm (categories) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 675.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 675.20 Tm (Comma-separated selected categories.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 656.20 Tm (claimImages) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 656.20 Tm (List<String>) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 656.20 Tm (Element collection of uploaded file) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 645.20 Tm (names.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 626.20 Tm (status) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 626.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 626.20 Tm (Submitted, Approved, Rejected, Paid.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 607.20 Tm (total_amount) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 607.20 Tm (Double) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 607.20 Tm (Calculated total.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 588.20 Tm (managerId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 588.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 588.20 Tm (Manager identifier if used.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 569.20 Tm (userName) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 569.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 569.20 Tm (Transient display field.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 550.20 Tm (userSubmissionCount) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 550.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 550.20 Tm (Transient count field.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 504.90 783.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 764.20 m 504.90 764.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 745.20 m 504.90 745.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 726.20 m 504.90 726.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 707.20 m 504.90 707.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 688.20 m 504.90 688.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 669.20 m 504.90 669.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 639.20 m 504.90 639.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 620.20 m 504.90 620.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 601.20 m 504.90 601.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 582.20 m 504.90 582.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 563.20 m 504.90 563.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 544.20 m 504.90 544.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 51.35 544.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 783.20 m 151.13 544.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 783.20 m 314.41 544.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 783.20 m 504.90 544.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F2 10.50 Tf 1 0 0 1 51.35 529.20 Tm (ClaimDetail) Tj ET
+0.917647 0.949020 0.972549 rg
+n 51.35 489.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 495.20 Tm (Field) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 495.20 Tm (Type) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 495.20 Tm (Notes) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 476.20 Tm (claimDetailId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 476.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 476.20 Tm (Primary key, auto generated.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 457.20 Tm (claimId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 457.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 457.20 Tm (Parent claim id.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 438.20 Tm (category) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 438.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 438.20 Tm (Meals, Toll Fees, Other, Distance) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 427.20 Tm (Travelled.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 408.20 Tm (detailType) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 408.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 408.20 Tm (Meal type or Distance.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 389.20 Tm (description) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 389.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 389.20 Tm (Description for Other and supporting) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 378.20 Tm (detail.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 359.20 Tm (kilometers) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 359.20 Tm (Double) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 359.20 Tm (Distance travelled.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 340.20 Tm (vehicleType) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 340.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 340.20 Tm (Petrol or Diesel.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 321.20 Tm (engineSizeCc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 321.20 Tm (Double) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 321.20 Tm (Engine size used for rate.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 302.20 Tm (receiptTime) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 302.20 Tm (LocalTime) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 302.20 Tm (Used for meal classification.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 283.20 Tm (amount) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 283.20 Tm (Double) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 283.20 Tm (Claimed amount.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 264.20 Tm (allowedAmount) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 264.20 Tm (Double) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 264.20 Tm (Meal allowance reference amount.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 245.20 Tm (reimbursableAmount) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 245.20 Tm (Double) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 245.20 Tm (Normalized reimbursement value.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 226.20 Tm (receiptFileName) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 226.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 226.20 Tm (Uploaded receipt file name.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 207.20 Tm (receiptContentType) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 207.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 207.20 Tm (Receipt MIME type.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 188.20 Tm (receiptData) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 188.20 Tm (byte[]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 188.20 Tm (Receipt BLOB.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 169.20 Tm (receiptUrl) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 169.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 169.20 Tm (Transient URL for receipt download/view.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 508.20 m 504.90 508.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 489.20 m 504.90 489.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 470.20 m 504.90 470.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 451.20 m 504.90 451.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 421.20 m 504.90 421.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 402.20 m 504.90 402.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 372.20 m 504.90 372.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 353.20 m 504.90 353.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 334.20 m 504.90 334.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 315.20 m 504.90 315.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 296.20 m 504.90 296.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 277.20 m 504.90 277.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 258.20 m 504.90 258.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 239.20 m 504.90 239.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 220.20 m 504.90 220.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 201.20 m 504.90 201.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 182.20 m 504.90 182.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 163.20 m 504.90 163.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 508.20 m 51.35 163.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 508.20 m 151.13 163.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 508.20 m 314.41 163.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 508.20 m 504.90 163.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F2 10.50 Tf 1 0 0 1 51.35 148.20 Tm (ClaimImage) Tj ET
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (6) Tj ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Length 11488 >>
+stream
+0.917647 0.949020 0.972549 rg
+n 51.35 764.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 770.20 Tm (Field) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 770.20 Tm (Type) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 770.20 Tm (Notes) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 751.20 Tm (imageId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 751.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 751.20 Tm (Primary key, auto generated.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 732.20 Tm (claimId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 732.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 732.20 Tm (Parent claim id.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 713.20 Tm (fileName) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 713.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 713.20 Tm (Original uploaded file name.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 694.20 Tm (contentType) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 694.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 694.20 Tm (MIME type.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 675.20 Tm (data) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 675.20 Tm (byte[]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 675.20 Tm (File BLOB.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 504.90 783.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 764.20 m 504.90 764.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 745.20 m 504.90 745.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 726.20 m 504.90 726.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 707.20 m 504.90 707.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 688.20 m 504.90 688.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 669.20 m 504.90 669.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 51.35 669.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 783.20 m 151.13 669.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 783.20 m 314.41 669.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 783.20 m 504.90 669.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F2 10.50 Tf 1 0 0 1 51.35 654.20 Tm (BankAccountDetails) Tj ET
+0.917647 0.949020 0.972549 rg
+n 51.35 614.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 620.20 Tm (Field) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 620.20 Tm (Type) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 620.20 Tm (Notes) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 601.20 Tm (bankDetailsId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 601.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 601.20 Tm (Primary key, auto generated.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 582.20 Tm (claimId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 582.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 582.20 Tm (Claim id.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 563.20 Tm (userId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 563.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 563.20 Tm (Employee user id.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 544.20 Tm (bankName) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 544.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 544.20 Tm (Bank name.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 525.20 Tm (accountNumber) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 525.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 525.20 Tm (Account number.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 506.20 Tm (accountType) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 506.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 506.20 Tm (Cheque, Savings, or Transmission.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 633.20 m 504.90 633.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 614.20 m 504.90 614.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 595.20 m 504.90 595.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 576.20 m 504.90 576.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 557.20 m 504.90 557.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 538.20 m 504.90 538.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 519.20 m 504.90 519.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 500.20 m 504.90 500.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 633.20 m 51.35 500.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 633.20 m 151.13 500.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 633.20 m 314.41 500.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 633.20 m 504.90 500.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F2 10.50 Tf 1 0 0 1 51.35 485.20 Tm (Payment) Tj ET
+0.917647 0.949020 0.972549 rg
+n 51.35 445.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 451.20 Tm (Field) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 451.20 Tm (Type) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 451.20 Tm (Notes) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 432.20 Tm (paymentId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 432.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 432.20 Tm (Primary key, auto generated.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 413.20 Tm (claimId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 413.20 Tm (Long) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 413.20 Tm (Paid claim id.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 394.20 Tm (paymentDate) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 394.20 Tm (Date) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 394.20 Tm (Payment processing date.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 375.20 Tm (reference) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 375.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 375.20 Tm (PAY- plus claim reference or claim id.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 356.20 Tm (status) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 356.20 Tm (Boolean) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 356.20 Tm (True when payment processed.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 337.20 Tm (processedBy) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 337.20 Tm (String) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 337.20 Tm (Manager/processor name.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 464.20 m 504.90 464.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 445.20 m 504.90 445.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 426.20 m 504.90 426.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 407.20 m 504.90 407.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 388.20 m 504.90 388.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 369.20 m 504.90 369.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 350.20 m 504.90 350.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 331.20 m 504.90 331.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 464.20 m 51.35 331.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 464.20 m 151.13 331.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 464.20 m 314.41 331.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 464.20 m 504.90 331.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 316.20 Tm (7.2 API DTOs and Response Models) Tj ET
+0.917647 0.949020 0.972549 rg
+n 51.35 274.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 280.20 Tm (Model) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 247.84 280.20 Tm (Fields) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 261.20 Tm (JwtRequest) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 261.20 Tm (userName, userPassword) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 242.20 Tm (JwtResponse) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 242.20 Tm (user, jwtToken) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 223.20 Tm (ClaimImageResponse) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 223.20 Tm (imageId, fileName, contentType, imageUrl) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 204.20 Tm (ClaimCalculationResponse) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 204.20 Tm (claimId, claimReference, claimDate, totalAmount, details,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 193.20 Tm (bankDetails) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 174.20 Tm (UserClaimCountResponse) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 174.20 Tm (userSubmissionCount) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 155.20 Tm (PaymentResponse) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 155.20 Tm (paymentId, claimId, paymentDate, reference, status,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 144.20 Tm (processedBy) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 293.20 m 504.90 293.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 274.20 m 504.90 274.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 255.20 m 504.90 255.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 236.20 m 504.90 236.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 217.20 m 504.90 217.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 187.20 m 504.90 187.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 168.20 m 504.90 168.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 138.20 m 504.90 138.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 293.20 m 51.35 138.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 241.84 293.20 m 241.84 138.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 293.20 m 504.90 138.20 l S
+0.121569 0.305882 0.474510 rg
+BT /F2 14.00 Tf 1 0 0 1 51.35 119.20 Tm (8. Business Rules) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 93.20 Tm (8.1 Claim Status Rules) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 70.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 70.20 Tm (New claims are saved as Submitted.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 57.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 57.20 Tm (Manager may update status to Approved or Rejected.) Tj ET
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (7) Tj ET
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 17 0 R >>
+endobj
+19 0 obj
+<< /Length 9329 >>
+stream
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 783.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 783.20 Tm (Payment processing changes claim status to Paid.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 770.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 770.20 Tm (Employee status screen treats missing, boolean true, or empty status as Submitted.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 752.20 Tm (8.2 Meal Rules) Tj ET
+0.917647 0.949020 0.972549 rg
+n 51.35 710.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 716.20 Tm (Receipt Time) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 716.20 Tm (Meal Type) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 716.20 Tm (Allowed Amount) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 697.20 Tm (Before 12:00) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 697.20 Tm (Breakfast) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 697.20 Tm (R150.00) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 678.20 Tm (12:00 to 15:59) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 678.20 Tm (Lunch) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 678.20 Tm (R190.00) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 659.20 Tm (16:00 and later) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 659.20 Tm (Supper) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 659.20 Tm (R210.00) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 729.20 m 504.90 729.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 710.20 m 504.90 710.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 691.20 m 504.90 691.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 672.20 m 504.90 672.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 653.20 m 504.90 653.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 729.20 m 51.35 653.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 729.20 m 151.13 653.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 729.20 m 314.41 653.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 729.20 m 504.90 653.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 638.20 Tm (Frontend validation requires the selected meal type to match the receipt time. Backend) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 625.20 Tm (normalizes the meal type and allowance from the submitted receipt time.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 604.20 Tm (8.3 Distance Rate Rules) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 581.20 Tm (Petrol reimbursement rates:) Tj ET
+0.917647 0.949020 0.972549 rg
+n 51.35 541.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 547.20 Tm (Engine Size) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 247.84 547.20 Tm (Rate per km) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 528.20 Tm (<= 1250 cc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 528.20 Tm (R3.172) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 509.20 Tm (<= 1550 cc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 509.20 Tm (R3.992) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 490.20 Tm (<= 1750 cc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 490.20 Tm (R4.337) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 471.20 Tm (<= 1950 cc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 471.20 Tm (R4.999) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 452.20 Tm (<= 2150 cc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 452.20 Tm (R5.359) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 433.20 Tm (<= 2500 cc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 433.20 Tm (R6.068) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 414.20 Tm (<= 3500 cc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 414.20 Tm (R7.576) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 395.20 Tm (> 3500 cc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 395.20 Tm (R8.952) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 560.20 m 504.90 560.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 541.20 m 504.90 541.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 522.20 m 504.90 522.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 503.20 m 504.90 503.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 484.20 m 504.90 484.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 465.20 m 504.90 465.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 446.20 m 504.90 446.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 427.20 m 504.90 427.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 408.20 m 504.90 408.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 389.20 m 504.90 389.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 560.20 m 51.35 389.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 241.84 560.20 m 241.84 389.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 560.20 m 504.90 389.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 374.20 Tm (Diesel reimbursement rates:) Tj ET
+0.917647 0.949020 0.972549 rg
+n 51.35 334.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 340.20 Tm (Engine Size) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 247.84 340.20 Tm (Rate per km) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 321.20 Tm (<= 1250 cc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 321.20 Tm (R3.197) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 302.20 Tm (<= 1550 cc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 302.20 Tm (R3.828) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 283.20 Tm (<= 1750 cc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 283.20 Tm (R4.248) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 264.20 Tm (<= 1950 cc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 264.20 Tm (R4.448) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 245.20 Tm (<= 2150 cc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 245.20 Tm (R5.196) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 226.20 Tm (<= 2500 cc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 226.20 Tm (R5.942) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 207.20 Tm (> 2500 cc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 247.84 207.20 Tm (R7.375) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 353.20 m 504.90 353.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 334.20 m 504.90 334.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 315.20 m 504.90 315.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 296.20 m 504.90 296.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 277.20 m 504.90 277.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 258.20 m 504.90 258.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 239.20 m 504.90 239.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 220.20 m 504.90 220.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 201.20 m 504.90 201.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 353.20 m 51.35 201.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 241.84 353.20 m 241.84 201.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 353.20 m 504.90 201.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 186.20 Tm (Distance amount = kilometers multiplied by the rate determined by vehicle type and engine size.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 165.20 Tm (8.4 Calculation Rules) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 142.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 142.20 Tm (Distance Travelled: included amount is kilometers multiplied by applicable fuel/engine) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 129.20 Tm (rate.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 116.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 116.20 Tm (Meals: included amount is the submitted amount.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 103.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 103.20 Tm (Toll Fees: included amount is the submitted amount.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 90.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 90.20 Tm (Other: included amount is the submitted amount.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 77.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 77.20 Tm (The calculated claim total is saved to Claim.total_amount.) Tj ET
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (8) Tj ET
+endstream
+endobj
+20 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 19 0 R >>
+endobj
+21 0 obj
+<< /Length 7264 >>
+stream
+0.121569 0.305882 0.474510 rg
+BT /F2 14.00 Tf 1 0 0 1 51.35 779.20 Tm (9. Use Cases) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 753.20 Tm (UC-001 Login) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 730.20 Tm (Actor: User, Manager, Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 714.20 Tm (Preconditions: Account exists and is active.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 698.20 Tm (Main flow:) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 677.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 677.20 Tm (1. Actor opens login screen.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 664.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 664.20 Tm (2. Actor enters username and password.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 651.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 651.20 Tm (3. Frontend posts credentials to /authenticate.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 638.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 638.20 Tm (4. Backend validates credentials and returns JWT plus user profile.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 625.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 625.20 Tm (5. Frontend stores JWT and user profile.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 612.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 612.20 Tm (6. Manager is redirected to approvals; other users are redirected to timesheet.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 594.20 Tm (UC-002 Submit Timesheet) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 571.20 Tm (Actor: User) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 555.20 Tm (Preconditions: User is logged in.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 539.20 Tm (Main flow:) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 518.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 518.20 Tm (1. User opens timesheet screen.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 505.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 505.20 Tm (2. User enters work date, location, start time, end time, and task description.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 492.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 492.20 Tm (3. Frontend calculates total hours per row and grand total.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 479.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 479.20 Tm (4. User submits completed rows.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 466.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 466.20 Tm (5. Frontend posts rows to /timesheets/save.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 453.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 453.20 Tm (6. Backend saves timesheets.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 440.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 440.20 Tm (7. User is routed to claims screen.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 422.20 Tm (UC-003 Capture Bank Details) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 399.20 Tm (Actor: User) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 383.20 Tm (Preconditions: User is logged in.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 367.20 Tm (Main flow:) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 346.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 346.20 Tm (1. User opens bank details screen.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 333.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 333.20 Tm (2. User enters bank name, account number, and account type.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 320.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 320.20 Tm (3. Frontend validates required fields.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 307.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 307.20 Tm (4. Frontend stores bank details locally for the next claim submission.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 289.20 Tm (UC-004 Submit Claim) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 266.20 Tm (Actor: User) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 250.20 Tm (Preconditions: User is logged in and bank details are captured.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 234.20 Tm (Main flow:) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 213.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 213.20 Tm (1. User opens claims screen.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 200.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 200.20 Tm (2. User selects one or more claim categories.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 187.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 187.20 Tm (3. User captures required category detail.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 174.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 174.20 Tm (4. User attaches supporting documents or receipts.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 161.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 161.20 Tm (5. Frontend validates selected categories and bank details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 148.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 148.20 Tm (6. Frontend posts a multipart request to /claims/save.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 135.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 135.20 Tm (7. Backend saves claim, files, details, bank details, and generated reference.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 122.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 122.20 Tm (8. Frontend displays confirmation with claim reference.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 104.20 Tm (UC-005 Track Claim Status) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 81.20 Tm (Actor: User) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 65.20 Tm (Preconditions: User has submitted one or more claims.) Tj ET
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (9) Tj ET
+endstream
+endobj
+22 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 21 0 R >>
+endobj
+23 0 obj
+<< /Length 7894 >>
+stream
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 783.20 Tm (Main flow:) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 762.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 762.20 Tm (1. User opens claim status screen.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 749.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 749.20 Tm (2. Frontend refreshes user claims from /claims/user/{userId} and count from) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 736.20 Tm (/claims/user/{userId}/count.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 723.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 723.20 Tm (3. Screen displays submitted, approved, and rejected claims.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 710.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 710.20 Tm (4. Screen refreshes periodically and when browser focus returns.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 692.20 Tm (UC-006 Review and Decide Claim) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 669.20 Tm (Actor: Manager) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 653.20 Tm (Preconditions: Manager is logged in.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 637.20 Tm (Main flow:) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 616.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 616.20 Tm (1. Manager opens approve claims screen.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 603.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 603.20 Tm (2. Frontend loads claims from /claims.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 590.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 590.20 Tm (3. Manager views claim fields and supporting documents.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 577.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 577.20 Tm (4. Manager approves or rejects a claim.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 564.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 564.20 Tm (5. Frontend sends status update to /claims/{claimId}/status.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 551.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 551.20 Tm (6. Backend saves the new status.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 533.20 Tm (UC-007 Calculate and Pay Claim) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 510.20 Tm (Actor: Manager) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 494.20 Tm (Preconditions: Claim exists and has claim details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 478.20 Tm (Main flow:) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 457.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 457.20 Tm (1. Manager selects Calculate on a claim.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 444.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 444.20 Tm (2. Frontend calls /claims/{claimId}/calculate.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 431.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 431.20 Tm (3. Backend calculates total amount and returns details plus bank details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 418.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 418.20 Tm (4. Manager reviews calculation and selects Pay.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 405.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 405.20 Tm (5. Frontend posts processor name to /claims/{claimId}/pay.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 392.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 392.20 Tm (6. Backend creates payment record and marks claim as Paid.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 374.20 Tm (UC-008 Admin Maintain Operational Records) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 351.20 Tm (Actor: Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 335.20 Tm (Preconditions: Admin is logged in with role Admin.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 319.20 Tm (Main flow:) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 298.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 298.20 Tm (1. Admin logs in with admin credentials.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 285.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 285.20 Tm (2. Frontend routes the admin to /admin-dashboard.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 272.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 272.20 Tm (3. Admin selects Claims, Timesheets, or Bank Details from the sidebar.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 259.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 259.20 Tm (4. Admin searches records when the table has many rows.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 246.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 246.20 Tm (5. Admin creates, edits, or deletes a selected record.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 233.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 233.20 Tm (6. Backend persists changes through /admin/** endpoints.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 220.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 220.20 Tm (7. Admin dashboard refreshes every 2 seconds so manager claim decisions appear during the) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 207.20 Tm (active session.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 189.20 Tm (UC-009 Preserve Claim Draft Across Sidebar Navigation) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 166.20 Tm (Actor: User) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 150.20 Tm (Preconditions: User is logged in and has started a claim.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 134.20 Tm (Main flow:) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 113.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 113.20 Tm (1. User selects claim categories, enters details, attaches receipts, or changes the claim) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 100.20 Tm (date.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 87.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 87.20 Tm (2. User navigates to Bank Details, Timesheet, or Status from the sidebar.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 74.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 74.20 Tm (3. Frontend stores the in-progress claim draft in the Angular claim service.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 61.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 61.20 Tm (4. User returns to Claims.) Tj ET
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (10) Tj ET
+endstream
+endobj
+24 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 23 0 R >>
+endobj
+25 0 obj
+<< /Length 11550 >>
+stream
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 783.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 783.20 Tm (5. Previously selected categories, details, attachments, and date remain available during) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 770.20 Tm (the same SPA session.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 752.20 Tm (UC-010 Concurrent Claim Status Visibility) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 729.20 Tm (Actor: User, Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 713.20 Tm (Preconditions: Manager changes a claim status while user/admin screens are active.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 697.20 Tm (Main flow:) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 676.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 676.20 Tm (1. Manager approves or rejects a claim.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 663.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 663.20 Tm (2. Backend persists the new claim status.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 650.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 650.20 Tm (3. Employee claim status polling refreshes within approximately 2 seconds.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 637.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 637.20 Tm (4. Admin dashboard polling refreshes within approximately 2 seconds.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 624.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 624.20 Tm (5. The updated status appears without manual refresh.) Tj ET
+0.121569 0.305882 0.474510 rg
+BT /F2 14.00 Tf 1 0 0 1 51.35 602.20 Tm (10. Suggested API Endpoints) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 576.20 Tm (Base URL: http://localhost:8080) Tj ET
+0.917647 0.949020 0.972549 rg
+n 51.35 536.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 542.20 Tm (Method) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 134.46 542.20 Tm (Endpoint) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 265.98 542.20 Tm (Purpose) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 442.87 542.20 Tm (Auth) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 523.20 Tm (POST) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 523.20 Tm (/authenticate) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 523.20 Tm (Login and receive JWT.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 523.20 Tm (Public) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 504.20 Tm (POST) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 504.20 Tm (/registerNewUser) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 504.20 Tm (Register a new user with User role.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 504.20 Tm (Public) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 485.20 Tm (POST) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 485.20 Tm (/createNewRole) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 485.20 Tm (Create a role.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 485.20 Tm (JWT) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 466.20 Tm (GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 466.20 Tm (/admin/users) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 466.20 Tm (List users for admin display names and) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 455.20 Tm (IDs.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 466.20 Tm (Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 436.20 Tm (GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 436.20 Tm (/admin/claims) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 436.20 Tm (List all claims for admin.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 436.20 Tm (Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 417.20 Tm (POST) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 417.20 Tm (/admin/claims) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 417.20 Tm (Create a claim record.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 417.20 Tm (Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 398.20 Tm (PUT) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 398.20 Tm (/admin/claims/{claimId}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 398.20 Tm (Update a claim record.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 398.20 Tm (Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 379.20 Tm (DELETE) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 379.20 Tm (/admin/claims/{claimId}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 379.20 Tm (Delete a claim and linked) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 368.20 Tm (details/images/bank/payment records.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 379.20 Tm (Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 349.20 Tm (GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 349.20 Tm (/admin/timesheets) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 349.20 Tm (List all timesheets.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 349.20 Tm (Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 330.20 Tm (POST) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 330.20 Tm (/admin/timesheets) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 330.20 Tm (Create a timesheet record.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 330.20 Tm (Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 311.20 Tm (PUT) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 311.20 Tm (/admin/timesheets/{timesheet) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 300.20 Tm (Id}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 311.20 Tm (Update a timesheet record.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 311.20 Tm (Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 281.20 Tm (DELETE) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 281.20 Tm (/admin/timesheets/{timesheet) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 270.20 Tm (Id}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 281.20 Tm (Delete a timesheet record.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 281.20 Tm (Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 251.20 Tm (GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 251.20 Tm (/admin/bank-details) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 251.20 Tm (List all bank detail records.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 251.20 Tm (Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 232.20 Tm (POST) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 232.20 Tm (/admin/bank-details) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 232.20 Tm (Create a bank detail record.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 232.20 Tm (Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 213.20 Tm (PUT) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 213.20 Tm (/admin/bank-details/{bankDet) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 202.20 Tm (ailsId}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 213.20 Tm (Update a bank detail record.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 213.20 Tm (Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 183.20 Tm (DELETE) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 183.20 Tm (/admin/bank-details/{bankDet) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 172.20 Tm (ailsId}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 183.20 Tm (Delete a bank detail record.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 183.20 Tm (Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 153.20 Tm (GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 153.20 Tm (/forAdmin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 153.20 Tm (Admin-only protected test endpoint.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 153.20 Tm (Admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 134.20 Tm (GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 134.20 Tm (/forUser) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 134.20 Tm (User-only protected test endpoint.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 134.20 Tm (User) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 555.20 m 504.90 555.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 536.20 m 504.90 536.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 517.20 m 504.90 517.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 498.20 m 504.90 498.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 479.20 m 504.90 479.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 449.20 m 504.90 449.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 430.20 m 504.90 430.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 411.20 m 504.90 411.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 392.20 m 504.90 392.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 362.20 m 504.90 362.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 343.20 m 504.90 343.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 324.20 m 504.90 324.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 294.20 m 504.90 294.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 264.20 m 504.90 264.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 245.20 m 504.90 245.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 226.20 m 504.90 226.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 196.20 m 504.90 196.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 166.20 m 504.90 166.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 147.20 m 504.90 147.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 128.20 m 504.90 128.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 555.20 m 51.35 128.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 128.46 555.20 m 128.46 128.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 259.98 555.20 m 259.98 128.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 436.87 555.20 m 436.87 128.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 555.20 m 504.90 128.20 l S
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (11) Tj ET
+endstream
+endobj
+26 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 25 0 R >>
+endobj
+27 0 obj
+<< /Length 9674 >>
+stream
+0.917647 0.949020 0.972549 rg
+n 51.35 764.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 770.20 Tm (Method) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 134.46 770.20 Tm (Endpoint) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 265.98 770.20 Tm (Purpose) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 442.87 770.20 Tm (Auth) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 751.20 Tm (POST) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 751.20 Tm (/timesheets/save) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 751.20 Tm (Save submitted timesheet rows.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 751.20 Tm (JWT) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 732.20 Tm (GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 732.20 Tm (/timesheets) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 732.20 Tm (List all timesheets.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 732.20 Tm (JWT) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 713.20 Tm (POST) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 713.20 Tm (/claims/save) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 713.20 Tm (Save claim as multipart form data.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 713.20 Tm (JWT) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 694.20 Tm (GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 694.20 Tm (/claims) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 694.20 Tm (List all claims.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 694.20 Tm (Public in) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 683.20 Tm (current secur) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 672.20 Tm (ity config) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 653.20 Tm (GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 653.20 Tm (/claims/user/{userId}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 653.20 Tm (List claims for one user.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 653.20 Tm (Public in) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 642.20 Tm (current secur) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 631.20 Tm (ity config) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 612.20 Tm (GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 612.20 Tm (/claims/user/{userId}/count) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 612.20 Tm (Count claims for one user.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 612.20 Tm (Public in) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 601.20 Tm (current secur) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 590.20 Tm (ity config) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 571.20 Tm (GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 571.20 Tm (/claims/{claimId}/images) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 571.20 Tm (Get claim image metadata.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 571.20 Tm (Public in) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 560.20 Tm (current secur) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 549.20 Tm (ity config) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 530.20 Tm (GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 530.20 Tm (/claims/{claimId}/images/{im) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 519.20 Tm (ageId}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 530.20 Tm (Get image BLOB.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 530.20 Tm (Public in) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 519.20 Tm (current secur) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 508.20 Tm (ity config) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 489.20 Tm (GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 489.20 Tm (/claims/{claimId}/details) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 489.20 Tm (Get claim details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 489.20 Tm (Public in) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 478.20 Tm (current secur) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 467.20 Tm (ity config) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 448.20 Tm (GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 448.20 Tm (/claims/{claimId}/details/{d) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 437.20 Tm (etailId}/receipt) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 448.20 Tm (Get claim detail receipt BLOB.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 448.20 Tm (Public in) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 437.20 Tm (current secur) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 426.20 Tm (ity config) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 407.20 Tm (GET) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 407.20 Tm (/claims/{claimId}/calculate) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 407.20 Tm (Calculate and persist claim total.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 407.20 Tm (Public in) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 396.20 Tm (current secur) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 385.20 Tm (ity config) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 366.20 Tm (PUT) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 366.20 Tm (/claims/{claimId}/status) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 366.20 Tm (Update claim status.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 366.20 Tm (JWT) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 347.20 Tm (POST) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 134.46 347.20 Tm (/claims/{claimId}/pay) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 265.98 347.20 Tm (Create payment and mark claim Paid.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 442.87 347.20 Tm (JWT) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 504.90 783.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 764.20 m 504.90 764.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 745.20 m 504.90 745.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 726.20 m 504.90 726.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 707.20 m 504.90 707.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 666.20 m 504.90 666.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 625.20 m 504.90 625.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 584.20 m 504.90 584.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 543.20 m 504.90 543.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 502.20 m 504.90 502.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 461.20 m 504.90 461.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 420.20 m 504.90 420.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 379.20 m 504.90 379.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 360.20 m 504.90 360.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 341.20 m 504.90 341.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 51.35 341.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 128.46 783.20 m 128.46 341.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 259.98 783.20 m 259.98 341.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 436.87 783.20 m 436.87 341.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 783.20 m 504.90 341.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 51.35 326.20 Tm (Recommended future endpoint hardening:) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 305.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 305.20 Tm (Restrict GET /claims/** to authenticated users.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 292.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 292.20 Tm (Restrict manager-only actions such as status updates, calculation, and payment to role) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 279.20 Tm (Manager.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 266.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 266.20 Tm (Add user ownership checks for employee claim status endpoints.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 253.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 253.20 Tm (Add CRUD endpoints for bank details if bank details should persist independently before) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 240.20 Tm (claim submission.) Tj ET
+0.121569 0.305882 0.474510 rg
+BT /F2 14.00 Tf 1 0 0 1 51.35 218.20 Tm (11. ERD) Tj ET
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (12) Tj ET
+endstream
+endobj
+28 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 27 0 R >>
+endobj
+29 0 obj
+<< /Length 6437 >>
+stream
+0.941000 0.956000 0.973000 rg
+n 51.35 123.20 453.54 660.00 re f*
+0.121569 0.305882 0.474510 rg
+BT /F2 8.50 Tf 1 0 0 1 58.35 770.20 Tm (Diagram source \(mermaid\)) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 758.20 Tm (erDiagram) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 749.20 Tm (USER {) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 740.20 Tm (long userId PK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 731.20 Tm (string userName) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 722.20 Tm (string userFirstName) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 713.20 Tm (string userLastName) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 704.20 Tm (string userEmail) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 695.20 Tm (string userPassword) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 686.20 Tm (string created_at) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 677.20 Tm (boolean status) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 668.20 Tm (}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 650.20 Tm (ROLE {) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 641.20 Tm (string roleName PK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 632.20 Tm (string roleDescription) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 623.20 Tm (}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 605.20 Tm (USER_ROLE {) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 596.20 Tm (long USER_ID FK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 587.20 Tm (string ROLE_ID FK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 578.20 Tm (}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 560.20 Tm (TIMESHEET {) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 551.20 Tm (long timesheetId PK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 542.20 Tm (long userId FK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 533.20 Tm (string workDate) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 524.20 Tm (string startTime) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 515.20 Tm (string endTime) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 506.20 Tm (double total_hours) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 497.20 Tm (string location) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 488.20 Tm (string description) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 479.20 Tm (boolean status) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 470.20 Tm (}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 452.20 Tm (CLAIM {) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 443.20 Tm (long claimId PK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 434.20 Tm (long userId FK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 425.20 Tm (string claimReference) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 416.20 Tm (date claimDate) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 407.20 Tm (string categories) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 398.20 Tm (string status) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 389.20 Tm (double total_amount) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 380.20 Tm (long managerId) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 371.20 Tm (}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 353.20 Tm (CLAIM_DETAIL {) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 344.20 Tm (long claimDetailId PK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 335.20 Tm (long claimId FK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 326.20 Tm (string category) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 317.20 Tm (string detailType) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 308.20 Tm (string description) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 299.20 Tm (double kilometers) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 290.20 Tm (string vehicleType) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 281.20 Tm (double engineSizeCc) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 272.20 Tm (time receiptTime) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 263.20 Tm (double amount) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 254.20 Tm (double allowedAmount) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 245.20 Tm (double reimbursableAmount) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 236.20 Tm (string receiptFileName) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 227.20 Tm (string receiptContentType) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 218.20 Tm (blob receiptData) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 209.20 Tm (}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 191.20 Tm (CLAIM_IMAGE {) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 182.20 Tm (long imageId PK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 173.20 Tm (long claimId FK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 164.20 Tm (string fileName) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 155.20 Tm (string contentType) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 146.20 Tm (blob data) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 137.20 Tm (}) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 504.90 783.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 123.20 m 504.90 123.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 51.35 123.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 783.20 m 504.90 123.20 l S
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (13) Tj ET
+endstream
+endobj
+30 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 29 0 R >>
+endobj
+31 0 obj
+<< /Length 7324 >>
+stream
+0.941000 0.956000 0.973000 rg
+n 51.35 492.20 453.54 291.00 re f*
+0.121569 0.305882 0.474510 rg
+BT /F2 8.50 Tf 1 0 0 1 58.35 770.20 Tm (Diagram source \(mermaid\)) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 749.20 Tm (BANK_ACCOUNT_DETAILS {) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 740.20 Tm (long bankDetailsId PK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 731.20 Tm (long claimId FK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 722.20 Tm (long userId FK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 713.20 Tm (string bankName) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 704.20 Tm (string accountNumber) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 695.20 Tm (string accountType) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 686.20 Tm (}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 668.20 Tm (PAYMENT {) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 659.20 Tm (long paymentId PK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 650.20 Tm (long claimId FK) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 641.20 Tm (date paymentDate) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 632.20 Tm (string reference) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 623.20 Tm (boolean status) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 614.20 Tm (string processedBy) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 605.20 Tm (}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 587.20 Tm (USER ||--o{ TIMESHEET : submits) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 578.20 Tm (USER ||--o{ CLAIM : submits) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 569.20 Tm (USER ||--o{ BANK_ACCOUNT_DETAILS : owns) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 560.20 Tm (USER }o--o{ ROLE : has) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 551.20 Tm (USER_ROLE }o--|| USER : maps) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 542.20 Tm (USER_ROLE }o--|| ROLE : maps) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 533.20 Tm (CLAIM ||--o{ CLAIM_DETAIL : contains) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 524.20 Tm (CLAIM ||--o{ CLAIM_IMAGE : has) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 515.20 Tm (CLAIM ||--o| BANK_ACCOUNT_DETAILS : uses) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 506.20 Tm (CLAIM ||--o| PAYMENT : paid_by) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 504.90 783.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 492.20 m 504.90 492.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 51.35 492.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 783.20 m 504.90 492.20 l S
+0.121569 0.305882 0.474510 rg
+BT /F2 14.00 Tf 1 0 0 1 51.35 473.20 Tm (12. Process Flow Diagrams) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 447.20 Tm (12.1 Authentication and Routing) Tj ET
+0.941000 0.956000 0.973000 rg
+n 51.35 304.20 453.54 120.00 re f*
+0.121569 0.305882 0.474510 rg
+BT /F2 8.50 Tf 1 0 0 1 58.35 411.20 Tm (Diagram source \(mermaid\)) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 399.20 Tm (flowchart TD) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 390.20 Tm (A[Open Login Screen] --> B[Enter username and password]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 381.20 Tm (B --> C[POST /authenticate]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 372.20 Tm (C --> D{Valid credentials?}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 363.20 Tm (D -- No --> E[Show invalid username or password]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 354.20 Tm (D -- Yes --> F[Save JWT and user profile]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 345.20 Tm (F --> G{User has Manager role?}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 336.20 Tm (G -- Yes --> H[Go to /approve-claims]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 327.20 Tm (G -- No --> I[Refresh claim status]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 318.20 Tm (I --> J[Go to /timesheet]) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 424.20 m 504.90 424.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 304.20 m 504.90 304.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 424.20 m 51.35 304.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 424.20 m 504.90 304.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 289.20 Tm (12.2 Employee Timesheet and Claim Submission) Tj ET
+0.941000 0.956000 0.973000 rg
+n 51.35 101.20 453.54 165.00 re f*
+0.121569 0.305882 0.474510 rg
+BT /F2 8.50 Tf 1 0 0 1 58.35 253.20 Tm (Diagram source \(mermaid\)) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 241.20 Tm (flowchart TD) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 232.20 Tm (A[Employee logs in] --> B[Capture timesheet rows]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 223.20 Tm (B --> C[Calculate row and grand total hours]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 214.20 Tm (C --> D{At least one complete row?}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 205.20 Tm (D -- No --> E[Show validation message]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 196.20 Tm (D -- Yes --> F[POST /timesheets/save]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 187.20 Tm (F --> G[Open claims screen]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 178.20 Tm (G --> H[Select claim categories]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 169.20 Tm (H --> I[Capture required category details]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 160.20 Tm (I --> J[Attach supporting documents]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 151.20 Tm (J --> K{Bank details available?}) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 142.20 Tm (K -- No --> L[Open bank details screen]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 133.20 Tm (K -- Yes --> M[POST multipart /claims/save]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 124.20 Tm (M --> N[Backend saves claim, details, files, bank details]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 115.20 Tm (N --> O[Show claim reference]) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 266.20 m 504.90 266.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 101.20 m 504.90 101.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 266.20 m 51.35 101.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 266.20 m 504.90 101.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 86.20 Tm (12.3 Manager Approval, Calculation, and Payment) Tj ET
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (14) Tj ET
+endstream
+endobj
+32 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 31 0 R >>
+endobj
+33 0 obj
+<< /Length 5386 >>
+stream
+0.941000 0.956000 0.973000 rg
+n 51.35 645.20 453.54 138.00 re f*
+0.121569 0.305882 0.474510 rg
+BT /F2 8.50 Tf 1 0 0 1 58.35 770.20 Tm (Diagram source \(mermaid\)) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 758.20 Tm (flowchart TD) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 749.20 Tm (A[Manager logs in] --> B[Load all claims]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 740.20 Tm (B --> C[Review claim list]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 731.20 Tm (C --> D[View documents]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 722.20 Tm (C --> E[Approve or reject]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 713.20 Tm (E --> F[PUT /claims/{claimId}/status]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 704.20 Tm (C --> G[Calculate claim]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 695.20 Tm (G --> H[GET /claims/{claimId}/calculate]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 686.20 Tm (H --> I[Show details, bank details, total]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 677.20 Tm (I --> J[Process payment]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 668.20 Tm (J --> K[POST /claims/{claimId}/pay]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 659.20 Tm (K --> L[Create Payment and mark claim Paid]) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 504.90 783.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 645.20 m 504.90 645.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 51.35 645.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 783.20 m 504.90 645.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 625.20 Tm (12.4 Admin Dashboard Maintenance) Tj ET
+0.941000 0.956000 0.973000 rg
+n 51.35 437.20 453.54 165.00 re f*
+0.121569 0.305882 0.474510 rg
+BT /F2 8.50 Tf 1 0 0 1 58.35 589.20 Tm (Diagram source \(mermaid\)) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 577.20 Tm (flowchart TD) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 568.20 Tm (A[Admin logs in] --> B[Route to /admin-dashboard]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 559.20 Tm (B --> C[Load claims, timesheets, bank details, users]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 550.20 Tm (C --> D[Select resource from sidebar]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 541.20 Tm (D --> E[Search records]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 532.20 Tm (D --> F[Create record]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 523.20 Tm (D --> G[Edit selected record]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 514.20 Tm (D --> H[Delete selected record]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 505.20 Tm (F --> I[POST /admin resource endpoint]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 496.20 Tm (G --> J[PUT /admin resource endpoint]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 487.20 Tm (H --> K[DELETE /admin resource endpoint]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 478.20 Tm (I --> L[Refresh dashboard]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 469.20 Tm (J --> L) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 460.20 Tm (K --> L) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 451.20 Tm (L --> C) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 602.20 m 504.90 602.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 437.20 m 504.90 437.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 602.20 m 51.35 437.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 602.20 m 504.90 437.20 l S
+0.000000 0.000000 0.000000 rg
+BT /F2 11.50 Tf 1 0 0 1 51.35 422.20 Tm (12.5 Active Session Refresh) Tj ET
+0.941000 0.956000 0.973000 rg
+n 51.35 315.20 453.54 84.00 re f*
+0.121569 0.305882 0.474510 rg
+BT /F2 8.50 Tf 1 0 0 1 58.35 386.20 Tm (Diagram source \(mermaid\)) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 374.20 Tm (flowchart TD) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 365.20 Tm (A[Manager updates claim status] --> B[Backend saves status]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 356.20 Tm (B --> C[Employee status polling every 2 seconds]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 347.20 Tm (B --> D[Admin dashboard polling every 2 seconds]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 338.20 Tm (C --> E[Employee sees latest approval or rejection]) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 7.00 Tf 1 0 0 1 58.35 329.20 Tm (D --> F[Admin sees updated claim record]) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 399.20 m 504.90 399.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 315.20 m 504.90 315.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 399.20 m 51.35 315.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 399.20 m 504.90 315.20 l S
+0.121569 0.305882 0.474510 rg
+BT /F2 14.00 Tf 1 0 0 1 51.35 296.20 Tm (13. Test Scenarios) Tj ET
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (15) Tj ET
+endstream
+endobj
+34 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 33 0 R >>
+endobj
+35 0 obj
+<< /Length 9818 >>
+stream
+0.917647 0.949020 0.972549 rg
+n 51.35 764.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 770.20 Tm (ID) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 770.20 Tm (Scenario) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 770.20 Tm (Expected Result) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 751.20 Tm (TS-001) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 751.20 Tm (Login with valid employee) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 740.20 Tm (credentials.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 751.20 Tm (JWT and user are saved; employee is) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 740.20 Tm (routed to /timesheet.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 721.20 Tm (TS-002) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 721.20 Tm (Login with valid manager) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 710.20 Tm (credentials.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 721.20 Tm (JWT and user are saved; manager is routed) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 710.20 Tm (to /approve-claims.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 691.20 Tm (TS-003) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 691.20 Tm (Login with invalid credentials.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 691.20 Tm (Error message Invalid username or) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 680.20 Tm (password is shown.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 661.20 Tm (TS-004) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 661.20 Tm (Submit timesheet without login.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 661.20 Tm (Error message asks user to log in.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 642.20 Tm (TS-005) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 642.20 Tm (Submit timesheet with no complete) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 631.20 Tm (rows.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 642.20 Tm (Validation message asks for at least one) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 631.20 Tm (row.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 612.20 Tm (TS-006) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 612.20 Tm (Enter end time before start time.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 612.20 Tm (Row total displays Invalid; invalid total) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 601.20 Tm (is excluded from grand total.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 582.20 Tm (TS-007) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 582.20 Tm (Submit a valid timesheet row.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 582.20 Tm (Backend saves row and frontend navigates) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 571.20 Tm (to claims screen.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 552.20 Tm (TS-008) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 552.20 Tm (Save blank bank details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 552.20 Tm (Validation requires bank name, account) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 541.20 Tm (number, and account type.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 522.20 Tm (TS-009) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 522.20 Tm (Save complete bank details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 522.20 Tm (Details are stored locally and success) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 511.20 Tm (message is shown.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 492.20 Tm (TS-010) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 492.20 Tm (Submit claim without category.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 492.20 Tm (Validation asks user to select at least) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 481.20 Tm (one claim category.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 462.20 Tm (TS-011) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 462.20 Tm (Submit claim without bank details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 462.20 Tm (Validation asks user to capture bank) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 451.20 Tm (details before submission.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 432.20 Tm (TS-012) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 432.20 Tm (Select Meals without detail.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 432.20 Tm (Detail dialog opens before submission.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 413.20 Tm (TS-013) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 413.20 Tm (Select Breakfast with receipt time) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 402.20 Tm (13:00.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 413.20 Tm (Frontend blocks save and says slip time) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 402.20 Tm (is treated as Lunch.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 383.20 Tm (TS-014) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 383.20 Tm (Submit Distance Travelled without) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 372.20 Tm (kilometers.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 383.20 Tm (Category remains incomplete and) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 372.20 Tm (submission is blocked.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 353.20 Tm (TS-015) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 353.20 Tm (Submit valid claim with files and) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 342.20 Tm (bank details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 353.20 Tm (Backend saves claim, generated reference) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 342.20 Tm (is returned, confirmation dialog appears.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 323.20 Tm (TS-016) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 323.20 Tm (Manager loads approvals.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 323.20 Tm (All claims are displayed or an error) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 312.20 Tm (appears if unavailable.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 293.20 Tm (TS-017) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 293.20 Tm (Manager views claim images.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 293.20 Tm (Image metadata loads and BLOB previews) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 282.20 Tm (are created.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 263.20 Tm (TS-018) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 263.20 Tm (Manager approves a claim.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 263.20 Tm (Claim status changes to Approved and) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 252.20 Tm (persists on backend.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 504.90 783.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 764.20 m 504.90 764.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 734.20 m 504.90 734.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 704.20 m 504.90 704.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 674.20 m 504.90 674.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 655.20 m 504.90 655.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 625.20 m 504.90 625.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 595.20 m 504.90 595.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 565.20 m 504.90 565.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 535.20 m 504.90 535.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 505.20 m 504.90 505.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 475.20 m 504.90 475.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 445.20 m 504.90 445.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 426.20 m 504.90 426.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 396.20 m 504.90 396.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 366.20 m 504.90 366.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 336.20 m 504.90 336.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 306.20 m 504.90 306.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 276.20 m 504.90 276.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 246.20 m 504.90 246.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 51.35 246.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 783.20 m 151.13 246.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 783.20 m 314.41 246.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 783.20 m 504.90 246.20 l S
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (16) Tj ET
+endstream
+endobj
+36 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 35 0 R >>
+endobj
+37 0 obj
+<< /Length 12095 >>
+stream
+0.917647 0.949020 0.972549 rg
+n 51.35 764.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 770.20 Tm (ID) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 770.20 Tm (Scenario) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 770.20 Tm (Expected Result) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 751.20 Tm (TS-019) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 751.20 Tm (Manager rejects a claim.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 751.20 Tm (Claim status changes to Rejected and) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 740.20 Tm (persists on backend.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 721.20 Tm (TS-020) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 721.20 Tm (Employee opens status screen after) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 710.20 Tm (approval.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 721.20 Tm (Approved claim appears with approved) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 710.20 Tm (status/icon.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 691.20 Tm (TS-021) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 691.20 Tm (Calculate claim with Meals detail.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 691.20 Tm (Total includes submitted meal amount.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 672.20 Tm (TS-022) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 672.20 Tm (Calculate claim with Toll Fees) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 661.20 Tm (detail.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 672.20 Tm (Total includes submitted toll amount.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 642.20 Tm (TS-023) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 642.20 Tm (Calculate claim with Other detail.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 642.20 Tm (Total includes submitted other amount.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 623.20 Tm (TS-024) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 623.20 Tm (Calculate petrol distance claim.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 623.20 Tm (Total equals kilometers multiplied by) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 612.20 Tm (petrol cc rate.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 593.20 Tm (TS-025) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 593.20 Tm (Calculate diesel distance claim.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 593.20 Tm (Total equals kilometers multiplied by) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 582.20 Tm (diesel cc rate.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 563.20 Tm (TS-026) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 563.20 Tm (Pay a calculated claim.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 563.20 Tm (Payment is saved, reference starts with) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 552.20 Tm (PAY-, claim status becomes Paid.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 533.20 Tm (TS-027) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 533.20 Tm (Access protected POST without JWT.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 533.20 Tm (Backend returns unauthorized response.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 514.20 Tm (TS-028) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 514.20 Tm (Register a new user.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 514.20 Tm (User is saved with encoded password and) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 503.20 Tm (User role.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 484.20 Tm (TS-029) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 484.20 Tm (Login with valid admin credentials.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 484.20 Tm (JWT and user are saved; admin is routed) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 473.20 Tm (to /admin-dashboard.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 454.20 Tm (TS-030) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 454.20 Tm (Admin searches records.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 454.20 Tm (Table filters to matching claims,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 443.20 Tm (timesheets, or bank details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 424.20 Tm (TS-031) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 424.20 Tm (Admin creates a claim.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 424.20 Tm (Claim record is saved through) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 413.20 Tm (/admin/claims and appears in the claims) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 402.20 Tm (table.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 383.20 Tm (TS-032) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 383.20 Tm (Admin updates a timesheet.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 383.20 Tm (Timesheet changes persist through) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 372.20 Tm (/admin/timesheets/{timesheetId}.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 353.20 Tm (TS-033) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 353.20 Tm (Admin deletes bank details.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 353.20 Tm (Bank detail record is removed through) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 342.20 Tm (/admin/bank-details/{bankDetailsId}.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 323.20 Tm (TS-034) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 323.20 Tm (User navigates from Claims to Bank) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 312.20 Tm (Details and back.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 323.20 Tm (In-progress claim categories, details,) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 312.20 Tm (date, and files remain in the claim form.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 293.20 Tm (TS-035) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 293.20 Tm (Manager approves claim while) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 282.20 Tm (employee status screen is open.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 293.20 Tm (Employee status updates within the active) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 282.20 Tm (polling interval.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 263.20 Tm (TS-036) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 263.20 Tm (Manager rejects claim while admin) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 252.20 Tm (dashboard is open.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 263.20 Tm (Admin claims table updates within the) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 252.20 Tm (active polling interval.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 504.90 783.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 764.20 m 504.90 764.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 734.20 m 504.90 734.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 704.20 m 504.90 704.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 685.20 m 504.90 685.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 655.20 m 504.90 655.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 636.20 m 504.90 636.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 606.20 m 504.90 606.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 576.20 m 504.90 576.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 546.20 m 504.90 546.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 527.20 m 504.90 527.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 497.20 m 504.90 497.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 467.20 m 504.90 467.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 437.20 m 504.90 437.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 396.20 m 504.90 396.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 366.20 m 504.90 366.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 336.20 m 504.90 336.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 306.20 m 504.90 306.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 276.20 m 504.90 276.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 246.20 m 504.90 246.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 783.20 m 51.35 246.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 783.20 m 151.13 246.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 783.20 m 314.41 246.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 783.20 m 504.90 246.20 l S
+0.917647 0.949020 0.972549 rg
+n 51.35 217.20 453.54 19.00 re f*
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 57.35 223.20 Tm (ID) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 157.13 223.20 Tm (Scenario) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F2 8.50 Tf 1 0 0 1 320.41 223.20 Tm (Expected Result) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 57.35 204.20 Tm (TS-037) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 157.13 204.20 Tm (Login screen is displayed.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 204.20 Tm (No sign-up section or sign-up route link) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 8.50 Tf 1 0 0 1 320.41 193.20 Tm (is shown.) Tj ET
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 236.20 m 504.90 236.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 217.20 m 504.90 217.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 187.20 m 504.90 187.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 51.35 236.20 m 51.35 187.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 151.13 236.20 m 151.13 187.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 314.41 236.20 m 314.41 187.20 l S
+0.498039 0.549020 0.552941 RG
+0.50 w n 504.90 236.20 m 504.90 187.20 l S
+0.121569 0.305882 0.474510 rg
+BT /F2 14.00 Tf 1 0 0 1 51.35 168.20 Tm (14. Assumptions and Open Items) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 142.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 142.20 Tm (The previous PDF could not be extracted in this environment because no local PDF text) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 129.20 Tm (extraction tool or Python PDF library is installed.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 116.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 116.20 Tm (The current backend permits GET access to /claims/**; this is useful during development but) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 103.20 Tm (should be restricted for production.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 90.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 90.20 Tm (Bank details are saved in browser local storage until a claim is submitted, then persisted) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 77.20 Tm (with that claim.) Tj ET
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (17) Tj ET
+endstream
+endobj
+38 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 37 0 R >>
+endobj
+39 0 obj
+<< /Length 1032 >>
+stream
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 783.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 783.20 Tm (No frontend registration screen exists although /registerNewUser exists on the backend; the) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 770.20 Tm (login sign-up link has been removed.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 757.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 757.20 Tm (No Angular route guard is implemented; routing checks are handled inside components.) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 10.00 Tf 1 0 0 1 56.35 744.20 Tm () Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 744.20 Tm (Existing unit test files are mostly generated skeletons and should be expanded around the) Tj ET
+0.000000 0.000000 0.000000 rg
+BT /F1 9.50 Tf 1 0 0 1 66.35 731.20 Tm (scenarios listed above.) Tj ET
+0.501961 0.501961 0.501961 rg
+BT /F1 8.00 Tf 1 0 0 1 548.28 28.35 Tm (18) Tj ET
+endstream
+endobj
+40 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> /ProcSet [/PDF /Text] >> /Contents 39 0 R >>
+endobj
+xref
+0 41
+0000000000 65535 f 
+0000000026 00000 n 
+0000000094 00000 n 
+0000000270 00000 n 
+0000000367 00000 n 
+0000000469 00000 n 
+0000008790 00000 n 
+0000008958 00000 n 
+0000019923 00000 n 
+0000020091 00000 n 
+0000030701 00000 n 
+0000030870 00000 n 
+0000041324 00000 n 
+0000041494 00000 n 
+0000051298 00000 n 
+0000051468 00000 n 
+0000062996 00000 n 
+0000063166 00000 n 
+0000074708 00000 n 
+0000074878 00000 n 
+0000084260 00000 n 
+0000084430 00000 n 
+0000091747 00000 n 
+0000091917 00000 n 
+0000099864 00000 n 
+0000100034 00000 n 
+0000111638 00000 n 
+0000111808 00000 n 
+0000121535 00000 n 
+0000121705 00000 n 
+0000128195 00000 n 
+0000128365 00000 n 
+0000135742 00000 n 
+0000135912 00000 n 
+0000141351 00000 n 
+0000141521 00000 n 
+0000151392 00000 n 
+0000151562 00000 n 
+0000163711 00000 n 
+0000163881 00000 n 
+0000164966 00000 n 
+trailer
+<< /Size 41 /Root 1 0 R >>
+startxref
+165136
+%%EOF

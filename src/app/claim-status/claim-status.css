@@ -191,77 +191,79 @@
   border-top: 4px solid #b00020;
 }
 
-.status-list {
+.claims-panel {
   display: grid;
   gap: 12px;
 }
 
-.status-card {
-  display: grid;
-  grid-template-columns: 48px minmax(0, 1fr);
-  gap: 14px;
-  align-items: center;
-  padding: 16px;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-left: 4px solid #f58220;
-  border-radius: 8px;
-}
-
-.status-card.approved {
-  border-left-color: #2e7d32;
-}
-
-.status-card.rejected {
-  border-left-color: #b00020;
-}
-
-.status-icon {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  color: #fff;
-  background: #f58220;
-  border-radius: 8px;
-}
-
-.status-card.approved .status-icon {
-  background: #2e7d32;
-}
-
-.status-card.rejected .status-icon {
-  background: #b00020;
-}
-
-.status-card-head {
+.table-toolbar,
+.pagination-bar,
+.pagination-actions {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
 }
 
-.status-card-head strong {
-  color: #333;
-  font-size: 17px;
+.table-toolbar,
+.pagination-bar {
+  justify-content: space-between;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
 }
 
-.status-card-head span {
-  padding: 5px 9px;
+.table-toolbar mat-form-field,
+.pagination-bar mat-form-field {
+  width: 180px;
+}
+
+.claims-table {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) minmax(120px, 0.7fr) minmax(170px, 1.3fr) minmax(140px, 0.9fr) minmax(260px, 1.6fr);
+  gap: 12px;
+  align-items: center;
+  min-width: 860px;
+  padding: 14px 16px;
+  border-bottom: 1px solid #eef0f3;
+}
+
+.table-row:last-child {
+  border-bottom: 0;
+}
+
+.table-row.table-head {
+  background: #f8fafc;
+  font-weight: 700;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
   color: #333;
   background: #f3f4f6;
-  border-radius: 6px;
+  border-radius: 999px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.status-content p {
-  margin: 6px 0;
+.status-pill mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.pagination-bar {
   color: #555;
-}
-
-.status-content small {
-  color: #777;
 }
 
 .empty-state,
@@ -312,9 +314,15 @@
   }
 
   .status-header,
-  .status-card-head {
+  .table-toolbar,
+  .pagination-bar {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .table-toolbar mat-form-field,
+  .pagination-bar mat-form-field {
+    width: 100%;
   }
 
   .status-summary {

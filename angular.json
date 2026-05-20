@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "travel_work_timesheet_expense_claim_management_system": {
+    "khokha_system_ui": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -43,7 +43,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumError": "1.2MB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -65,10 +65,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "travel_work_timesheet_expense_claim_management_system:build:production"
+              "buildTarget": "khokha_system_ui:build:production"
             },
             "development": {
-              "buildTarget": "travel_work_timesheet_expense_claim_management_system:build:development"
+              "buildTarget": "khokha_system_ui:build:development"
             }
           },
           "defaultConfiguration": "development"

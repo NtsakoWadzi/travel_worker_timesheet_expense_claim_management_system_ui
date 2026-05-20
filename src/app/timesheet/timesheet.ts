@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth';
-import { TimesheetService } from '../services/timesheet-service';
+import { ClaimsService } from '../services/claims-service';
 
 export interface TimesheetRow {
   date: Date | string;
@@ -20,10 +19,13 @@ export interface TimesheetRow {
   styleUrl: './timesheet.css',
 })
 export class Timesheet implements OnInit {
+  @Input() embedded = false;
+  @Output() stepRequested = new EventEmitter<'timesheet' | 'claims' | 'bank-details' | 'status'>();
+
   constructor(
     private router: Router,
     private authService: AuthService,
-    private timesheetService: TimesheetService
+    private claimsService: ClaimsService
   ) {}
 
   ngOnInit(): void {
@@ -37,29 +39,29 @@ export class Timesheet implements OnInit {
 
   timesheetReferenceNumber: string = '';
   employeeName: string = 'Employee';
+  personalParticulars = {
+    officeType: '',
+    initials: '',
+    surname: '',
+    persalNumber: '',
+    cellularPhoneNumber: '',
+  };
   taskDescription = '';
   errorMessage = '';
   successMessage = '';
   isSubmitting = false;
+  activeRow: TimesheetRow | null = null;
 
   displayedColumns: string[] = [
-    'date','worklocation' ,'starttime', 'endtime', 'totalWorkHours'
+    'date', 'worklocation', 'starttime', 'endtime', 'totalWorkHours', 'actions'
   ];
 
   timesheetData: TimesheetRow[] = [
-    { date: '7/9/2025', worklocation : '',starttime: null, endtime: null, totalWorkHours: '' },
-    { date: '7/10/2025',worklocation:'', starttime: null, endtime: null, totalWorkHours: '' },
-    { date: '7/10/2025',worklocation:'', starttime: null, endtime: null, totalWorkHours: '' },
-    { date: '7/10/2025',worklocation:'', starttime: null, endtime: null, totalWorkHours: '' },
-    { date: '7/11/2025',worklocation:'', starttime: null, endtime: null, totalWorkHours: '' },
-    { date: '7/12/2025',worklocation:'',starttime: null, endtime: null, totalWorkHours: '' },
-    { date: '7/13/2025',worklocation:'', starttime: null, endtime: null, totalWorkHours: '' },
-    { date: '7/14/2025', worklocation :'',starttime: null, endtime: null, totalWorkHours: '' },
-    { date: '7/15/2025', worklocation :'',starttime: null, endtime: null, totalWorkHours: '' },
-    { date: '7/16/2025','worklocation':'' ,starttime: null, endtime: null, totalWorkHours: '' },
+    this.createBlankRow(),
   ];
 
   calculateTotalHours(row: TimesheetRow): void {
+  this.setActiveRow(row);
   if (row.starttime && row.endtime) {
     const start = new Date(row.starttime);
     const end = new Date(row.endtime);
@@ -74,6 +76,49 @@ export class Timesheet implements OnInit {
     }
   }
   this.calculateGrandTotal();
+}
+
+setActiveRow(row: TimesheetRow): void {
+  if (!this.successMessage) {
+    this.activeRow = row;
+  }
+}
+
+onRowValueChanged(row: TimesheetRow): void {
+  this.setActiveRow(row);
+  this.calculateGrandTotal();
+}
+
+addTimesheetRow(afterIndex: number): void {
+  const row = this.timesheetData[afterIndex];
+  if (row && !this.hasRowStarted(row)) {
+    this.setActiveRow(row);
+    return;
+  }
+
+  const nextRow = this.createBlankRow();
+  this.timesheetData = [
+    ...this.timesheetData.slice(0, afterIndex + 1),
+    nextRow,
+    ...this.timesheetData.slice(afterIndex + 1),
+  ];
+  this.activeRow = nextRow;
+}
+
+isActiveRow(row: TimesheetRow): boolean {
+  return this.activeRow === row && !this.successMessage;
+}
+
+hasActiveRow(): boolean {
+  return !!this.activeRow && !this.successMessage;
+}
+
+hasRowStarted(row: TimesheetRow): boolean {
+  return !!row.date || !!row.worklocation || !!row.starttime || !!row.endtime || !!row.totalWorkHours;
+}
+
+private createBlankRow(): TimesheetRow {
+  return { date: '', worklocation: '', starttime: null, endtime: null, totalWorkHours: '' };
 }
 
 grandTotalHours: string = '0h 0m';
@@ -118,46 +163,72 @@ onSubmitclick(){
     return;
   }
 
-  this.isSubmitting = true;
-
-  this.timesheetService.saveTimesheet(completedRows, user?.userId, this.taskDescription).subscribe({
-    next: () => {
-      this.isSubmitting = false;
-      this.successMessage = 'Timesheet submitted successfully.';
-      this.router.navigate(['/claims']);
-    },
-    error: (error) => {
-      this.isSubmitting = false;
-      this.errorMessage = this.getSubmitErrorMessage(error);
-      console.error(error);
-    },
-  });
-}
-
-private getSubmitErrorMessage(error: unknown): string {
-  if (error instanceof HttpErrorResponse && error.status === 401) {
-    this.authService.logout();
-    return 'Your login session has expired. Please log in again before submitting your timesheet.';
-  }
-
-  return 'Timesheet could not be submitted. Please try again.';
+  this.claimsService.saveTimesheetDraft(completedRows.map((row) => ({
+    userId: user?.userId,
+    workDate: this.toIsoString(row.date),
+    startTime: this.toIsoString(row.starttime),
+    endTime: this.toIsoString(row.endtime),
+    total_hours: this.toHours(row.totalWorkHours),
+    location: row.worklocation,
+    description: this.taskDescription,
+    status: true,
+  })));
+  this.activeRow = null;
+  this.successMessage = 'Timesheet added to the claim submission.';
+  this.goToClaims();
 }
 
 goToTimesheet(): void {
+  if (this.embedded) {
+    this.stepRequested.emit('timesheet');
+    return;
+  }
   this.router.navigate(['/timesheet']);
 }
 
 goToClaims(): void {
+  if (this.embedded) {
+    this.stepRequested.emit('claims');
+    return;
+  }
   this.router.navigate(['/claims']);
 }
 
 goToClaimStatus(): void {
+  if (this.embedded) {
+    this.stepRequested.emit('status');
+    return;
+  }
   this.router.navigate(['/claim-status']);
 }
 
 logout(): void {
+  this.claimsService.clearTimesheetDraft();
+  this.claimsService.clearClaimStatus();
   this.authService.logout();
   this.router.navigate(['/']);
+}
+
+private toIsoString(value: Date | string | null): string {
+  if (!value) {
+    return '';
+  }
+
+  if (value instanceof Date) {
+    return value.toISOString();
+  }
+
+  const parsedDate = new Date(value);
+  return Number.isNaN(parsedDate.getTime()) ? value : parsedDate.toISOString();
+}
+
+private toHours(totalWorkHours: string): number {
+  const parts = totalWorkHours.match(/(\d+)h\s(\d+)m/);
+  if (!parts) {
+    return 0;
+  }
+
+  return Number(parts[1]) + Number(parts[2]) / 60;
 }
 
   

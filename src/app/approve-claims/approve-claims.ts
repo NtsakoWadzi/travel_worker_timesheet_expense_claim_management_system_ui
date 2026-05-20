@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { forkJoin } from 'rxjs';
-import { finalize } from 'rxjs/operators';
-import { Claim, ClaimCalculationResponse } from '../Model/claim.model';
+import { forkJoin, of } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
+import { BankDetails, Claim, ClaimCalculationResponse, ClaimDetail, ClaimTimesheet } from '../Model/claim.model';
+import { AdminService } from '../services/admin-service';
 import { AuthService } from '../services/auth';
 import { ClaimsService } from '../services/claims-service';
 
@@ -27,14 +28,25 @@ export class ApproveClaims implements OnInit {
   imageDialogTitle = '';
   imageDialogMessage = '';
   imagePreviews: ClaimImagePreview[] = [];
-  isImageDialogOpen = false;
+  isReviewDialogOpen = false;
   isLoadingImages = false;
+  isLoadingReview = false;
   isCalculationDialogOpen = false;
   isCalculating = false;
+  isPaying = false;
+  paymentMessage = '';
   calculation?: ClaimCalculationResponse;
+  calculationDetails: ClaimDetail[] = [];
+  calculationClaim?: Claim;
+  selectedClaim?: Claim;
+  reviewTimesheets: ClaimTimesheet[] = [];
+  reviewBankDetails?: BankDetails;
+  managerDecisionMessage = '';
+  isUpdatingStatus = false;
 
   constructor(
     private claimsService: ClaimsService,
+    private adminService: AdminService,
     private authService: AuthService,
     private router: Router
   ) {
@@ -72,7 +84,7 @@ export class ApproveClaims implements OnInit {
     });
   }
 
-  updateStatus(claim: Claim, status: string): void {
+  updateStatus(claim: Claim, status: string, managerMessage = ''): void {
     if (!claim.claimId) {
       this.errorMessage = 'This claim does not have a claim id.';
       return;
@@ -80,11 +92,13 @@ export class ApproveClaims implements OnInit {
 
     const previousStatus = claim.status;
     claim.status = status;
+    claim.managerMessage = managerMessage || this.getDefaultDecisionMessage(status);
     this.errorMessage = '';
 
-    this.claimsService.updateClaimStatus(claim.claimId, status).subscribe({
+    this.claimsService.updateClaimStatus(claim.claimId, status, claim.managerMessage).subscribe({
       next: (updatedClaim) => {
         claim.status = updatedClaim.status || status;
+        claim.managerMessage = updatedClaim.managerMessage || claim.managerMessage;
       },
       error: (error) => {
         claim.status = previousStatus;
@@ -94,22 +108,48 @@ export class ApproveClaims implements OnInit {
     });
   }
 
-  viewImages(claim: Claim): void {
+  viewClaim(claim: Claim): void {
     if (!claim.claimId) {
       window.alert('No claim id is available for this claim.');
       return;
     }
 
-    this.closeImageDialog();
+    this.closeReviewDialog();
+    this.selectedClaim = claim;
     this.isLoadingImages = true;
-    this.imageDialogTitle = `Claim ${claim.claimReference || claim.claimId} documents`;
+    this.isLoadingReview = true;
+    this.imageDialogTitle = `Claim ${claim.claimReference || claim.claimId} review`;
     this.imageDialogMessage = '';
-    this.isImageDialogOpen = true;
+    this.managerDecisionMessage = '';
+    this.isReviewDialogOpen = true;
+    const pendingReview = this.claimsService.getPendingClaimReview(claim);
+    const reviewClaim = {
+      ...claim,
+      claimDetails: claim.claimDetails?.length ? claim.claimDetails : pendingReview?.claimDetails,
+      timesheetDetails: claim.timesheetDetails?.length ? claim.timesheetDetails : pendingReview?.timesheetDetails,
+      bankDetails: claim.bankDetails || pendingReview?.bankDetails,
+    };
+    this.selectedClaim = reviewClaim;
 
-    this.claimsService.getClaimImages(claim.claimId).subscribe({
-      next: (images) => {
+    forkJoin({
+      images: this.claimsService.getClaimImages(claim.claimId).pipe(catchError(() => of([]))),
+      timesheets: this.adminService.getTimesheets().pipe(catchError(() => of([]))),
+      bankDetails: this.adminService.getBankDetails().pipe(catchError(() => of([]))),
+    }).subscribe({
+      next: ({ images, timesheets, bankDetails }) => {
+        this.reviewTimesheets = (reviewClaim.timesheetDetails?.length ? reviewClaim.timesheetDetails : timesheets || [])
+          .filter((timesheet) => Number(timesheet.userId) === Number(claim.userId));
+        this.reviewBankDetails = reviewClaim.bankDetails || (bankDetails || []).find((bank) => {
+          if (bank.claimId && claim.claimId) {
+            return Number(bank.claimId) === Number(claim.claimId);
+          }
+
+          return Number(bank.userId) === Number(claim.userId);
+        });
+
         if (!images.length) {
           this.isLoadingImages = false;
+          this.isLoadingReview = false;
           this.imageDialogMessage = 'No supporting images are attached to this claim.';
           return;
         }
@@ -125,9 +165,11 @@ export class ApproveClaims implements OnInit {
               isImage: !!image.contentType?.startsWith('image/'),
             }));
             this.isLoadingImages = false;
+            this.isLoadingReview = false;
           },
           error: (error) => {
             this.isLoadingImages = false;
+            this.isLoadingReview = false;
             this.imageDialogMessage = 'Claim images could not be loaded.';
             console.error(error);
           },
@@ -135,8 +177,9 @@ export class ApproveClaims implements OnInit {
       },
       error: (error) => {
         this.isLoadingImages = false;
-        this.isImageDialogOpen = false;
-        this.errorMessage = 'Claim images could not be loaded.';
+        this.isLoadingReview = false;
+        this.isReviewDialogOpen = false;
+        this.errorMessage = 'Claim review details could not be loaded.';
         console.error(error);
       },
     });
@@ -151,12 +194,18 @@ export class ApproveClaims implements OnInit {
     return Number.isNaN(date.getTime()) ? String(value) : date.toLocaleDateString();
   }
 
-  closeImageDialog(): void {
+  closeReviewDialog(): void {
     this.imagePreviews.forEach((image) => URL.revokeObjectURL(image.url));
     this.imagePreviews = [];
     this.imageDialogMessage = '';
-    this.isImageDialogOpen = false;
+    this.isReviewDialogOpen = false;
     this.isLoadingImages = false;
+    this.isLoadingReview = false;
+    this.isUpdatingStatus = false;
+    this.selectedClaim = undefined;
+    this.reviewTimesheets = [];
+    this.reviewBankDetails = undefined;
+    this.managerDecisionMessage = '';
   }
 
   calculateClaim(claim: Claim): void {
@@ -168,14 +217,22 @@ export class ApproveClaims implements OnInit {
     this.isCalculating = true;
     this.isCalculationDialogOpen = true;
     this.calculation = undefined;
+    this.calculationClaim = claim;
+    this.managerDecisionMessage = '';
     this.claimsService.calculateClaimTotal(claim.claimId).pipe(
       finalize(() => {
         this.isCalculating = false;
       })
     ).subscribe({
       next: (calculation) => {
-        this.calculation = calculation;
-        claim.total_amount = calculation.totalAmount;
+        this.calculationDetails = this.mergeCalculationDetails(calculation.details || [], claim.claimDetails || []);
+        this.calculation = {
+          ...calculation,
+          details: this.calculationDetails,
+          totalAmount: this.getCalculationTotal(this.calculationDetails),
+        };
+        this.paymentMessage = '';
+        claim.total_amount = this.calculation.totalAmount;
       },
       error: (error) => {
         this.isCalculationDialogOpen = false;
@@ -188,10 +245,197 @@ export class ApproveClaims implements OnInit {
   closeCalculationDialog(): void {
     this.isCalculationDialogOpen = false;
     this.calculation = undefined;
+    this.calculationClaim = undefined;
+    this.calculationDetails = [];
+    this.paymentMessage = '';
+    this.isPaying = false;
+  }
+
+  approveCalculatedClaim(): void {
+    if (!this.calculationClaim) {
+      return;
+    }
+
+    if (this.calculation) {
+      this.claimsService.savePendingClaimPayment(this.calculation, this.calculationClaim);
+    }
+    this.selectedClaim = this.calculationClaim;
+    this.approveSelectedClaim();
+  }
+
+  rejectCalculatedClaim(): void {
+    if (!this.calculationClaim) {
+      return;
+    }
+
+    this.selectedClaim = this.calculationClaim;
+    this.rejectSelectedClaim();
+    this.closeCalculationDialog();
+  }
+
+  approveSelectedClaim(): void {
+    if (!this.selectedClaim?.claimId) {
+      return;
+    }
+
+    const claim = this.selectedClaim;
+    const claimId = Number(claim.claimId);
+    const message = this.managerDecisionMessage.trim() || this.getDefaultDecisionMessage('Approved');
+    this.isUpdatingStatus = true;
+    this.claimsService.updateClaimStatus(claimId, 'Approved', message).pipe(
+      finalize(() => {
+        this.isUpdatingStatus = false;
+      })
+    ).subscribe({
+      next: (updatedClaim) => {
+        claim.status = updatedClaim.status || 'Approved';
+        claim.managerMessage = updatedClaim.managerMessage || message;
+        this.claimsService.clearPendingClaimReview(claim);
+        this.closeReviewDialog();
+        this.router.navigate(['/pay-claims', claimId]);
+      },
+      error: (error) => {
+        this.errorMessage = 'Claim could not be approved.';
+        console.error(error);
+      },
+    });
+  }
+
+  rejectSelectedClaim(): void {
+    if (!this.selectedClaim?.claimId) {
+      return;
+    }
+
+    const claim = this.selectedClaim;
+    const claimId = Number(claim.claimId);
+    const message = this.managerDecisionMessage.trim() || this.getDefaultDecisionMessage('Rejected');
+    this.isUpdatingStatus = true;
+
+    this.claimsService.updateClaimStatus(claimId, 'Rejected', message).pipe(
+      finalize(() => {
+        this.isUpdatingStatus = false;
+      })
+    ).subscribe({
+      next: (updatedClaim) => {
+        claim.status = updatedClaim.status || 'Rejected';
+        claim.managerMessage = updatedClaim.managerMessage || message;
+        this.claimsService.clearPendingClaimReview(claim);
+        this.closeReviewDialog();
+      },
+      error: (error) => {
+        this.errorMessage = 'Claim could not be rejected.';
+        console.error(error);
+      },
+    });
+  }
+
+  getCategoryLabel(categories: Claim['categories']): string {
+    return Array.isArray(categories) ? categories.join(', ') : categories || '-';
+  }
+
+  getTimesheetTotalHours(timesheet: ClaimTimesheet): string {
+    return `${Number(timesheet.total_hours || 0).toFixed(2)} h`;
+  }
+
+  getTimesheetTrackKey(timesheet: ClaimTimesheet): string {
+    return String(timesheet.timesheetId || `${timesheet.workDate}-${timesheet.startTime}-${timesheet.location}`);
   }
 
   formatCurrency(value: number | undefined): string {
     return `R ${(value || 0).toFixed(2)}`;
+  }
+
+  getCalculationTotal(details: ClaimDetail[] = this.calculationDetails): number {
+    return details.reduce((total, detail) => total + this.getDetailIncludedAmount(detail), 0);
+  }
+
+  getDetailIncludedAmount(detail: ClaimDetail): number {
+    if (detail.category === 'Distance Travelled') {
+      return this.getDistanceAmount(detail);
+    }
+
+    if (this.isAmountCategory(detail.category)) {
+      return Number(detail.amount || detail.reimbursableAmount || 0);
+    }
+
+    return Number(detail.reimbursableAmount || detail.amount || 0);
+  }
+
+  getDistanceAmount(detail: ClaimDetail): number {
+    const kilometers = Number(detail.kilometers || 0);
+    const rate = this.getDistanceRatePerKm(detail);
+    return kilometers > 0 && rate > 0 ? kilometers * rate : 0;
+  }
+
+  getDistanceRatePerKm(detail: ClaimDetail): number {
+    const engineSize = Number(detail.engineSizeCc || 0);
+    const vehicleType = String(detail.vehicleType || '').toLowerCase();
+
+    if (!engineSize || !vehicleType) {
+      return 0;
+    }
+
+    const petrolRates = [
+      { max: 1250, rate: 3.172 },
+      { max: 1550, rate: 3.992 },
+      { max: 1750, rate: 4.337 },
+      { max: 1950, rate: 4.999 },
+      { max: 2150, rate: 5.359 },
+      { max: 2500, rate: 6.068 },
+      { max: 3500, rate: 7.576 },
+      { max: Infinity, rate: 8.952 },
+    ];
+
+    const dieselRates = [
+      { max: 1250, rate: 3.197 },
+      { max: 1550, rate: 3.828 },
+      { max: 1750, rate: 4.248 },
+      { max: 1950, rate: 4.448 },
+      { max: 2150, rate: 5.196 },
+      { max: 2500, rate: 5.942 },
+      { max: Infinity, rate: 7.375 },
+    ];
+
+    const rates = vehicleType === 'diesel' ? dieselRates : petrolRates;
+    return rates.find((item) => engineSize <= item.max)?.rate || 0;
+  }
+
+  formatRate(detail: ClaimDetail): string {
+    const rate = this.getDistanceRatePerKm(detail);
+    return rate ? `R ${rate.toFixed(2)}/km` : '-';
+  }
+
+  private isAmountCategory(category: string): boolean {
+    return ['Meals', 'Toll Fees', 'Other'].includes(category);
+  }
+
+  private getDefaultDecisionMessage(status: string): string {
+    return status.toLowerCase() === 'approved'
+      ? 'Accepted by the manager because the claim passed review and the supporting details were accepted.'
+      : 'Rejected by the manager because the claim requires correction or the supporting details were not accepted.';
+  }
+
+  private mergeCalculationDetails(primary: ClaimDetail[], fallback: ClaimDetail[]): ClaimDetail[] {
+    if (!fallback.length) {
+      return primary;
+    }
+
+    const merged = [...primary];
+    fallback.forEach((detail) => {
+      const hasDetail = merged.some((item) => {
+        if (detail.claimDetailId && item.claimDetailId) {
+          return detail.claimDetailId === item.claimDetailId;
+        }
+
+        return item.category === detail.category && item.detailType === detail.detailType;
+      });
+
+      if (!hasDetail) {
+        merged.push(detail);
+      }
+    });
+
+    return merged;
   }
 
   goToApprovals(): void {

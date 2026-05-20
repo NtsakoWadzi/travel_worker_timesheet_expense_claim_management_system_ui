@@ -1,0 +1,96 @@
+<div class="app-shell">
+  <aside class="sidebar" aria-label="Manager navigation">
+    <div class="sidebar-brand">
+      <img src="logo.jpeg" alt="Department of Public Works and Infrastructure" />
+      <div>
+        <strong>Travel Worker</strong>
+        <span>Manager Portal</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button type="button" class="nav-item" (click)="goToApprovals()">
+        <mat-icon>fact_check</mat-icon>
+        <span>Claims</span>
+      </button>
+      <button type="button" class="nav-item active">
+        <mat-icon>payments</mat-icon>
+        <span>Pay Claims</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-summary">
+        <mat-icon>supervisor_account</mat-icon>
+        <div>
+          <strong>{{ managerName }}</strong>
+          <span>Manager</span>
+        </div>
+      </div>
+      <button type="button" class="nav-item logout" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="pay-container">
+    <header class="pay-header">
+      <div>
+        <h2>Pay Claim</h2>
+        <p>Process payment for the approved claim.</p>
+      </div>
+      <button type="button" mat-button color="primary" (click)="goToApprovals()">Back to Claims</button>
+    </header>
+
+    @if (isLoading) {
+      <section class="pay-panel">Loading payment details...</section>
+    }
+
+    @if (errorMessage) {
+      <p class="error-message">{{ errorMessage }}</p>
+    }
+
+    @if (!isLoading && calculation) {
+      <section class="pay-panel">
+        <div class="pay-total">
+          <span>Claim Reference: {{ calculation.claimReference || calculation.claimId }}</span>
+          <small>Claim Date: {{ formatDate(calculation.claimDate) }}</small>
+          <small>Total in rands</small>
+          <strong>{{ formatCurrency(getCalculationTotal()) }}</strong>
+        </div>
+
+        @if (calculation.bankDetails) {
+          <div class="pay-detail bank-detail">
+            <strong>Bank Details</strong>
+            <p>Bank: {{ calculation.bankDetails.bankName }}</p>
+            <p>Account number: {{ calculation.bankDetails.accountNumber }}</p>
+            <p>Account type: {{ calculation.bankDetails.accountType }}</p>
+          </div>
+        }
+
+        @for (detail of calculationDetails; track detail.claimDetailId || detail.category + detail.detailType) {
+          <div class="pay-detail">
+            <strong>{{ detail.category }} {{ detail.detailType ? '- ' + detail.detailType : '' }}</strong>
+            @if (detail.description) {
+              <p>{{ detail.description }}</p>
+            }
+            @if (detail.kilometers) {
+              <p>Distance: {{ detail.kilometers }} km</p>
+            }
+            <p>Included: {{ formatCurrency(getDetailIncludedAmount(detail)) }}</p>
+          </div>
+        }
+
+        <footer class="pay-actions">
+          @if (paymentMessage) {
+            <span class="payment-message">{{ paymentMessage }}</span>
+          }
+          <button type="button" mat-raised-button color="primary" [disabled]="isPaying" (click)="payClaim()">
+            {{ isPaying ? 'Paying...' : 'Pay Claim' }}
+          </button>
+        </footer>
+      </section>
+    }
+  </main>
+</div>

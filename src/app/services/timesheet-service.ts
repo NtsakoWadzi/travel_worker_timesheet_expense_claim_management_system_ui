@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import type { TimesheetRow } from '../timesheet/timesheet';
+import { API_BASE_URL } from './api-config';
 
 export interface TimesheetPayload {
   userId?: number;
@@ -18,7 +19,7 @@ export interface TimesheetPayload {
   providedIn: 'root',
 })
 export class TimesheetService {
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = API_BASE_URL;
 
   constructor(private http: HttpClient) {}
 

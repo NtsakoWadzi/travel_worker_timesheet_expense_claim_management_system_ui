@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DPWI S&amp;T PW 1516 Claim Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="form-header">
+      <div>
+        <p class="eyebrow">Department of Public Works and Infrastructure</p>
+        <h1>PW 1516 Subsistence and Travelling Claim Form</h1>
+      </div>
+      <div class="form-code">S&amp;T PW 1516</div>
+    </header>
+
+    <form id="claimForm">
+      <section class="section">
+        <h2>1. Office Use Only</h2>
+        <div class="grid four">
+          <label>National Department <input type="text" name="nationalDepartment"></label>
+          <label>Claim Number <input type="text" name="claimNumber"></label>
+          <label>Captured By <input type="text" name="capturedBy"></label>
+          <label>Date Captured <input type="date" name="dateCaptured"></label>
+          <label>Advance Taken <input type="text" name="advanceTaken"></label>
+          <label>Amount <input type="number" name="officeAmount" step="0.01"></label>
+          <label>Authorised By <input type="text" name="authorisedBy"></label>
+          <label>Date Authorised <input type="date" name="dateAuthorised"></label>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>2. Personal Particulars</h2>
+        <fieldset class="office-type">
+          <legend>Office Type</legend>
+          <label><input type="radio" name="officeType" value="Head Office"> Head Office / Directorate</label>
+          <label><input type="radio" name="officeType" value="Regional Office"> Regional Office / Directorate</label>
+        </fieldset>
+        <div class="grid five">
+          <label>Initials <input type="text" name="initials"></label>
+          <label>Surname <input type="text" name="surname"></label>
+          <label>PERSAL Number <input type="text" name="persalNumber"></label>
+          <label>Cellular Phone Number <input type="tel" name="cellNumber"></label>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>3. Claim Details</h2>
+        <label class="full">Claim Description <textarea name="claimDescription" rows="3"></textarea></label>
+        <div class="grid four">
+          <label>Departure Date <input type="date" name="departureDate"></label>
+          <label>Arrival Date <input type="date" name="arrivalDate"></label>
+          <label>Departure Time <input type="time" name="departureTime"></label>
+          <label>Arrival Time <input type="time" name="arrivalTime"></label>
+          <label>Number of Days <input type="number" name="numberOfDays" min="0"></label>
+          <label>Number of Hours <input type="number" name="numberOfHours" min="0" step="0.5"></label>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>4. Allocation Table</h2>
+        <div class="table-wrap">
+          <table class="allocation-table">
+            <thead>
+              <tr>
+                <th>Tick</th>
+                <th>PERSAL Code</th>
+                <th>Description</th>
+                <th>SARS Code</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody id="allocationRows"></tbody>
+            <tfoot>
+              <tr>
+                <td colspan="4">Sub Total</td>
+                <td><input id="subTotal" type="number" readonly value="0.00"></td>
+              </tr>
+              <tr>
+                <td colspan="4">Less Advance S&amp;T</td>
+                <td><input id="advanceAmount" type="number" min="0" step="0.01" value="0.00"></td>
+              </tr>
+              <tr class="grand-total">
+                <td colspan="4">Total</td>
+                <td><input id="totalAmount" type="number" readonly value="0.00"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>5. Authorisation</h2>
+        <div class="signature-grid">
+          <fieldset>
+            <legend>Applicant / Appointee</legend>
+            <label>Name <input type="text" name="applicantName"></label>
+            <label>Rank <input type="text" name="applicantRank"></label>
+            <label>Signature <input type="text" name="applicantSignature"></label>
+            <label>Date <input type="date" name="applicantDate"></label>
+          </fieldset>
+          <fieldset>
+            <legend>Verified by Logistics</legend>
+            <label>Name <input type="text" name="logisticsName"></label>
+            <label>Rank <input type="text" name="logisticsRank"></label>
+            <label>Signature <input type="text" name="logisticsSignature"></label>
+            <label>Date <input type="date" name="logisticsDate"></label>
+          </fieldset>
+          <fieldset>
+            <legend>Approval</legend>
+            <label>Name <input type="text" name="approvalName"></label>
+            <label>Rank <input type="text" name="approvalRank"></label>
+            <label>Signature <input type="text" name="approvalSignature"></label>
+            <label>Date <input type="date" name="approvalDate"></label>
+          </fieldset>
+        </div>
+      </section>
+
+      <footer class="actions">
+        <button type="submit">Submit Claim</button>
+        <button type="button" id="printButton">Print Form</button>
+      </footer>
+    </form>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

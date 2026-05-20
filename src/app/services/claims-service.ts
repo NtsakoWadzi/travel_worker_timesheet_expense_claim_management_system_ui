@@ -2,13 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
 import { catchError, map, tap, timeout } from 'rxjs/operators';
-import { Claim, ClaimCalculationResponse, ClaimImageResponse, ClaimStatusSummary, ReceiptAnalysisResponse, UserClaimCountResponse } from '../Model/claim.model';
+import { Claim, ClaimCalculationResponse, ClaimImageResponse, ClaimStatusSummary, ClaimTimesheet, PaymentResponse, UserClaimCountResponse } from '../Model/claim.model';
+import { API_BASE_URL } from './api-config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClaimsService {
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = API_BASE_URL;
+  private readonly pendingReviewStorageKey = 'pendingClaimReviews';
+  private readonly pendingPaymentStorageKey = 'pendingClaimPayment';
+  private claimDraft?: Claim;
+  private timesheetDraft: ClaimTimesheet[] = [];
+  private statusRefreshIntervalId?: number;
+  private statusRefreshUserId?: number;
   private claimStatusSummarySubject = new BehaviorSubject<ClaimStatusSummary>({
     claims: [],
     submittedCount: 0,
@@ -20,6 +27,58 @@ export class ClaimsService {
 
   constructor(private http: HttpClient) {}
 
+  saveClaimDraft(claim: Claim): void {
+    this.claimDraft = {
+      ...claim,
+      categories: Array.isArray(claim.categories) ? [...claim.categories] : claim.categories,
+      claimImages: [...(claim.claimImages || [])],
+      claimDetails: [...(claim.claimDetails || [])],
+      timesheetDetails: [...(claim.timesheetDetails || this.timesheetDraft || [])],
+    };
+  }
+
+  getClaimDraft(): Claim | undefined {
+    if (!this.claimDraft) {
+      return undefined;
+    }
+
+    return {
+      ...this.claimDraft,
+      categories: Array.isArray(this.claimDraft.categories) ? [...this.claimDraft.categories] : this.claimDraft.categories,
+      claimImages: [...(this.claimDraft.claimImages || [])],
+      claimDetails: [...(this.claimDraft.claimDetails || [])],
+      timesheetDetails: [...(this.claimDraft.timesheetDetails || this.timesheetDraft || [])],
+    };
+  }
+
+  clearClaimDraft(): void {
+    this.claimDraft = undefined;
+  }
+
+  saveTimesheetDraft(timesheets: ClaimTimesheet[]): void {
+    this.timesheetDraft = [...timesheets];
+    if (this.claimDraft) {
+      this.claimDraft = {
+        ...this.claimDraft,
+        timesheetDetails: [...timesheets],
+      };
+    }
+  }
+
+  getTimesheetDraft(): ClaimTimesheet[] {
+    return [...this.timesheetDraft];
+  }
+
+  clearTimesheetDraft(): void {
+    this.timesheetDraft = [];
+    if (this.claimDraft) {
+      this.claimDraft = {
+        ...this.claimDraft,
+        timesheetDetails: [],
+      };
+    }
+  }
+
   submitClaim(claim: Claim): Observable<Claim> {
     const formData = new FormData();
     const claimPayload = {
@@ -27,6 +86,8 @@ export class ClaimsService {
       claimDate: claim.ClaimDate,
       categories: Array.isArray(claim.categories) ? claim.categories.join(', ') : claim.categories,
       status: true,
+      bankDetails: claim.bankDetails,
+      timesheetDetails: claim.timesheetDetails || this.timesheetDraft,
     };
 
     formData.append(
@@ -34,6 +95,10 @@ export class ClaimsService {
       new Blob([JSON.stringify(claimPayload)], { type: 'application/json' })
     );
     formData.append('details', JSON.stringify(claim.claimDetails || []));
+    formData.append('timesheets', JSON.stringify(claim.timesheetDetails || this.timesheetDraft || []));
+    if (claim.bankDetails) {
+      formData.append('bankDetails', JSON.stringify(claim.bankDetails));
+    }
 
     (claim.claimImages as any[]).forEach((fileHandle) => {
       formData.append('files', fileHandle.file, fileHandle.file.name);
@@ -43,6 +108,7 @@ export class ClaimsService {
       headers: this.getAuthHeaders(),
     }).pipe(
       tap((savedClaim) => {
+        this.savePendingClaimReview(savedClaim, claim);
         if (savedClaim.userId) {
           this.refreshClaimStatus(savedClaim.userId).subscribe();
         }
@@ -68,10 +134,10 @@ export class ClaimsService {
     });
   }
 
-  updateClaimStatus(claimId: number, status: string): Observable<Claim> {
+  updateClaimStatus(claimId: number, status: string, managerMessage = ''): Observable<Claim> {
     return this.http.put<Claim>(
       `${this.baseUrl}/claims/${claimId}/status`,
-      { status },
+      { status, managerMessage, statusReason: managerMessage, decisionReason: managerMessage },
       { headers: this.getAuthHeaders() }
     ).pipe(
       tap((updatedClaim) => {
@@ -109,7 +175,29 @@ export class ClaimsService {
     );
   }
 
+  startClaimStatusAutoRefresh(userId: number): void {
+    if (this.statusRefreshIntervalId && this.statusRefreshUserId === userId) {
+      return;
+    }
+
+    this.stopClaimStatusAutoRefresh();
+    this.statusRefreshUserId = userId;
+    this.refreshClaimStatus(userId).subscribe();
+    this.statusRefreshIntervalId = window.setInterval(() => {
+      this.refreshClaimStatus(userId).subscribe();
+    }, 2000);
+  }
+
+  stopClaimStatusAutoRefresh(): void {
+    if (this.statusRefreshIntervalId) {
+      window.clearInterval(this.statusRefreshIntervalId);
+    }
+    this.statusRefreshIntervalId = undefined;
+    this.statusRefreshUserId = undefined;
+  }
+
   clearClaimStatus(): void {
+    this.stopClaimStatusAutoRefresh();
     this.claimStatusSummarySubject.next({
       claims: [],
       submittedCount: 0,
@@ -138,19 +226,88 @@ export class ClaimsService {
     });
   }
 
-  analyzeReceipt(file: File, category: string): Observable<ReceiptAnalysisResponse> {
-    const formData = new FormData();
-    formData.append('file', file, file.name);
-    formData.append('category', category);
+  payClaim(claimId: number, processedBy: string): Observable<PaymentResponse> {
+    return this.http.post<PaymentResponse>(
+      `${this.baseUrl}/claims/${claimId}/pay`,
+      { processedBy },
+      { headers: this.getAuthHeaders() }
+    );
+  }
 
-    return this.http.post<ReceiptAnalysisResponse>(`${this.baseUrl}/claims/vision/analyze-receipt`, formData, {
-      headers: this.getAuthHeaders(),
-    });
+  getPendingClaimReview(claim: Claim): Partial<Claim> | undefined {
+    const reviews = this.getPendingClaimReviews();
+    return reviews.find((review) => this.isSameClaim(review, claim));
+  }
+
+  clearPendingClaimReview(claim: Claim): void {
+    const reviews = this.getPendingClaimReviews().filter((review) => !this.isSameClaim(review, claim));
+    localStorage.setItem(this.pendingReviewStorageKey, JSON.stringify(reviews));
+  }
+
+  savePendingClaimPayment(calculation: ClaimCalculationResponse, claim?: Claim): void {
+    localStorage.setItem(this.pendingPaymentStorageKey, JSON.stringify({ calculation, claim }));
+  }
+
+  getPendingClaimPayment(claimId: number): { calculation: ClaimCalculationResponse; claim?: Claim } | undefined {
+    const value = localStorage.getItem(this.pendingPaymentStorageKey);
+    if (!value) {
+      return undefined;
+    }
+
+    try {
+      const payment = JSON.parse(value) as { calculation: ClaimCalculationResponse; claim?: Claim };
+      return Number(payment.calculation?.claimId || payment.claim?.claimId) === Number(claimId) ? payment : undefined;
+    } catch {
+      return undefined;
+    }
   }
 
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('jwtToken');
     return token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : new HttpHeaders();
+  }
+
+  private savePendingClaimReview(savedClaim: Claim, submittedClaim: Claim): void {
+    const review: Partial<Claim> = {
+      ...savedClaim,
+      claimId: savedClaim.claimId,
+      claimReference: savedClaim.claimReference,
+      userId: savedClaim.userId || submittedClaim.userId,
+      userName: savedClaim.userName || submittedClaim.userName,
+      categories: savedClaim.categories || submittedClaim.categories,
+      claimDetails: submittedClaim.claimDetails || [],
+      timesheetDetails: submittedClaim.timesheetDetails || this.timesheetDraft || [],
+      bankDetails: submittedClaim.bankDetails,
+    };
+
+    const reviews = this.getPendingClaimReviews().filter((item) => !this.isSameClaim(item, review));
+    reviews.unshift(review);
+    localStorage.setItem(this.pendingReviewStorageKey, JSON.stringify(reviews.slice(0, 50)));
+  }
+
+  private getPendingClaimReviews(): Partial<Claim>[] {
+    const value = localStorage.getItem(this.pendingReviewStorageKey);
+    if (!value) {
+      return [];
+    }
+
+    try {
+      return JSON.parse(value) as Partial<Claim>[];
+    } catch {
+      return [];
+    }
+  }
+
+  private isSameClaim(first: Partial<Claim>, second: Partial<Claim>): boolean {
+    if (first.claimId && second.claimId) {
+      return Number(first.claimId) === Number(second.claimId);
+    }
+
+    if (first.claimReference && second.claimReference) {
+      return first.claimReference === second.claimReference;
+    }
+
+    return false;
   }
 
   private mergeClaims(primaryClaims: Claim[], fallbackClaims: Claim[]): Claim[] {

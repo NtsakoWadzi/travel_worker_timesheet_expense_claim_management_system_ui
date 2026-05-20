@@ -1,11 +1,11 @@
 .login-container {
   display: grid;
   place-items: center;
-  min-height: 100vh;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow: hidden;
   padding: 24px 16px;
-  background:
-    linear-gradient(rgba(243, 244, 246, 0.88), rgba(243, 244, 246, 0.92)),
-    url('/logo.jpeg') center / min(82vw, 760px) auto no-repeat;
+  background: #f3f4f6 url('/Ks%20Logo.png') center / cover no-repeat;
 }
 
 form {
@@ -19,12 +19,22 @@ mat-form-field {
   width: 100%;
 }
 
+.username-field {
+  margin-top: 28px;
+}
+
 button {
   width: 100%;
 }
 
+form button[type="submit"] {
+  margin-top: 14px;
+}
+
 mat-card {
-  width: min(420px, 100%);
+  width: min(450px, 100%);
+  height: min(450px, calc(100vh - 48px));
+  transform: translateX(-310px);
   border: 1px solid #e3e3e3;
   border-top: 5px solid #f58220;
   border-radius: 8px;
@@ -33,25 +43,20 @@ mat-card {
   backdrop-filter: blur(6px);
 }
 
+mat-card:hover,
+mat-card:focus-within {
+  animation: none !important;
+  transform: translateX(-310px) !important;
+}
+
 .logo {
-  width:82%;
-  display:block;
-  margin:0 auto;
+  width: 82%;
+  display: block;
+  margin: 0 auto;
 }
 
 .error-message {
   margin: 0;
   color: #b00020;
   font-size: 14px;
-}
-
-.signup-link {
-  margin: 0;
-  color: #666;
-  text-align: center;
-}
-
-.signup-link a {
-  color: #f58220;
-  font-weight: 600;
 }
