@@ -14,6 +14,8 @@ import { ClaimDetailsComponent } from './claim-details/claim-details';
 import { PayClaimsComponent } from './pay-claims/pay-claims';
 import { PrivateOwnedComponent } from './private-owned/private-owned';
 import { DetailsOfJourneyComponent } from './details-of-journey/details-of-journey';
+import { SubsistenceTravelClaimFormComponent } from './subsistence-travel-claim-form/subsistence-travel-claim-form';
+import { AuthorisationComponent } from './authorisation/authorisation';
 
  
 
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'bank-details',redirectTo: 'claim-details', pathMatch: 'full', },
   { path: 'claim-status',component: ClaimStatus, },
   { path: 'approve-claims',component: ApproveClaims, },
+  { path: 'subsistence-travel-claim-form',component: SubsistenceTravelClaimFormComponent, },
+  { path: 'authorisation',component: AuthorisationComponent, },
   { path: 'pay-claims/:claimId',component: PayClaimsComponent, },
   { path: 'admin-dashboard',component: AdminDashboardComponent, },
   { path: 'private-owned',component: PrivateOwnedComponent, },

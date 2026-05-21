@@ -49,9 +49,11 @@ import { GenerateReportsComponent } from './generate-reports/generate-reports';
 import { PayClaimsComponent } from './pay-claims/pay-claims';
 import { PrivateOwnedComponent } from './private-owned/private-owned';
 import { DetailsOfJourneyComponent } from './details-of-journey/details-of-journey';
+import { SubsistenceTravelClaimFormComponent } from './subsistence-travel-claim-form/subsistence-travel-claim-form';
+import { AuthorisationComponent } from './authorisation/authorisation';
 
 @NgModule({
-  declarations: [App, LoginComponent, Timesheet, Claims, DragDirective, ApproveClaims, ClaimStatus, BankDetailsComponent, AdminDashboardComponent, ClaimDetailsComponent, GenerateReportsComponent, PayClaimsComponent, PrivateOwnedComponent, DetailsOfJourneyComponent],
+  declarations: [App, LoginComponent, Timesheet, Claims, DragDirective, ApproveClaims, ClaimStatus, BankDetailsComponent, AdminDashboardComponent, ClaimDetailsComponent, GenerateReportsComponent, PayClaimsComponent, PrivateOwnedComponent, DetailsOfJourneyComponent, SubsistenceTravelClaimFormComponent, AuthorisationComponent],
 
   imports: [
     BrowserModule,

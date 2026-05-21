@@ -1,0 +1,140 @@
+<div class="manager-form-shell">
+  <aside class="sidebar" aria-label="Manager navigation">
+    <div class="sidebar-brand">
+      <img src="logo.jpeg" alt="Department of Public Works and Infrastructure" />
+      <div>
+        <strong>Travel Worker</strong>
+        <span>Manager Portal</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button type="button" class="nav-item" (click)="goToApprovals()">
+        <mat-icon>fact_check</mat-icon>
+        <span>Claims</span>
+      </button>
+      <button type="button" class="nav-item" (click)="goToSubsistenceTravelForm()">
+        <mat-icon>description</mat-icon>
+        <span>S&amp;T PW 1516</span>
+      </button>
+      <button type="button" class="nav-item active" (click)="goToAuthorisation()">
+        <mat-icon>verified</mat-icon>
+        <span>Authorisation</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-summary">
+        <mat-icon>supervisor_account</mat-icon>
+        <div>
+          <strong>{{ managerName }}</strong>
+          <span>Manager</span>
+        </div>
+      </div>
+      <button type="button" class="nav-item logout" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="manager-form-container">
+    <header class="manager-form-header">
+      <div>
+        <h1>Authorisation</h1>
+      </div>
+    </header>
+
+    <section class="manager-form-panel" aria-label="Authorisation table">
+      <div class="manager-form-table-wrap">
+        <table class="manager-form-table">
+          <thead>
+            <tr>
+              <th scope="col">Applicant/Appoinee</th>
+              <th scope="col">Verified(Logistics)</th>
+              <th scope="col">Approval(In accordance with delegations)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="paired-fields">
+                  <label>
+                    <span>Name</span>
+                    <input class="table-input" type="text" aria-label="Applicant/Appoinee name" />
+                  </label>
+                  <label>
+                    <span>Rank</span>
+                    <input class="table-input" type="text" aria-label="Applicant/Appoinee rank" />
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="paired-fields">
+                  <label>
+                    <span>Name</span>
+                    <input class="table-input" type="text" aria-label="Verified logistics name" />
+                  </label>
+                  <label>
+                    <span>Rank</span>
+                    <input class="table-input" type="text" aria-label="Verified logistics rank" />
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="paired-fields">
+                  <label>
+                    <span>Name</span>
+                    <input class="table-input" type="text" aria-label="Approval name" />
+                  </label>
+                  <label>
+                    <span>Rank</span>
+                    <input class="table-input" type="text" aria-label="Approval rank" />
+                  </label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="paired-fields">
+                  <label>
+                    <span>Signature</span>
+                    <input class="table-input" type="text" aria-label="Applicant/Appoinee signature" />
+                  </label>
+                  <label>
+                    <span>Date</span>
+                    <input class="table-input" type="date" aria-label="Applicant/Appoinee date" />
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="paired-fields">
+                  <label>
+                    <span>Signature</span>
+                    <input class="table-input" type="text" aria-label="Verified logistics signature" />
+                  </label>
+                  <label>
+                    <span>Date</span>
+                    <input class="table-input" type="date" aria-label="Verified logistics date" />
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="paired-fields">
+                  <label>
+                    <span>Signature</span>
+                    <input class="table-input" type="text" aria-label="Approval signature" />
+                  </label>
+                  <label>
+                    <span>Date</span>
+                    <input class="table-input" type="date" aria-label="Approval date" />
+                  </label>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>

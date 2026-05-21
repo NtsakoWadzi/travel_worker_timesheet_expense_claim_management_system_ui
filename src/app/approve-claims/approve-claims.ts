@@ -442,6 +442,14 @@ export class ApproveClaims implements OnInit {
     this.router.navigate(['/approve-claims']);
   }
 
+  goToSubsistenceTravelForm(): void {
+    this.router.navigate(['/subsistence-travel-claim-form']);
+  }
+
+  goToAuthorisation(): void {
+    this.router.navigate(['/authorisation']);
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/']);
