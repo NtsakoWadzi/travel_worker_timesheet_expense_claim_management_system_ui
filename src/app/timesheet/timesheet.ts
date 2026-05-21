@@ -49,6 +49,7 @@ export class Timesheet implements OnInit {
   taskDescription = '';
   errorMessage = '';
   successMessage = '';
+  personalParticularsErrorMessage = '';
   isSubmitting = false;
   activeRow: TimesheetRow | null = null;
 
@@ -115,6 +116,36 @@ hasActiveRow(): boolean {
 
 hasRowStarted(row: TimesheetRow): boolean {
   return !!row.date || !!row.worklocation || !!row.starttime || !!row.endtime || !!row.totalWorkHours;
+}
+
+validatePersonalParticulars(): boolean {
+  const missingFields: string[] = [];
+
+  if (!this.personalParticulars.officeType) {
+    missingFields.push('office type');
+  }
+
+  if (!this.personalParticulars.initials.trim()) {
+    missingFields.push('initials');
+  }
+
+  if (!this.personalParticulars.surname.trim()) {
+    missingFields.push('surname');
+  }
+
+  if (!this.personalParticulars.persalNumber.trim()) {
+    missingFields.push('persal number');
+  }
+
+  if (!this.personalParticulars.cellularPhoneNumber.trim()) {
+    missingFields.push('cellular phone number');
+  }
+
+  this.personalParticularsErrorMessage = missingFields.length
+    ? `Please complete ${missingFields.join(', ')}.`
+    : '';
+
+  return missingFields.length === 0;
 }
 
 private createBlankRow(): TimesheetRow {

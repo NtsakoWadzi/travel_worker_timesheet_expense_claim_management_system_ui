@@ -47,9 +47,10 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard';
 import { ClaimDetailsComponent } from './claim-details/claim-details';
 import { GenerateReportsComponent } from './generate-reports/generate-reports';
 import { PayClaimsComponent } from './pay-claims/pay-claims';
+import { PrivateOwnedComponent } from './private-owned/private-owned';
 
 @NgModule({
-  declarations: [App, LoginComponent, Timesheet, Claims, DragDirective, ApproveClaims, ClaimStatus, BankDetailsComponent, AdminDashboardComponent, ClaimDetailsComponent, GenerateReportsComponent, PayClaimsComponent],
+  declarations: [App, LoginComponent, Timesheet, Claims, DragDirective, ApproveClaims, ClaimStatus, BankDetailsComponent, AdminDashboardComponent, ClaimDetailsComponent, GenerateReportsComponent, PayClaimsComponent, PrivateOwnedComponent],
 
   imports: [
     BrowserModule,

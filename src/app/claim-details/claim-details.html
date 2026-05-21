@@ -45,7 +45,12 @@
     <mat-stepper #claimStepper class="claim-details-stepper" orientation="horizontal" [linear]="false">
       <mat-step label="Personal Particulars">
         <ng-template matStepContent>
-          <app-timesheet [embedded]="true" (stepRequested)="selectStep($event)"></app-timesheet>
+          <app-timesheet #timesheetForm [embedded]="true" (stepRequested)="selectStep($event)"></app-timesheet>
+          <div class="step-actions">
+            <button type="button" mat-raised-button color="primary" (click)="continueToClaimStep()">
+              Next
+            </button>
+          </div>
         </ng-template>
       </mat-step>
 
@@ -60,6 +65,7 @@
                     <input
                       class="table-input"
                       type="text"
+                      required
                       aria-label="Claim description"
                       [(ngModel)]="claimDraft.claimDescription"
                       (ngModelChange)="saveClaimDraft()"
@@ -72,6 +78,7 @@
                     <input
                       class="table-input"
                       type="date"
+                      required
                       aria-label="Departure Date"
                       [(ngModel)]="claimDraft.departureDate"
                       (ngModelChange)="saveClaimDraft()"
@@ -82,6 +89,7 @@
                     <input
                       class="table-input"
                       type="time"
+                      required
                       aria-label="Arrival Time"
                       [(ngModel)]="claimDraft.arrivalDateTime"
                       (ngModelChange)="saveClaimDraft()"
@@ -93,6 +101,7 @@
                       class="table-input"
                       type="number"
                       min="0"
+                      required
                       aria-label="Number of Days"
                       [(ngModel)]="claimDraft.dateNumberOfDays"
                       (ngModelChange)="saveClaimDraft()"
@@ -105,6 +114,7 @@
                     <input
                       class="table-input"
                       type="time"
+                      required
                       aria-label="Departure Time"
                       [(ngModel)]="claimDraft.departureTime"
                       (ngModelChange)="saveClaimDraft()"
@@ -115,6 +125,7 @@
                     <input
                       class="table-input"
                       type="time"
+                      required
                       aria-label="Arrival Time"
                       [(ngModel)]="claimDraft.arrivalTime"
                       (ngModelChange)="saveClaimDraft()"
@@ -126,6 +137,7 @@
                       class="table-input"
                       type="number"
                       min="0"
+                      required
                       aria-label="Number of Hours"
                       [(ngModel)]="claimDraft.numberOfHours"
                       (ngModelChange)="saveClaimDraft()"
@@ -134,7 +146,15 @@
                 </tr>
               </tbody>
             </table>
+            @if (claimValidationMessage) {
+              <p class="validation-message">{{ claimValidationMessage }}</p>
+            }
           </section>
+          <div class="step-actions">
+            <button type="button" mat-raised-button color="primary" (click)="continueToAllocationStep()">
+              Next
+            </button>
+          </div>
         </ng-template>
       </mat-step>
 
@@ -159,30 +179,33 @@
                       <td class="checkbox-cell">
                         <input
                           type="checkbox"
+                          required
                           [attr.aria-label]="'Select allocation ' + row.persalCode"
                           [(ngModel)]="row.selected"
                         />
                       </td>
+                      <td>{{ row.persalCode }}</td>
                       <td>
                         <select
-                          class="table-input persal-select"
-                          [attr.aria-label]="'PERSAL code for allocation row ' + ($index + 1)"
+                          class="table-input description-select"
+                          required
+                          [attr.aria-label]="'Description for allocation row ' + ($index + 1)"
                           [(ngModel)]="row.persalCode"
                           (ngModelChange)="onAllocationCodeChanged(row)"
                         >
                           @for (option of allocationOptions; track option.persalCode) {
-                            <option [ngValue]="option.persalCode">{{ option.persalCode }}</option>
+                            <option [ngValue]="option.persalCode">{{ option.description }}</option>
                           }
                         </select>
                       </td>
-                      <td>{{ row.description }}</td>
                       <td>{{ row.sarsCode }}</td>
                       <td>
                         <input
                           class="table-input amount-input"
                           type="number"
-                          min="0"
+                          min="0.01"
                           step="0.01"
+                          required
                           [attr.aria-label]="'Amount for ' + row.persalCode"
                           [(ngModel)]="row.amount"
                         />
@@ -233,6 +256,7 @@
                       <input
                         class="table-input"
                         type="text"
+                        required
                         aria-label="PERSAL Transaction"
                         [(ngModel)]="persalTransaction"
                       />
@@ -240,6 +264,17 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+            @if (allocationValidationMessage) {
+              <p class="validation-message">{{ allocationValidationMessage }}</p>
+            }
+            <div class="step-actions allocation-footer-actions">
+              <button type="button" mat-stroked-button color="primary" (click)="goToPrivateOwned()">
+                Private Motor
+              </button>
+              <button type="button" mat-raised-button color="primary" (click)="submitAllocation()">
+                Submit
+              </button>
             </div>
           </section>
         </ng-template>

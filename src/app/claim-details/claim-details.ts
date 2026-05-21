@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth';
 import { ClaimsService } from '../services/claims-service';
 import { Claim } from '../Model/claim.model';
+import { Timesheet } from '../timesheet/timesheet';
 
 type ClaimDetailsStep = 'timesheet' | 'claims' | 'bank-details' | 'status';
 
@@ -29,6 +30,7 @@ interface AllocationOption {
 })
 export class ClaimDetailsComponent {
   @ViewChild('claimStepper') claimStepper?: MatStepper;
+  @ViewChild('timesheetForm') timesheetForm?: Timesheet;
 
   employeeName = 'Employee';
   claimDraft: Claim = {
@@ -40,6 +42,8 @@ export class ClaimDetailsComponent {
   lessAdvanceST?: number;
   lessAdvanceSelected = false;
   persalTransaction = '';
+  claimValidationMessage = '';
+  allocationValidationMessage = '';
   allocationOptions: AllocationOption[] = [
     { persalCode: '0436', description: 'T&S Allowance Not Exceeding Amount Set By SARS', sarsCode: '3705' },
     { persalCode: '0717', description: 'T&S Allowance Exceeding Amount Set By SARS', sarsCode: '3704' },
@@ -103,6 +107,22 @@ export class ClaimDetailsComponent {
     this.router.navigate(['/claim-status']);
   }
 
+  continueToClaimStep(): void {
+    if (!this.timesheetForm?.validatePersonalParticulars()) {
+      return;
+    }
+
+    this.selectStep('claims');
+  }
+
+  continueToAllocationStep(): void {
+    if (!this.validateClaimStep()) {
+      return;
+    }
+
+    this.selectStep('bank-details');
+  }
+
   getAllocationSubTotal(): number {
     return this.allocationRows.reduce((total, row) => total + (Number(row.amount) || 0), 0);
   }
@@ -122,7 +142,97 @@ export class ClaimDetailsComponent {
   }
 
   addAllocationRow(): void {
+    const currentRow = this.allocationRows[this.allocationRows.length - 1];
+    if (
+      !currentRow?.selected
+      || !currentRow.persalCode
+      || !currentRow.description
+      || !currentRow.sarsCode
+      || !this.hasPositiveNumber(currentRow.amount)
+    ) {
+      this.allocationValidationMessage = 'Please tick the current row, select a description, and enter an amount greater than 0 before adding another row.';
+      return;
+    }
+
+    this.allocationValidationMessage = '';
     this.allocationRows = [...this.allocationRows, this.createAllocationRow()];
+  }
+
+  validateClaimStep(): boolean {
+    const missingFields: string[] = [];
+
+    if (!this.claimDraft.claimDescription?.trim()) {
+      missingFields.push('claim description');
+    }
+
+    if (!this.claimDraft.departureDate) {
+      missingFields.push('departure date');
+    }
+
+    if (!this.claimDraft.arrivalDateTime) {
+      missingFields.push('arrival time');
+    }
+
+    if (!this.hasPositiveNumber(this.claimDraft.dateNumberOfDays)) {
+      missingFields.push('number of days');
+    }
+
+    if (!this.claimDraft.departureTime) {
+      missingFields.push('departure time');
+    }
+
+    if (!this.claimDraft.arrivalTime) {
+      missingFields.push('arrival time');
+    }
+
+    if (!this.hasPositiveNumber(this.claimDraft.numberOfHours)) {
+      missingFields.push('number of hours');
+    }
+
+    this.claimValidationMessage = missingFields.length
+      ? `Please complete ${missingFields.join(', ')}.`
+      : '';
+
+    return missingFields.length === 0;
+  }
+
+  validateAllocationStep(): boolean {
+    const hasInvalidRow = this.allocationRows.some((row) => (
+      !row.selected
+      || !row.persalCode
+      || !row.description
+      || !row.sarsCode
+      || !this.hasPositiveNumber(row.amount)
+    ));
+
+    const hasInvalidLessAdvance = this.lessAdvanceSelected && !this.hasNonNegativeNumber(this.lessAdvanceST);
+    const hasMissingTransaction = !this.persalTransaction.trim();
+
+    if (hasInvalidRow) {
+      this.allocationValidationMessage = 'Please tick each allocation row, select a description, and enter an amount greater than 0.';
+      return false;
+    }
+
+    if (hasInvalidLessAdvance) {
+      this.allocationValidationMessage = 'Please enter a valid Less Advance S&T amount or untick the row.';
+      return false;
+    }
+
+    if (hasMissingTransaction) {
+      this.allocationValidationMessage = 'Please enter the PERSAL Transaction.';
+      return false;
+    }
+
+    this.allocationValidationMessage = '';
+    return true;
+  }
+
+  submitAllocation(): void {
+    this.validateAllocationStep();
+  }
+
+  goToPrivateOwned(): void {
+    this.router.navigate(['/private-owned']);
   }
 
   saveClaimDraft(): void {
@@ -153,5 +263,13 @@ export class ClaimDetailsComponent {
       description: option.description,
       sarsCode: option.sarsCode,
     };
+  }
+
+  private hasPositiveNumber(value: number | undefined): boolean {
+    return Number(value) > 0;
+  }
+
+  private hasNonNegativeNumber(value: number | undefined): boolean {
+    return value !== undefined && Number(value) >= 0;
   }
 }

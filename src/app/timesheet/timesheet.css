@@ -182,14 +182,17 @@
 .personal-particulars-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
   border: 1px solid #d1d5db;
 }
 
 .personal-particulars-table th,
 .personal-particulars-table td {
+  min-width: 0;
   padding: 10px 12px;
   border: 1px solid #d1d5db;
   vertical-align: middle;
+  overflow: hidden;
 }
 
 .personal-particulars-table th {
@@ -203,11 +206,13 @@
 .personal-particulars-table input[type="text"],
 .personal-particulars-table input[type="tel"] {
   width: 100%;
+  max-width: 100%;
   min-height: 34px;
   padding: 6px 8px;
   border: 1px solid #cbd5e1;
   border-radius: 4px;
   font: inherit;
+  box-sizing: border-box;
 }
 
 .checkbox-cell {
@@ -215,13 +220,20 @@
   align-items: center;
   gap: 10px;
   min-height: 34px;
+  min-width: 0;
   color: #333;
   font-weight: 600;
 }
 
 .checkbox-cell input {
+  flex: 0 0 auto;
   width: 18px;
   height: 18px;
+}
+
+.checkbox-cell span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .timesheet-dialog {
@@ -464,6 +476,10 @@ td.mat-mdc-footer-cell {
   margin: 0;
   color: #b00020;
   font-size: 14px;
+}
+
+.personal-particulars-error {
+  margin-top: 8px;
 }
 
 .success-message {

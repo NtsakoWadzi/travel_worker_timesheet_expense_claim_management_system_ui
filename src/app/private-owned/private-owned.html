@@ -1,0 +1,120 @@
+<div class="private-owned-shell">
+  <aside class="sidebar" aria-label="Private owned vehicle navigation">
+    <div class="sidebar-brand">
+      <img src="logo.jpeg" alt="Department of Public Works and Infrastructure" />
+      <div>
+        <strong>Travel Worker</strong>
+        <span>Claims Portal</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button type="button" class="nav-item active" (click)="goToClaimDetails()">
+        <mat-icon>receipt_long</mat-icon>
+        <span>Claim Details</span>
+      </button>
+      <button type="button" class="nav-item" (click)="goToClaimStatus()">
+        <mat-icon>fact_check</mat-icon>
+        <span>Status</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-summary">
+        <mat-icon>account_circle</mat-icon>
+        <div>
+          <strong>{{ employeeName }}</strong>
+          <span>Employee</span>
+        </div>
+      </div>
+      <button type="button" class="nav-item logout" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="private-owned-container">
+    <header class="private-owned-header">
+      <div>
+        <h1>Private Owned Vehicle Claim</h1>
+      </div>
+    </header>
+
+    <section class="private-owned-panel">
+      <div class="private-owned-table-wrap">
+        <table class="private-owned-table" aria-label="Private owned vehicle claim">
+          <tbody>
+            <tr>
+              <th scope="row">CLAIMED BY</th>
+              <td colspan="2">
+                <input class="table-input" type="text" aria-label="Claimed by" [(ngModel)]="claimedBy" />
+              </td>
+              <th scope="row">Department Of:</th>
+              <td colspan="2">
+                <input class="table-input" type="text" aria-label="Department Of" [(ngModel)]="departmentOf" />
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Rank</th>
+              <td colspan="5">
+                <input class="table-input" type="text" aria-label="Rank" [(ngModel)]="rank" />
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" rowspan="2">Address<br>(to which warrant voucher must be sent)</th>
+              <td rowspan="2">
+                <textarea class="table-input table-textarea" aria-label="Address" [(ngModel)]="address"></textarea>
+              </td>
+              <th scope="row">Month</th>
+              <td>
+                <input class="table-input" type="text" aria-label="Month" [(ngModel)]="month" />
+              </td>
+              <th scope="row" rowspan="2">/for Account Claim No</th>
+              <td rowspan="2">
+                <input class="table-input" type="text" aria-label="Account Claim Number" [(ngModel)]="accountClaimNo" />
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Headquarters</th>
+              <td>
+                <input class="table-input" type="text" aria-label="Headquarters" [(ngModel)]="headquarters" />
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" colspan="6">DESCRIPTION OF VEHICLE</th>
+            </tr>
+            <tr class="vehicle-header-row">
+              <th scope="col">Make and Model</th>
+              <th scope="col">Category<br>(as per petrol tariff)</th>
+              <th scope="col">Year of manufacture</th>
+              <th scope="col">Type<br>(motor-car, motor cycle, scooter, etc)</th>
+              <th scope="col">Registration number</th>
+              <th scope="col">Engine swept volume group in cm cubed</th>
+            </tr>
+            <tr>
+              <td>
+                <input class="table-input" type="text" aria-label="Make and Model" [(ngModel)]="makeAndModel" />
+              </td>
+              <td>
+                <input class="table-input" type="text" aria-label="Category" [(ngModel)]="category" />
+              </td>
+              <td>
+                <input class="table-input" type="text" aria-label="Year of manufacture" [(ngModel)]="yearOfManufacture" />
+              </td>
+              <td>
+                <input class="table-input" type="text" aria-label="Vehicle type" [(ngModel)]="vehicleType" />
+              </td>
+              <td>
+                <input class="table-input" type="text" aria-label="Registration number" [(ngModel)]="registrationNumber" />
+              </td>
+              <td>
+                <input class="table-input" type="text" aria-label="Engine swept volume group" [(ngModel)]="engineSweptVolumeGroup" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
