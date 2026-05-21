@@ -72,7 +72,7 @@
           <span>Calculate</span>
         </div>
 
-        @for (claim of claims; track claim.claimId) {
+        @for (claim of claims; track getClaimTrackKey(claim)) {
           <div class="table-row">
             <span>{{ claim.claimReference || '-' }}</span>
             <span>{{ claim.userName || '-' }}</span>

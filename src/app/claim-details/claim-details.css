@@ -218,6 +218,12 @@
   font-size: 14px;
 }
 
+.success-message {
+  margin: 10px 0 0;
+  color: #1b5e20;
+  font-size: 14px;
+}
+
 .allocation-step-form {
   padding: 18px;
   background: #fff;

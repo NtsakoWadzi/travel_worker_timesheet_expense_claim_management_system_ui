@@ -44,6 +44,7 @@ export class ClaimDetailsComponent {
   persalTransaction = '';
   claimValidationMessage = '';
   allocationValidationMessage = '';
+  allocationSuccessMessage = '';
   allocationOptions: AllocationOption[] = [
     { persalCode: '0436', description: 'T&S Allowance Not Exceeding Amount Set By SARS', sarsCode: '3705' },
     { persalCode: '0717', description: 'T&S Allowance Exceeding Amount Set By SARS', sarsCode: '3704' },
@@ -170,7 +171,7 @@ export class ClaimDetailsComponent {
     }
 
     if (!this.claimDraft.arrivalDateTime) {
-      missingFields.push('arrival time');
+      missingFields.push('arrival date');
     }
 
     if (!this.hasPositiveNumber(this.claimDraft.dateNumberOfDays)) {
@@ -197,6 +198,7 @@ export class ClaimDetailsComponent {
   }
 
   validateAllocationStep(): boolean {
+    this.allocationSuccessMessage = '';
     const hasInvalidRow = this.allocationRows.some((row) => (
       !row.selected
       || !row.persalCode
@@ -228,7 +230,20 @@ export class ClaimDetailsComponent {
   }
 
   submitAllocation(): void {
-    this.validateAllocationStep();
+    if (!this.validateAllocationStep()) {
+      return;
+    }
+
+    const claimNumber = this.generateClaimNumber();
+    this.claimsService.saveSubsistenceTravelClaimFormDraft({
+      claimNumber,
+      capturedBy: this.getCapturedByName(),
+      dateCaptured: this.getDateInputValue(new Date()),
+      advanceTaken: this.formatMoney(this.lessAdvanceST || 0),
+      amount: this.formatMoney(this.getAllocationTotal()),
+    });
+    this.claimsService.saveLocalSubmittedClaim(this.createSubmittedClaim(claimNumber));
+    this.allocationSuccessMessage = 'Claim information submitted successfully.';
   }
 
   goToPrivateOwned(): void {
@@ -271,5 +286,81 @@ export class ClaimDetailsComponent {
 
   private hasNonNegativeNumber(value: number | undefined): boolean {
     return value !== undefined && Number(value) >= 0;
+  }
+
+  private createSubmittedClaim(claimNumber: string): Claim {
+    const user = this.authService.getUser();
+    const submittedAt = new Date();
+    const selectedAllocations = this.allocationRows
+      .filter((row) => row.selected)
+      .map((row) => row.description);
+
+    return {
+      ...this.claimDraft,
+      claimId: submittedAt.getTime(),
+      claimReference: claimNumber,
+      ClaimDate: submittedAt,
+      claimDate: submittedAt.toISOString(),
+      userId: user?.userId,
+      userName: user?.userName || this.getCapturedByName(),
+      categories: selectedAllocations.length ? selectedAllocations : ['Subsistence and Travel'],
+      status: 'Submitted',
+      total_amount: this.getAllocationTotal(),
+      claimImages: [],
+      claimDetails: this.allocationRows
+        .filter((row) => row.selected)
+        .map((row) => ({
+          category: row.description,
+          detailType: row.persalCode,
+          description: `SARS Code: ${row.sarsCode}`,
+          amount: Number(row.amount || 0),
+        })),
+      timesheetDetails: this.claimsService.getTimesheetDraft(),
+      localSubmitted: true,
+    };
+  }
+
+  private generateClaimNumber(): string {
+    const now = new Date();
+    return [
+      String(now.getFullYear()).slice(-2),
+      this.padDatePart(now.getMonth() + 1),
+      this.padDatePart(now.getDate()),
+      this.padDatePart(now.getHours()),
+      this.padDatePart(now.getMinutes()),
+    ].join('');
+  }
+
+  private getCapturedByName(): string {
+    const user = this.authService.getUser();
+    const firstName = String(user?.userFirstName || '').trim();
+    const lastName = String(user?.userLastName || '').trim();
+
+    if (firstName || lastName) {
+      const initials = firstName
+        .split(/\s+/)
+        .filter(Boolean)
+        .map((name) => name.charAt(0).toUpperCase())
+        .join('');
+      return [initials, lastName].filter(Boolean).join(' ');
+    }
+
+    return user?.userName || this.employeeName;
+  }
+
+  private getDateInputValue(date: Date): string {
+    return [
+      date.getFullYear(),
+      this.padDatePart(date.getMonth() + 1),
+      this.padDatePart(date.getDate()),
+    ].join('-');
+  }
+
+  private formatMoney(value: number): string {
+    return (Number(value) || 0).toFixed(2);
+  }
+
+  private padDatePart(value: number): string {
+    return String(value).padStart(2, '0');
   }
 }

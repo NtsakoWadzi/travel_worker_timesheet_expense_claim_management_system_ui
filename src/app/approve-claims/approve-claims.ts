@@ -69,13 +69,16 @@ export class ApproveClaims implements OnInit {
     this.isLoading = true;
     this.errorMessage = '';
 
-    this.claimsService.getClaims().pipe(
+    this.claimsService.getManagerClaims().pipe(
       finalize(() => {
         this.isLoading = false;
       })
     ).subscribe({
       next: (claims) => {
-        this.claims = claims || [];
+        this.claims = this.sortClaimsBySubmittedDate(claims || []);
+        if (this.claims.length === 0) {
+          this.errorMessage = '';
+        }
       },
       error: (error) => {
         this.errorMessage = 'Claims could not be loaded. Please check that the manager is logged in and the backend claims endpoint is available.';
@@ -85,6 +88,16 @@ export class ApproveClaims implements OnInit {
   }
 
   updateStatus(claim: Claim, status: string, managerMessage = ''): void {
+    if (claim.localSubmitted) {
+      const updatedClaim = this.claimsService.updateLocalSubmittedClaimStatus(
+        claim,
+        status,
+        managerMessage || this.getDefaultDecisionMessage(status)
+      );
+      Object.assign(claim, updatedClaim);
+      return;
+    }
+
     if (!claim.claimId) {
       this.errorMessage = 'This claim does not have a claim id.';
       return;
@@ -109,6 +122,21 @@ export class ApproveClaims implements OnInit {
   }
 
   viewClaim(claim: Claim): void {
+    if (claim.localSubmitted) {
+      this.closeReviewDialog();
+      this.selectedClaim = claim;
+      this.reviewTimesheets = claim.timesheetDetails || [];
+      this.reviewBankDetails = claim.bankDetails;
+      this.imagePreviews = [];
+      this.imageDialogTitle = `Claim ${claim.claimReference || claim.claimId} review`;
+      this.imageDialogMessage = 'No supporting images are attached to this claim.';
+      this.managerDecisionMessage = '';
+      this.isLoadingImages = false;
+      this.isLoadingReview = false;
+      this.isReviewDialogOpen = true;
+      return;
+    }
+
     if (!claim.claimId) {
       window.alert('No claim id is available for this claim.');
       return;
@@ -209,6 +237,24 @@ export class ApproveClaims implements OnInit {
   }
 
   calculateClaim(claim: Claim): void {
+    if (claim.localSubmitted) {
+      this.isCalculationDialogOpen = true;
+      this.isCalculating = false;
+      this.calculationClaim = claim;
+      this.calculationDetails = claim.claimDetails || [];
+      this.calculation = {
+        claimId: Number(claim.claimId || 0),
+        claimReference: claim.claimReference,
+        claimDate: claim.claimDate || claim.ClaimDate,
+        totalAmount: this.getCalculationTotal(this.calculationDetails),
+        details: this.calculationDetails,
+        bankDetails: claim.bankDetails,
+      };
+      this.paymentMessage = '';
+      claim.total_amount = this.calculation.totalAmount;
+      return;
+    }
+
     if (!claim.claimId) {
       this.errorMessage = 'This claim does not have a claim id.';
       return;
@@ -281,6 +327,14 @@ export class ApproveClaims implements OnInit {
     const claim = this.selectedClaim;
     const claimId = Number(claim.claimId);
     const message = this.managerDecisionMessage.trim() || this.getDefaultDecisionMessage('Approved');
+
+    if (claim.localSubmitted) {
+      const updatedClaim = this.claimsService.updateLocalSubmittedClaimStatus(claim, 'Approved', message);
+      Object.assign(claim, updatedClaim);
+      this.closeReviewDialog();
+      return;
+    }
+
     this.isUpdatingStatus = true;
     this.claimsService.updateClaimStatus(claimId, 'Approved', message).pipe(
       finalize(() => {
@@ -309,6 +363,14 @@ export class ApproveClaims implements OnInit {
     const claim = this.selectedClaim;
     const claimId = Number(claim.claimId);
     const message = this.managerDecisionMessage.trim() || this.getDefaultDecisionMessage('Rejected');
+
+    if (claim.localSubmitted) {
+      const updatedClaim = this.claimsService.updateLocalSubmittedClaimStatus(claim, 'Rejected', message);
+      Object.assign(claim, updatedClaim);
+      this.closeReviewDialog();
+      return;
+    }
+
     this.isUpdatingStatus = true;
 
     this.claimsService.updateClaimStatus(claimId, 'Rejected', message).pipe(
@@ -343,6 +405,10 @@ export class ApproveClaims implements OnInit {
 
   formatCurrency(value: number | undefined): string {
     return `R ${(value || 0).toFixed(2)}`;
+  }
+
+  getClaimTrackKey(claim: Claim): string {
+    return String(claim.claimId || claim.claimReference || claim.claimDate || claim.ClaimDate);
   }
 
   getCalculationTotal(details: ClaimDetail[] = this.calculationDetails): number {
@@ -436,6 +502,14 @@ export class ApproveClaims implements OnInit {
     });
 
     return merged;
+  }
+
+  private sortClaimsBySubmittedDate(claims: Claim[]): Claim[] {
+    return [...claims].sort((first, second) => {
+      const firstDate = new Date(first.claimDate || first.ClaimDate || 0).getTime();
+      const secondDate = new Date(second.claimDate || second.ClaimDate || 0).getTime();
+      return secondDate - firstDate;
+    });
   }
 
   goToApprovals(): void {

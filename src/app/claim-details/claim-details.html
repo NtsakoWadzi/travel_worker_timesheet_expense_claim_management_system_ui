@@ -84,13 +84,13 @@
                       (ngModelChange)="saveClaimDraft()"
                     />
                   </td>
-                  <th scope="row">Arrival Time</th>
+                  <th scope="row">Arrival Date</th>
                   <td>
                     <input
                       class="table-input"
-                      type="time"
+                      type="date"
                       required
-                      aria-label="Arrival Time"
+                      aria-label="Arrival Date"
                       [(ngModel)]="claimDraft.arrivalDateTime"
                       (ngModelChange)="saveClaimDraft()"
                     />
@@ -267,6 +267,9 @@
             </div>
             @if (allocationValidationMessage) {
               <p class="validation-message">{{ allocationValidationMessage }}</p>
+            }
+            @if (allocationSuccessMessage) {
+              <p class="success-message">{{ allocationSuccessMessage }}</p>
             }
             <div class="step-actions allocation-footer-actions">
               <button type="button" mat-stroked-button color="primary" (click)="goToPrivateOwned()">

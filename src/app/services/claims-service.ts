@@ -5,6 +5,14 @@ import { catchError, map, tap, timeout } from 'rxjs/operators';
 import { Claim, ClaimCalculationResponse, ClaimImageResponse, ClaimStatusSummary, ClaimTimesheet, PaymentResponse, UserClaimCountResponse } from '../Model/claim.model';
 import { API_BASE_URL } from './api-config';
 
+export interface SubsistenceTravelClaimFormDraft {
+  claimNumber: string;
+  capturedBy: string;
+  dateCaptured: string;
+  advanceTaken: string;
+  amount: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -12,6 +20,8 @@ export class ClaimsService {
   private baseUrl = API_BASE_URL;
   private readonly pendingReviewStorageKey = 'pendingClaimReviews';
   private readonly pendingPaymentStorageKey = 'pendingClaimPayment';
+  private readonly subsistenceTravelClaimFormDraftKey = 'subsistenceTravelClaimFormDraft';
+  private readonly localSubmittedClaimsStorageKey = 'localSubmittedClaims';
   private claimDraft?: Claim;
   private timesheetDraft: ClaimTimesheet[] = [];
   private statusRefreshIntervalId?: number;
@@ -77,6 +87,77 @@ export class ClaimsService {
         timesheetDetails: [],
       };
     }
+  }
+
+  saveSubsistenceTravelClaimFormDraft(draft: SubsistenceTravelClaimFormDraft): void {
+    localStorage.setItem(this.subsistenceTravelClaimFormDraftKey, JSON.stringify(draft));
+  }
+
+  getSubsistenceTravelClaimFormDraft(): SubsistenceTravelClaimFormDraft | undefined {
+    const value = localStorage.getItem(this.subsistenceTravelClaimFormDraftKey);
+    if (!value) {
+      return undefined;
+    }
+
+    try {
+      return JSON.parse(value) as SubsistenceTravelClaimFormDraft;
+    } catch {
+      return undefined;
+    }
+  }
+
+  saveLocalSubmittedClaim(claim: Claim): Claim {
+    const claims = this.getLocalSubmittedClaims().filter((item) => !this.isSameClaim(item, claim));
+    const savedClaim: Claim = {
+      ...claim,
+      localSubmitted: true,
+      status: claim.status || 'Submitted',
+      claimDate: claim.claimDate || claim.ClaimDate || new Date().toISOString(),
+      ClaimDate: claim.ClaimDate || new Date(),
+      categories: Array.isArray(claim.categories) ? [...claim.categories] : claim.categories,
+      claimImages: [],
+      claimDetails: [...(claim.claimDetails || [])],
+      timesheetDetails: [...(claim.timesheetDetails || [])],
+    };
+
+    claims.unshift(savedClaim);
+    localStorage.setItem(this.localSubmittedClaimsStorageKey, JSON.stringify(claims.slice(0, 100)));
+    return savedClaim;
+  }
+
+  getLocalSubmittedClaims(): Claim[] {
+    const value = localStorage.getItem(this.localSubmittedClaimsStorageKey);
+    if (!value) {
+      return [];
+    }
+
+    try {
+      return JSON.parse(value) as Claim[];
+    } catch {
+      return [];
+    }
+  }
+
+  getManagerClaims(): Observable<Claim[]> {
+    const localClaims = this.getLocalManagerClaims();
+
+    return this.getClaims().pipe(
+      map((backendClaims) => this.sortClaimsBySubmittedDate(this.mergeManagerClaims(backendClaims || [], localClaims))),
+      catchError(() => of(this.sortClaimsBySubmittedDate(localClaims)))
+    );
+  }
+
+  updateLocalSubmittedClaimStatus(claim: Claim, status: string, managerMessage = ''): Claim {
+    const updatedClaim: Claim = {
+      ...claim,
+      status,
+      managerMessage,
+    };
+    const claims = this.getLocalSubmittedClaims().map((item) => (
+      this.isSameClaim(item, updatedClaim) ? updatedClaim : item
+    ));
+    localStorage.setItem(this.localSubmittedClaimsStorageKey, JSON.stringify(claims));
+    return updatedClaim;
   }
 
   submitClaim(claim: Claim): Observable<Claim> {
@@ -312,6 +393,51 @@ export class ClaimsService {
     } catch {
       return [];
     }
+  }
+
+  private getLocalManagerClaims(): Claim[] {
+    const submittedClaims = this.getLocalSubmittedClaims();
+    const pendingReviews = this.getPendingClaimReviews().map((claim) => ({
+      ClaimDate: claim.ClaimDate || new Date(),
+      claimDate: claim.claimDate || claim.ClaimDate || new Date().toISOString(),
+      categories: claim.categories || [],
+      claimImages: [],
+      status: claim.status || 'Submitted',
+      localSubmitted: true,
+      ...claim,
+    } as Claim));
+
+    return this.sortClaimsBySubmittedDate(this.mergeManagerClaims(submittedClaims, pendingReviews));
+  }
+
+  private mergeManagerClaims(backendClaims: Claim[], localClaims: Claim[]): Claim[] {
+    const claimsByKey = new Map<string, Claim>();
+
+    [...backendClaims, ...localClaims].forEach((claim) => {
+      claimsByKey.set(this.getClaimMergeKey(claim), claim);
+    });
+
+    return Array.from(claimsByKey.values());
+  }
+
+  private getClaimMergeKey(claim: Partial<Claim>): string {
+    if (claim.claimId) {
+      return `id:${claim.claimId}`;
+    }
+
+    if (claim.claimReference) {
+      return `ref:${claim.claimReference}`;
+    }
+
+    return `date:${claim.claimDate || claim.ClaimDate || ''}:user:${claim.userId || claim.userName || ''}`;
+  }
+
+  private sortClaimsBySubmittedDate(claims: Claim[]): Claim[] {
+    return [...claims].sort((first, second) => {
+      const firstDate = new Date(first.claimDate || first.ClaimDate || 0).getTime();
+      const secondDate = new Date(second.claimDate || second.ClaimDate || 0).getTime();
+      return secondDate - firstDate;
+    });
   }
 
   private isSameClaim(first: Partial<Claim>, second: Partial<Claim>): boolean {

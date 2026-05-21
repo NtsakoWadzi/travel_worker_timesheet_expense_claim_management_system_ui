@@ -51,23 +51,23 @@
           <tbody>
             <tr>
               <th scope="row">National Department: Public Works</th>
-              <td><input class="table-input" type="text" aria-label="National department" /></td>
+              <td><input class="table-input" type="text" aria-label="National department" [(ngModel)]="nationalDepartment" /></td>
               <th scope="row">Claim Number:</th>
-              <td><input class="table-input" type="text" aria-label="Claim number" /></td>
+              <td><input class="table-input" type="text" aria-label="Claim number" [(ngModel)]="claimNumber" /></td>
               <th scope="row">Captured by:</th>
-              <td><input class="table-input" type="text" aria-label="Captured by" /></td>
+              <td><input class="table-input" type="text" aria-label="Captured by" [(ngModel)]="capturedBy" /></td>
               <th scope="row">Date captured:</th>
-              <td><input class="table-input" type="date" aria-label="Date captured" /></td>
+              <td><input class="table-input" type="date" aria-label="Date captured" [(ngModel)]="dateCaptured" /></td>
             </tr>
             <tr>
               <th scope="row">Advance taken:</th>
-              <td><input class="table-input" type="text" aria-label="Advance taken" /></td>
+              <td><input class="table-input" type="text" aria-label="Advance taken" [(ngModel)]="advanceTaken" /></td>
               <th scope="row">Amount:</th>
-              <td><input class="table-input" type="number" aria-label="Amount" /></td>
+              <td><input class="table-input" type="text" aria-label="Amount" [(ngModel)]="amount" /></td>
               <th scope="row">Authrised by:</th>
-              <td><input class="table-input" type="text" aria-label="Authrised by" /></td>
+              <td><input class="table-input" type="text" aria-label="Authrised by" [(ngModel)]="authorisedBy" /></td>
               <th scope="row">Date authorised:</th>
-              <td><input class="table-input" type="date" aria-label="Date authorised" /></td>
+              <td><input class="table-input" type="date" aria-label="Date authorised" [(ngModel)]="dateAuthorised" /></td>
             </tr>
           </tbody>
         </table>

@@ -10,6 +10,7 @@ export interface Claim{
     status?: boolean | string;
     claimId?: number;
     claimReference?: string;
+    localSubmitted?: boolean;
     managerId?: number;
     managerMessage?: string;
     managerComment?: string;
