@@ -1,0 +1,121 @@
+<div class="journey-shell">
+  <aside class="sidebar" aria-label="Details of journey navigation">
+    <div class="sidebar-brand">
+      <img src="logo.jpeg" alt="Department of Public Works and Infrastructure" />
+      <div>
+        <strong>Travel Worker</strong>
+        <span>Claims Portal</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button type="button" class="nav-item active" (click)="goToClaimDetails()">
+        <mat-icon>receipt_long</mat-icon>
+        <span>Claim Details</span>
+      </button>
+      <button type="button" class="nav-item" (click)="goToClaimStatus()">
+        <mat-icon>fact_check</mat-icon>
+        <span>Status</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-summary">
+        <mat-icon>account_circle</mat-icon>
+        <div>
+          <strong>{{ employeeName }}</strong>
+          <span>Employee</span>
+        </div>
+      </div>
+      <button type="button" class="nav-item logout" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="journey-container">
+    <header class="journey-header">
+      <div>
+        <h1>Details of Journey</h1>
+      </div>
+    </header>
+
+    <section class="journey-panel">
+      <div class="journey-table-wrap">
+        <table class="journey-table" aria-label="Details of journey">
+          <thead>
+            <tr>
+              <th scope="colgroup" colspan="2">Details of Journey(point to point)*</th>
+              <th scope="colgroup" colspan="3">Comparision Kilometers(compulsory)</th>
+              <th scope="colgroup" colspan="4">Official Kilometers</th>
+              <th scope="colgroup" colspan="3">Kilometer Distance</th>
+              <th scope="col" rowspan="2">Action</th>
+            </tr>
+            <tr>
+              <th scope="col">1.Date</th>
+              <th scope="col">2.Reason</th>
+              <th scope="col">3.Total Kilometers Home to Destination</th>
+              <th scope="col">4.Total Kilometers DPW Office to destination</th>
+              <th scope="col">5.Claimable Kilometers</th>
+              <th scope="col">6.Departure from:</th>
+              <th scope="col">7.Departure Time:</th>
+              <th scope="col">8.Arrival at:</th>
+              <th scope="col">9.Arrival time:</th>
+              <th scope="col">10.Speedometer reading at commencement of Journey</th>
+              <th scope="col">11.Speedometer reading at end of journey</th>
+              <th scope="col">12.Total traveled</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of journeyRows; track $index) {
+            <tr>
+              <td>
+                <input class="table-input" type="date" aria-label="Date" [(ngModel)]="row.date" />
+              </td>
+              <td>
+                <input class="table-input" type="text" aria-label="Reason" [(ngModel)]="row.reason" />
+              </td>
+              <td>
+                <input class="table-input" type="number" min="0" aria-label="Total Kilometers Home to Destination" [(ngModel)]="row.homeToDestinationKm" />
+              </td>
+              <td>
+                <input class="table-input" type="number" min="0" aria-label="Total Kilometers DPW Office to destination" [(ngModel)]="row.officeToDestinationKm" />
+              </td>
+              <td>
+                <input class="table-input" type="number" min="0" aria-label="Claimable Kilometers" [(ngModel)]="row.claimableKm" />
+              </td>
+              <td>
+                <input class="table-input" type="text" aria-label="Departure from" [(ngModel)]="row.departureFrom" />
+              </td>
+              <td>
+                <input class="table-input" type="time" aria-label="Departure Time" [(ngModel)]="row.departureTime" />
+              </td>
+              <td>
+                <input class="table-input" type="text" aria-label="Arrival at" [(ngModel)]="row.arrivalAt" />
+              </td>
+              <td>
+                <input class="table-input" type="time" aria-label="Arrival time" [(ngModel)]="row.arrivalTime" />
+              </td>
+              <td>
+                <input class="table-input" type="number" min="0" aria-label="Speedometer reading at commencement of Journey" [(ngModel)]="row.speedometerStart" />
+              </td>
+              <td>
+                <input class="table-input" type="number" min="0" aria-label="Speedometer reading at end of journey" [(ngModel)]="row.speedometerEnd" />
+              </td>
+              <td>
+                <input class="table-input" type="number" min="0" aria-label="Total traveled" [(ngModel)]="row.totalTraveled" />
+              </td>
+              <td class="journey-action-cell">
+                <button type="button" mat-stroked-button color="primary" (click)="addJourneyRow()">
+                  Add
+                </button>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>

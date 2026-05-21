@@ -13,6 +13,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard';
 import { ClaimDetailsComponent } from './claim-details/claim-details';
 import { PayClaimsComponent } from './pay-claims/pay-claims';
 import { PrivateOwnedComponent } from './private-owned/private-owned';
+import { DetailsOfJourneyComponent } from './details-of-journey/details-of-journey';
 
  
 
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'pay-claims/:claimId',component: PayClaimsComponent, },
   { path: 'admin-dashboard',component: AdminDashboardComponent, },
   { path: 'private-owned',component: PrivateOwnedComponent, },
+  { path: 'details-of-journey',component: DetailsOfJourneyComponent, },
 ];
 
 @NgModule({

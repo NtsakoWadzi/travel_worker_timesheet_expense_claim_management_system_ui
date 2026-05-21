@@ -1,4 +1,4 @@
-.private-owned-shell {
+.journey-shell {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
   min-height: 100vh;
@@ -104,13 +104,13 @@
   color: #ffe0c2;
 }
 
-.private-owned-container {
-  width: calc(100% - 48px);
-  max-width: 1180px;
+.journey-container {
+  width: calc(100% - 24px);
+  max-width: none;
   margin: 24px auto;
 }
 
-.private-owned-header {
+.journey-header {
   display: flex;
   justify-content: space-between;
   gap: 16px;
@@ -123,61 +123,58 @@
   box-shadow: 0 14px 32px rgba(17, 24, 39, 0.12);
 }
 
-.private-owned-header h1 {
+.journey-header h1 {
   margin: 0;
   font-size: 24px;
   letter-spacing: 0;
 }
 
-.private-owned-panel {
-  padding: 20px;
+.journey-panel {
+  padding: 14px;
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   box-shadow: 0 18px 46px rgba(17, 24, 39, 0.12);
 }
 
-.private-owned-panel h2 {
+.journey-panel h2 {
   margin: 0 0 16px;
   color: #333;
   font-size: 22px;
 }
 
-.private-owned-table-wrap {
-  overflow-x: auto;
+.journey-table-wrap {
+  overflow-x: hidden;
 }
 
-.private-owned-table {
+.journey-table {
   width: 100%;
-  min-width: 860px;
+  min-width: 0;
   border-collapse: collapse;
   table-layout: fixed;
   border: 1px solid #d1d5db;
-  font-size: 13px;
+  font-size: 10px;
 }
 
-.private-owned-table th,
-.private-owned-table td {
-  padding: 8px;
+.journey-table th,
+.journey-table td {
+  padding: 5px;
   border: 1px solid #d1d5db;
   color: #333;
   text-align: left;
   vertical-align: middle;
+  overflow-wrap: anywhere;
 }
 
-.private-owned-table th {
+.journey-table th {
   font-weight: 700;
   background: #f8fafc;
 }
 
-.vehicle-header-row th {
-  text-align: center;
-}
-
 .table-input {
   width: 100%;
-  min-height: 34px;
-  padding: 6px 8px;
+  min-height: 30px;
+  padding: 5px 6px;
   border: 1px solid #cbd5e1;
   border-radius: 4px;
   color: #333;
@@ -185,19 +182,17 @@
   box-sizing: border-box;
 }
 
-.table-textarea {
-  min-height: 86px;
-  resize: vertical;
+.journey-action-cell {
+  text-align: center;
 }
 
-.private-owned-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 18px;
+.journey-action-cell button {
+  min-width: 54px;
+  padding: 0 8px;
 }
 
 @media (max-width: 900px) {
-  .private-owned-shell {
+  .journey-shell {
     grid-template-columns: 1fr;
   }
 
@@ -223,8 +218,16 @@
     width: auto;
   }
 
-  .private-owned-container {
+  .journey-container {
     width: calc(100% - 32px);
     margin: 16px auto;
+  }
+
+  .journey-table-wrap {
+    overflow-x: auto;
+  }
+
+  .journey-table {
+    min-width: 1280px;
   }
 }
