@@ -20,6 +20,14 @@ export interface Claim{
     rejectionReason?: string;
     userSubmissionCount?: number;
     total_amount?: number;
+    claimDescription?: string;
+    departureDate?: string;
+    arrivalDateTime?: string;
+    dateNumberOfDays?: number;
+    departureTime?: string;
+    arrivalTime?: string;
+    timeNumberOfDays?: number;
+    numberOfHours?: number;
     claimDetails?: ClaimDetail[];
     timesheetDetails?: ClaimTimesheet[];
     bankDetails?: BankDetails;

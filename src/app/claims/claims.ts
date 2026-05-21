@@ -107,6 +107,7 @@ export class Claims implements OnDestroy {
   submitClaim(selectedCategories: string[]): void {
     this.errorMessage = '';
     this.successMessage = '';
+    this.syncClaimTableFieldsFromDraft();
 
     if (!this.validateClaimBeforeSubmit(selectedCategories, true)) {
       return;
@@ -151,6 +152,7 @@ export class Claims implements OnDestroy {
   continueToBankDetails(): void {
     this.errorMessage = '';
     this.successMessage = '';
+    this.syncClaimTableFieldsFromDraft();
 
     if (!this.validateClaimBeforeSubmit(this.selectedCategories, false)) {
       return;
@@ -415,7 +417,38 @@ export class Claims implements OnDestroy {
 
   private saveDraft(): void {
     this.singleclaim.categories = [...this.selectedCategories];
-    this.claimsService.saveClaimDraft(this.singleclaim);
+    const existingDraft = this.claimsService.getClaimDraft();
+    this.claimsService.saveClaimDraft({
+      ...existingDraft,
+      ...this.singleclaim,
+      claimDescription: existingDraft?.claimDescription || this.singleclaim.claimDescription,
+      departureDate: existingDraft?.departureDate || this.singleclaim.departureDate,
+      arrivalDateTime: existingDraft?.arrivalDateTime || this.singleclaim.arrivalDateTime,
+      dateNumberOfDays: existingDraft?.dateNumberOfDays ?? this.singleclaim.dateNumberOfDays,
+      departureTime: existingDraft?.departureTime || this.singleclaim.departureTime,
+      arrivalTime: existingDraft?.arrivalTime || this.singleclaim.arrivalTime,
+      timeNumberOfDays: existingDraft?.timeNumberOfDays ?? this.singleclaim.timeNumberOfDays,
+      numberOfHours: existingDraft?.numberOfHours ?? this.singleclaim.numberOfHours,
+    });
+  }
+
+  private syncClaimTableFieldsFromDraft(): void {
+    const existingDraft = this.claimsService.getClaimDraft();
+    if (!existingDraft) {
+      return;
+    }
+
+    this.singleclaim = {
+      ...this.singleclaim,
+      claimDescription: existingDraft.claimDescription || this.singleclaim.claimDescription,
+      departureDate: existingDraft.departureDate || this.singleclaim.departureDate,
+      arrivalDateTime: existingDraft.arrivalDateTime || this.singleclaim.arrivalDateTime,
+      dateNumberOfDays: existingDraft.dateNumberOfDays ?? this.singleclaim.dateNumberOfDays,
+      departureTime: existingDraft.departureTime || this.singleclaim.departureTime,
+      arrivalTime: existingDraft.arrivalTime || this.singleclaim.arrivalTime,
+      timeNumberOfDays: existingDraft.timeNumberOfDays ?? this.singleclaim.timeNumberOfDays,
+      numberOfHours: existingDraft.numberOfHours ?? this.singleclaim.numberOfHours,
+    };
   }
 
   private toCategoryArray(categories: string[] | string | undefined): string[] {

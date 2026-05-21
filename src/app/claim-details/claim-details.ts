@@ -3,8 +3,23 @@ import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth';
 import { ClaimsService } from '../services/claims-service';
+import { Claim } from '../Model/claim.model';
 
 type ClaimDetailsStep = 'timesheet' | 'claims' | 'bank-details' | 'status';
+
+interface AllocationRow {
+  selected: boolean;
+  persalCode: string;
+  description: string;
+  sarsCode: string;
+  amount?: number;
+}
+
+interface AllocationOption {
+  persalCode: string;
+  description: string;
+  sarsCode: string;
+}
 
 @Component({
   selector: 'app-claim-details',
@@ -16,6 +31,43 @@ export class ClaimDetailsComponent {
   @ViewChild('claimStepper') claimStepper?: MatStepper;
 
   employeeName = 'Employee';
+  claimDraft: Claim = {
+    ClaimDate: new Date(),
+    categories: [],
+    claimImages: [],
+    claimDetails: [],
+  };
+  lessAdvanceST?: number;
+  lessAdvanceSelected = false;
+  persalTransaction = '';
+  allocationOptions: AllocationOption[] = [
+    { persalCode: '0436', description: 'T&S Allowance Not Exceeding Amount Set By SARS', sarsCode: '3705' },
+    { persalCode: '0717', description: 'T&S Allowance Exceeding Amount Set By SARS', sarsCode: '3704' },
+    { persalCode: '0462', description: 'T&S Dom: Accommodation', sarsCode: 'N/A' },
+    { persalCode: '0463', description: 'T&S Dom: Other Transport Provided (Gautrain)', sarsCode: 'N/A' },
+    { persalCode: '0497', description: 'T&S Dom: Road Transport', sarsCode: 'N/A' },
+    { persalCode: '0498', description: 'T&S Dom: Parking', sarsCode: 'N/A' },
+    { persalCode: '0499', description: 'T&S Toll Fees', sarsCode: 'N/A' },
+    { persalCode: '0469', description: 'T&S Dom: Km All Own Transport', sarsCode: '3702' },
+    { persalCode: '0470', description: 'T&S Dom: Km All Own Transport', sarsCode: '3703' },
+    { persalCode: '0515', description: 'T&S Dom: Fuel Expenditure', sarsCode: 'N/A' },
+    { persalCode: '0494', description: 'T&S Dom: Actual Exp Accommodation & Meals', sarsCode: 'N/A' },
+    { persalCode: '0588', description: 'T&S Dom: Food & Beverage', sarsCode: 'N/A' },
+    { persalCode: '0674', description: 'T&S Dom: Air Travel', sarsCode: 'N/A' },
+    { persalCode: '0514', description: 'T&S Travel Documents Visas & Passports', sarsCode: 'N/A' },
+    { persalCode: '0476', description: 'T&S Foreign: Accommodation', sarsCode: 'N/A' },
+    { persalCode: '0477', description: 'T&S Foreign: Road Transport', sarsCode: 'N/A' },
+    { persalCode: '0473', description: 'T&S Overseas Not Exceeding Amount Set By SARS', sarsCode: '3716' },
+    { persalCode: '0444', description: 'T&S Overseas Exceeding Amount Set By SARS', sarsCode: '3715' },
+    { persalCode: '0500', description: 'T&S Airtime and Data Mobile', sarsCode: 'N/A' },
+    { persalCode: '0501', description: 'T&S Foreign: Accommodation & Meals', sarsCode: 'N/A' },
+    { persalCode: '0589', description: 'T&S Foreign: Food & Beverage', sarsCode: 'N/A' },
+    { persalCode: '0464', description: 'T&S Foreign: Parking Expenditure', sarsCode: 'N/A' },
+    { persalCode: '0465', description: 'T&S Foreign: Toll Fees', sarsCode: 'N/A' },
+    { persalCode: '0504', description: 'T&S Foreign: Railway Transport', sarsCode: 'N/A' },
+    { persalCode: '0650', description: 'T&S Foreign: Incidental Cost', sarsCode: 'N/A' },
+  ];
+  allocationRows: AllocationRow[] = [this.createAllocationRow()];
 
   constructor(
     private router: Router,
@@ -26,6 +78,8 @@ export class ClaimDetailsComponent {
     this.employeeName = user?.userFirstName && user?.userLastName
       ? `${user.userFirstName} ${user.userLastName}`
       : user?.userName || 'Employee';
+
+    this.claimDraft = this.claimsService.getClaimDraft() || this.claimDraft;
   }
 
   selectStep(step: ClaimDetailsStep): void {
@@ -49,11 +103,55 @@ export class ClaimDetailsComponent {
     this.router.navigate(['/claim-status']);
   }
 
+  getAllocationSubTotal(): number {
+    return this.allocationRows.reduce((total, row) => total + (Number(row.amount) || 0), 0);
+  }
+
+  getAllocationTotal(): number {
+    return this.getAllocationSubTotal() - (Number(this.lessAdvanceST) || 0);
+  }
+
+  onAllocationCodeChanged(row: AllocationRow): void {
+    const option = this.allocationOptions.find((item) => item.persalCode === row.persalCode);
+    if (!option) {
+      return;
+    }
+
+    row.description = option.description;
+    row.sarsCode = option.sarsCode;
+  }
+
+  addAllocationRow(): void {
+    this.allocationRows = [...this.allocationRows, this.createAllocationRow()];
+  }
+
+  saveClaimDraft(): void {
+    const existingDraft = this.claimsService.getClaimDraft();
+    this.claimsService.saveClaimDraft({
+      ...existingDraft,
+      ...this.claimDraft,
+      ClaimDate: existingDraft?.ClaimDate || this.claimDraft.ClaimDate || new Date(),
+      categories: existingDraft?.categories || this.claimDraft.categories || [],
+      claimImages: existingDraft?.claimImages || this.claimDraft.claimImages || [],
+      claimDetails: existingDraft?.claimDetails || this.claimDraft.claimDetails || [],
+    });
+  }
+
   logout(): void {
     this.claimsService.clearClaimDraft();
     this.claimsService.clearTimesheetDraft();
     this.claimsService.clearClaimStatus();
     this.authService.logout();
     this.router.navigate(['/']);
+  }
+
+  private createAllocationRow(): AllocationRow {
+    const option = this.allocationOptions[0];
+    return {
+      selected: false,
+      persalCode: option.persalCode,
+      description: option.description,
+      sarsCode: option.sarsCode,
+    };
   }
 }

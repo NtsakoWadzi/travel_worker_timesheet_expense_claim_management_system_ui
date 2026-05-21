@@ -157,6 +157,143 @@
   background-color: #f58220;
 }
 
+.claim-step-form {
+  margin-bottom: 18px;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.claim-entry-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border: 1px solid #d1d5db;
+  font-size: 13px;
+}
+
+.claim-entry-table th,
+.claim-entry-table td {
+  min-width: 92px;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  vertical-align: middle;
+}
+
+.claim-entry-table th {
+  color: #333;
+  font-weight: 600;
+  text-align: left;
+  background: #f8fafc;
+}
+
+.table-input {
+  width: 100%;
+  min-height: 34px;
+  padding: 6px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  color: #333;
+  font: inherit;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.table-input:focus {
+  border-color: #f58220;
+  outline: 2px solid rgba(245, 130, 32, 0.2);
+}
+
+.allocation-step-form {
+  padding: 18px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.allocation-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.allocation-table {
+  width: 100%;
+  min-width: 820px;
+  border-collapse: collapse;
+  border: 1px solid #d1d5db;
+  font-size: 13px;
+}
+
+.allocation-table th,
+.allocation-table td {
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  color: #333;
+  vertical-align: middle;
+}
+
+.allocation-table thead th,
+.allocation-summary-row th {
+  font-weight: 700;
+  text-align: left;
+  background: #f8fafc;
+}
+
+.allocation-table th:first-child,
+.allocation-table td:first-child {
+  width: 110px;
+  text-align: center;
+}
+
+.allocation-table th:nth-child(2),
+.allocation-table td:nth-child(2),
+.allocation-table th:nth-child(4),
+.allocation-table td:nth-child(4) {
+  width: 120px;
+}
+
+.allocation-table th:last-child,
+.allocation-table td:last-child {
+  width: 96px;
+  text-align: center;
+}
+
+.allocation-table th:nth-last-child(2),
+.allocation-table td:nth-last-child(2) {
+  width: 160px;
+  text-align: right;
+}
+
+.allocation-action-cell button {
+  min-width: 64px;
+}
+
+.checkbox-cell input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.amount-input {
+  text-align: right;
+}
+
+.persal-select {
+  cursor: pointer;
+}
+
+.allocation-summary-row td {
+  font-weight: 600;
+  background: #fff;
+}
+
+.allocation-total-row th,
+.allocation-total-row td {
+  color: #fff;
+  background: #4a4a4a;
+}
+
 @media (max-width: 900px) {
   .claim-details-shell {
     grid-template-columns: 1fr;
