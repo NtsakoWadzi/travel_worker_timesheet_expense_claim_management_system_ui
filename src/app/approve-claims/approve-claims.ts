@@ -375,6 +375,18 @@ export class ApproveClaims implements OnInit {
     return `R ${(value || 0).toFixed(2)}`;
   }
 
+  getCapturedBy(claim: Claim): string {
+    return claim.capturedBy || claim.userName || '-';
+  }
+
+  getAdvanceTaken(claim: Claim): number {
+    return Number(claim.advanceTaken || 0);
+  }
+
+  getClaimAmount(claim: Claim): number {
+    return Number(claim.amount ?? claim.total_amount ?? 0);
+  }
+
   getClaimTrackKey(claim: Claim): string {
     return String(claim.claimId || claim.claimReference || claim.claimDate || claim.ClaimDate);
   }

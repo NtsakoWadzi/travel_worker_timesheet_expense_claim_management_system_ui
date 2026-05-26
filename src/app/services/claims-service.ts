@@ -201,6 +201,38 @@ export class ClaimsService {
     );
   }
 
+  submitClaimSummary(claim: Claim): Observable<Claim> {
+    const payload = {
+      claimId: claim.claimId,
+      userId: claim.userId,
+      claimDate: claim.claimDate || claim.ClaimDate,
+      claimReference: claim.claimReference,
+      capturedBy: claim.capturedBy || claim.userName,
+      dateCaptured: claim.dateCaptured || claim.claimDate || claim.ClaimDate,
+      advanceTaken: Number(claim.advanceTaken || 0),
+      amount: Number(claim.amount ?? claim.total_amount ?? 0),
+      total_amount: Number(claim.total_amount ?? claim.amount ?? 0),
+      categories: Array.isArray(claim.categories) ? claim.categories.join(', ') : claim.categories,
+      status: typeof claim.status === 'string' ? claim.status : 'Submitted',
+    };
+
+    return this.http.post<Claim>(`${this.baseUrl}/claims`, payload, {
+      headers: this.getAuthHeaders(),
+    }).pipe(
+      tap((savedClaim) => {
+        this.saveLocalSubmittedClaim({
+          ...claim,
+          ...savedClaim,
+          categories: savedClaim.categories || claim.categories,
+          claimImages: [],
+          claimDetails: claim.claimDetails || [],
+          timesheetDetails: claim.timesheetDetails || [],
+          localSubmitted: true,
+        });
+      })
+    );
+  }
+
   updateLocalSubmittedClaimStatus(claim: Claim, status: string, managerMessage = ''): Claim {
     const updatedClaim: Claim = {
       ...claim,
@@ -229,6 +261,19 @@ export class ClaimsService {
       arrivalTime: claim.arrivalTime,
       timeNumberOfDays: claim.timeNumberOfDays,
       numberOfHours: claim.numberOfHours,
+      privateMotorClaimedBy: claim.privateMotorClaimedBy,
+      privateMotorDepartmentOf: claim.privateMotorDepartmentOf,
+      privateMotorRank: claim.privateMotorRank,
+      privateMotorAddress: claim.privateMotorAddress,
+      privateMotorMonth: claim.privateMotorMonth,
+      privateMotorAccountClaimNo: claim.privateMotorAccountClaimNo,
+      privateMotorHeadquarters: claim.privateMotorHeadquarters,
+      privateMotorMakeAndModel: claim.privateMotorMakeAndModel,
+      privateMotorCategory: claim.privateMotorCategory,
+      privateMotorYearOfManufacture: claim.privateMotorYearOfManufacture,
+      privateMotorVehicleType: claim.privateMotorVehicleType,
+      privateMotorRegistrationNumber: claim.privateMotorRegistrationNumber,
+      privateMotorEngineSweptVolumeGroup: claim.privateMotorEngineSweptVolumeGroup,
     };
 
     formData.append(
@@ -236,6 +281,10 @@ export class ClaimsService {
       new Blob([JSON.stringify(claimPayload)], { type: 'application/json' })
     );
     formData.append('details', JSON.stringify(claim.claimDetails || []));
+    formData.append('documentMetadata', JSON.stringify((claim.claimImages as any[]).map((fileHandle) => ({
+      fileName: fileHandle.file?.name,
+      documentType: fileHandle.documentType,
+    }))));
 
     (claim.claimImages as any[]).forEach((fileHandle) => {
       formData.append('files', fileHandle.file, fileHandle.file.name);
@@ -457,7 +506,11 @@ export class ClaimsService {
   }
 
   private getLocalManagerClaims(): Claim[] {
-    const submittedClaims = this.getLocalSubmittedClaims();
+    const draftClaim = this.getLatestSubsistenceTravelDraftClaim();
+    const submittedClaims = this.mergeManagerClaims(
+      this.getLocalSubmittedClaims(),
+      draftClaim ? [draftClaim] : []
+    );
     const pendingReviews = this.getPendingClaimReviews().map((claim) => ({
       ClaimDate: claim.ClaimDate || new Date(),
       claimDate: claim.claimDate || claim.ClaimDate || new Date().toISOString(),
@@ -469,6 +522,51 @@ export class ClaimsService {
     } as Claim));
 
     return this.sortClaimsBySubmittedDate(this.mergeManagerClaims(submittedClaims, pendingReviews));
+  }
+
+  private getLatestSubsistenceTravelDraftClaim(): Claim | undefined {
+    const draft = this.getSubsistenceTravelClaimFormDraft();
+    if (!draft?.claimNumber) {
+      return undefined;
+    }
+
+    const dateCaptured = draft.dateCaptured || new Date().toISOString();
+
+    return {
+      claimId: this.getStableLocalClaimId(draft.claimNumber, dateCaptured),
+      claimReference: draft.claimNumber,
+      capturedBy: draft.capturedBy,
+      dateCaptured,
+      ClaimDate: new Date(dateCaptured),
+      claimDate: dateCaptured,
+      userName: draft.capturedBy,
+      categories: ['Subsistence and Travel'],
+      status: 'Submitted',
+      advanceTaken: this.parseMoney(draft.advanceTaken),
+      amount: this.parseMoney(draft.amount),
+      total_amount: this.parseMoney(draft.amount),
+      claimImages: [],
+      claimDetails: [],
+      timesheetDetails: [],
+      localSubmitted: true,
+    };
+  }
+
+  private getStableLocalClaimId(claimReference: string, dateValue: Date | string): number {
+    const timestamp = new Date(dateValue).getTime();
+    if (!Number.isNaN(timestamp)) {
+      return timestamp;
+    }
+
+    return Number(String(claimReference).replace(/\D/g, '').slice(0, 13)) || Date.now();
+  }
+
+  private parseMoney(value: string | number | undefined): number {
+    if (typeof value === 'number') {
+      return value;
+    }
+
+    return Number(String(value || '0').replace(/[^\d.-]/g, '')) || 0;
   }
 
   private mergeManagerClaims(backendClaims: Claim[], localClaims: Claim[]): Claim[] {

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
-import { finalize, timeout } from 'rxjs/operators';
+import { timeout } from 'rxjs/operators';
 import { AuthService } from '../services/auth';
 import { ClaimsService, PrivateMotorJourneyDraft } from '../services/claims-service';
 import { Claim, ClaimDetail } from '../Model/claim.model';
@@ -45,6 +45,11 @@ export class DetailsOfJourneyComponent {
   errorMessage = '';
   journeyDocuments: JourneyDocument[] = [];
   requiredDocumentTypes: JourneyDocument['type'][] = ['Google Maps proof', 'Vehicle ownership', 'License'];
+  journeyDocumentsByType: Record<JourneyDocument['type'], JourneyDocument[]> = {
+    'Google Maps proof': [],
+    'Vehicle ownership': [],
+    License: [],
+  };
 
   constructor(
     private router: Router,
@@ -72,24 +77,23 @@ export class DetailsOfJourneyComponent {
 
   submitPrivateMotorClaim(): void {
     this.saveJourneyDraft();
-    this.errorMessage = '';
-    this.successMessage = '';
+    this.setStatusMessages('', '');
 
     const privateMotorDraft = this.claimsService.getPrivateMotorDraft();
     if (!privateMotorDraft) {
-      this.errorMessage = 'Please complete the private owned vehicle form before submitting.';
+      this.setStatusMessages('', 'Please complete the private owned vehicle form before submitting.');
       return;
     }
 
     const validRows = this.journeyRows.filter((row) => row.date || row.reason || row.claimableKm || row.totalTraveled);
     if (!validRows.length) {
-      this.errorMessage = 'Please complete at least one journey row before submitting.';
+      this.setStatusMessages('', 'Please complete at least one journey row before submitting.');
       return;
     }
 
     const missingDocument = this.requiredDocumentTypes.find((type) => this.getJourneyDocuments(type).length === 0);
     if (missingDocument) {
-      this.errorMessage = `Please upload ${missingDocument} before submitting.`;
+      this.setStatusMessages('', `Please upload ${missingDocument} before submitting.`);
       return;
     }
 
@@ -111,31 +115,46 @@ export class DetailsOfJourneyComponent {
       userName: user?.userName || this.employeeName,
       categories: ['Private Motor', 'Distance Travelled'],
       status: 'Submitted',
+      privateMotorClaimedBy: privateMotorDraft.claimedBy,
+      privateMotorDepartmentOf: privateMotorDraft.departmentOf,
+      privateMotorRank: privateMotorDraft.rank,
+      privateMotorAddress: privateMotorDraft.address,
+      privateMotorMonth: privateMotorDraft.month,
+      privateMotorAccountClaimNo: privateMotorDraft.accountClaimNo,
+      privateMotorHeadquarters: privateMotorDraft.headquarters,
+      privateMotorMakeAndModel: privateMotorDraft.makeAndModel,
+      privateMotorCategory: privateMotorDraft.category,
+      privateMotorYearOfManufacture: privateMotorDraft.yearOfManufacture,
+      privateMotorVehicleType: privateMotorDraft.vehicleType,
+      privateMotorRegistrationNumber: privateMotorDraft.registrationNumber,
+      privateMotorEngineSweptVolumeGroup: privateMotorDraft.engineSweptVolumeGroup,
       claimImages: [
         ...(existingDraft?.claimImages || []),
         ...this.journeyDocuments.map((document) => ({
           file: document.file,
           url: document.url as any,
+          documentType: document.type,
         })),
       ],
       claimDetails: this.createPrivateMotorClaimDetails(privateMotorDraft, validRows),
     };
 
     this.isSubmitting = true;
-    this.successMessage = 'Saving private motor claim to the database...';
+    this.setStatusMessages('Saving private motor claim to the database...', '');
     this.claimsService.submitClaim(claim).pipe(
-      timeout(30000),
-      finalize(() => {
-        this.isSubmitting = false;
-      })
+      timeout(30000)
     ).subscribe({
-      next: (savedClaim) => {
-        this.successMessage = `Private motor claim saved successfully and sent to the supervisor for authorization. Reference: ${savedClaim.claimReference || claimReference}`;
-        this.resetPrivateMotorFlow();
+      next: () => {
+        window.setTimeout(() => {
+          this.clearPrivateMotorDrafts();
+          this.router.navigate(['/claim-status']);
+        });
       },
       error: (error) => {
-        this.successMessage = '';
-        this.errorMessage = 'Private motor claim could not be saved to the database. Please confirm the backend is running and try again.';
+        window.setTimeout(() => {
+          this.isSubmitting = false;
+          this.setStatusMessages('', 'Private motor claim could not be saved to the database. Please confirm the backend is running and try again.');
+        });
         console.error(error);
       },
     });
@@ -152,12 +171,13 @@ export class DetailsOfJourneyComponent {
   }
 
   getJourneyDocuments(type: JourneyDocument['type']): JourneyDocument[] {
-    return this.journeyDocuments.filter((document) => document.type === type);
+    return this.journeyDocumentsByType[type];
   }
 
   removeJourneyDocument(document: JourneyDocument): void {
     URL.revokeObjectURL(document.url);
     this.journeyDocuments = this.journeyDocuments.filter((item) => item !== document);
+    this.groupJourneyDocumentsByType();
   }
 
   goToClaimDetails(): void {
@@ -192,52 +212,47 @@ export class DetailsOfJourneyComponent {
   }
 
   private createPrivateMotorClaimDetails(privateMotorDraft: any, rows: JourneyRow[]): ClaimDetail[] {
-    const vehicleDescription = [
-      `Claimed by: ${privateMotorDraft.claimedBy || '-'}`,
-      `Department: ${privateMotorDraft.departmentOf || '-'}`,
-      `Rank: ${privateMotorDraft.rank || '-'}`,
-      `Vehicle: ${privateMotorDraft.makeAndModel || '-'}`,
-      `Registration: ${privateMotorDraft.registrationNumber || '-'}`,
-      `Engine group: ${privateMotorDraft.engineSweptVolumeGroup || '-'}`,
-    ].join(' | ');
-
     return rows.map((row, index) => ({
       category: 'Distance Travelled',
       detailType: 'Private Motor',
-      description: [
-        vehicleDescription,
-        `Journey ${index + 1}: ${row.departureFrom || '-'} to ${row.arrivalAt || '-'}`,
-        `Date: ${row.date || '-'}`,
-        `Reason: ${row.reason || '-'}`,
-        `Departure: ${row.departureTime || '-'}`,
-        `Arrival: ${row.arrivalTime || '-'}`,
-        `Home to destination km: ${row.homeToDestinationKm || 0}`,
-        `Office to destination km: ${row.officeToDestinationKm || 0}`,
-        `Speedometer: ${row.speedometerStart || 0} - ${row.speedometerEnd || 0}`,
-      ].join(' | '),
+      description: `Private motor journey ${index + 1}: ${row.departureFrom || '-'} to ${row.arrivalAt || '-'}`,
       kilometers: Number(row.claimableKm || row.totalTraveled || 0),
       vehicleType: privateMotorDraft.category || privateMotorDraft.vehicleType || 'Private Motor',
       engineSizeCc: Number(String(privateMotorDraft.engineSweptVolumeGroup || '').replace(/\D/g, '')) || undefined,
+      journeyDate: row.date,
+      journeyReason: row.reason,
+      homeToDestinationKm: Number(row.homeToDestinationKm || 0),
+      officeToDestinationKm: Number(row.officeToDestinationKm || 0),
+      claimableKm: Number(row.claimableKm || 0),
+      departureFrom: row.departureFrom,
+      journeyDepartureTime: row.departureTime,
+      arrivalAt: row.arrivalAt,
+      journeyArrivalTime: row.arrivalTime,
+      speedometerStart: Number(row.speedometerStart || 0),
+      speedometerEnd: Number(row.speedometerEnd || 0),
+      totalTraveled: Number(row.totalTraveled || 0),
       amount: 0,
     }));
   }
 
-  private resetPrivateMotorFlow(): void {
-    this.journeyDocuments.forEach((document) => URL.revokeObjectURL(document.url));
+  private setStatusMessages(successMessage: string, errorMessage: string): void {
+    this.successMessage = successMessage;
+    this.errorMessage = errorMessage;
+  }
+
+  private clearPrivateMotorDrafts(): void {
     this.claimsService.clearClaimDraft();
     this.claimsService.clearTimesheetDraft();
     this.claimsService.clearPrivateMotorDrafts();
-    this.journeyRows = [this.createJourneyRow()];
-    this.journeyDocuments = [];
   }
 
   private addJourneyDocument(type: JourneyDocument['type'], file: File): void {
     if (!this.isAllowedDocument(file)) {
-      this.errorMessage = 'Only image and PDF documents are allowed.';
+      this.setStatusMessages('', 'Only image and PDF documents are allowed.');
       return;
     }
 
-    this.errorMessage = '';
+    this.setStatusMessages(this.successMessage, '');
     this.journeyDocuments = [
       ...this.journeyDocuments,
       {
@@ -248,6 +263,15 @@ export class DetailsOfJourneyComponent {
         isImage: file.type.startsWith('image/'),
       },
     ];
+    this.groupJourneyDocumentsByType();
+  }
+
+  private groupJourneyDocumentsByType(): void {
+    this.journeyDocumentsByType = {
+      'Google Maps proof': this.journeyDocuments.filter((document) => document.type === 'Google Maps proof'),
+      'Vehicle ownership': this.journeyDocuments.filter((document) => document.type === 'Vehicle ownership'),
+      License: this.journeyDocuments.filter((document) => document.type === 'License'),
+    };
   }
 
   private isAllowedDocument(file: File): boolean {

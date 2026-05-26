@@ -10,6 +10,10 @@ export interface Claim{
     status?: boolean | string;
     claimId?: number;
     claimReference?: string;
+    capturedBy?: string;
+    dateCaptured?: Date | string;
+    advanceTaken?: number;
+    amount?: number;
     localSubmitted?: boolean;
     managerId?: number;
     managerMessage?: string;
@@ -30,6 +34,19 @@ export interface Claim{
     arrivalTime?: string;
     timeNumberOfDays?: number;
     numberOfHours?: number;
+    privateMotorClaimedBy?: string;
+    privateMotorDepartmentOf?: string;
+    privateMotorRank?: string;
+    privateMotorAddress?: string;
+    privateMotorMonth?: string;
+    privateMotorAccountClaimNo?: string;
+    privateMotorHeadquarters?: string;
+    privateMotorMakeAndModel?: string;
+    privateMotorCategory?: string;
+    privateMotorYearOfManufacture?: string;
+    privateMotorVehicleType?: string;
+    privateMotorRegistrationNumber?: string;
+    privateMotorEngineSweptVolumeGroup?: string;
     claimDetails?: ClaimDetail[];
     timesheetDetails?: ClaimTimesheet[];
     bankDetails?: BankDetails;
@@ -60,6 +77,7 @@ export interface ClaimImageResponse {
     imageId: number;
     fileName: string;
     contentType?: string;
+    documentType?: string;
     imageUrl: string;
 }
 
@@ -84,6 +102,18 @@ export interface ClaimDetail {
     kilometers?: number;
     vehicleType?: 'Petrol' | 'Diesel' | string;
     engineSizeCc?: number;
+    journeyDate?: string;
+    journeyReason?: string;
+    homeToDestinationKm?: number;
+    officeToDestinationKm?: number;
+    claimableKm?: number;
+    departureFrom?: string;
+    journeyDepartureTime?: string;
+    arrivalAt?: string;
+    journeyArrivalTime?: string;
+    speedometerStart?: number;
+    speedometerEnd?: number;
+    totalTraveled?: number;
     receiptTime?: string;
     amount?: number;
     allowedAmount?: number;

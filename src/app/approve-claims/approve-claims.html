@@ -63,10 +63,11 @@
     @if (claims.length > 0) {
       <section class="claims-table">
         <div class="table-row table-head">
-          <span>Claim Reference</span>
-          <span>User Name</span>
-          <span>Claim Date</span>
-          <span>Categories</span>
+          <span>Claim Number</span>
+          <span>Captured By</span>
+          <span>Date Captured</span>
+          <span>Advance Taken</span>
+          <span>Amount</span>
           <span>Status</span>
           <span>Review</span>
           <span>Calculate</span>
@@ -75,9 +76,10 @@
         @for (claim of claims; track getClaimTrackKey(claim)) {
           <div class="table-row">
             <span>{{ claim.claimReference || '-' }}</span>
-            <span>{{ claim.userName || '-' }}</span>
-            <span>{{ formatDate(claim.claimDate || claim.ClaimDate) }}</span>
-            <span>{{ getCategoryLabel(claim.categories) }}</span>
+            <span>{{ getCapturedBy(claim) }}</span>
+            <span>{{ formatDate(claim.dateCaptured || claim.claimDate || claim.ClaimDate) }}</span>
+            <span>{{ formatCurrency(getAdvanceTaken(claim)) }}</span>
+            <span>{{ formatCurrency(getClaimAmount(claim)) }}</span>
             <span class="status">{{ claim.status || 'Submitted' }}</span>
             <span class="actions">
               <button type="button" mat-button color="primary" (click)="viewClaim(claim)">View Claims</button>
@@ -117,8 +119,10 @@
             <h4>Claim</h4>
             <div class="claim-review-summary">
               <span><strong>Reference:</strong> {{ selectedClaim.claimReference || selectedClaim.claimId || '-' }}</span>
-              <span><strong>Employee:</strong> {{ selectedClaim.userName || '-' }}</span>
-              <span><strong>Date:</strong> {{ formatDate(selectedClaim.claimDate || selectedClaim.ClaimDate) }}</span>
+              <span><strong>Captured by:</strong> {{ getCapturedBy(selectedClaim) }}</span>
+              <span><strong>Date captured:</strong> {{ formatDate(selectedClaim.dateCaptured || selectedClaim.claimDate || selectedClaim.ClaimDate) }}</span>
+              <span><strong>Advance taken:</strong> {{ formatCurrency(getAdvanceTaken(selectedClaim)) }}</span>
+              <span><strong>Amount:</strong> {{ formatCurrency(getClaimAmount(selectedClaim)) }}</span>
               <span><strong>Categories:</strong> {{ getCategoryLabel(selectedClaim.categories) }}</span>
               <span><strong>Status:</strong> {{ selectedClaim.status || 'Submitted' }}</span>
             </div>

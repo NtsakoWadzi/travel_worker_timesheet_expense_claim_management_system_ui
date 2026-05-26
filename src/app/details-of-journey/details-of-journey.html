@@ -41,12 +41,8 @@
       </div>
     </header>
 
-    @if (successMessage) {
-      <p class="success-message">{{ successMessage }}</p>
-    }
-    @if (errorMessage) {
-      <p class="error-message">{{ errorMessage }}</p>
-    }
+    <p class="success-message">{{ successMessage }}</p>
+    <p class="error-message">{{ errorMessage }}</p>
 
     <mat-stepper #journeyStepper class="journey-stepper" orientation="horizontal" [linear]="false">
       <mat-step label="Journey & Comparison">

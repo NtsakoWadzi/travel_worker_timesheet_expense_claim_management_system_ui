@@ -351,7 +351,11 @@ export class ClaimDetailsComponent {
     }
 
     const claimNumber = this.generateClaimNumber();
-    const claimForSubmission = this.createSubmittedClaim(claimNumber);
+    const capturedBy = this.getCapturedByName();
+    const submittedAt = new Date();
+    const advanceTaken = this.lessAdvanceSelected ? Number(this.lessAdvanceST || 0) : 0;
+    const allocationTotal = this.getAllocationTotal();
+    const claimForSubmission = this.createSubmittedClaim(claimNumber, capturedBy, submittedAt, advanceTaken, allocationTotal);
     this.isSubmittingClaim = true;
     this.allocationValidationMessage = '';
     this.allocationSuccessMessage = '';
@@ -359,10 +363,10 @@ export class ClaimDetailsComponent {
 
     this.claimsService.saveSubsistenceTravelClaimFormDraft({
       claimNumber,
-      capturedBy: this.getCapturedByName(),
-      dateCaptured: this.getDateInputValue(new Date()),
-      advanceTaken: this.formatMoney(this.lessAdvanceST || 0),
-      amount: this.formatMoney(this.getAllocationTotal()),
+      capturedBy,
+      dateCaptured: this.getDateInputValue(submittedAt),
+      advanceTaken: this.formatCurrency(advanceTaken),
+      amount: this.formatCurrency(allocationTotal),
     });
 
     this.claimsService.submitClaim(claimForSubmission).subscribe({
@@ -579,9 +583,14 @@ export class ClaimDetailsComponent {
     return value !== undefined && Number(value) >= 0;
   }
 
-  private createSubmittedClaim(claimNumber: string): Claim {
+  private createSubmittedClaim(
+    claimNumber: string,
+    capturedBy: string,
+    submittedAt: Date,
+    advanceTaken: number,
+    allocationTotal: number
+  ): Claim {
     const user = this.authService.getUser();
-    const submittedAt = new Date();
     const selectedAllocations = this.allocationRows
       .filter((row) => row.selected)
       .map((row) => row.description);
@@ -589,13 +598,17 @@ export class ClaimDetailsComponent {
     return {
       ...this.claimDraft,
       claimReference: claimNumber,
+      capturedBy,
+      dateCaptured: submittedAt.toISOString(),
+      advanceTaken,
+      amount: allocationTotal,
       ClaimDate: submittedAt,
       claimDate: submittedAt.toISOString(),
       userId: user?.userId,
-      userName: user?.userName || this.getCapturedByName(),
+      userName: capturedBy || user?.userName,
       categories: selectedAllocations.length ? selectedAllocations : ['Subsistence and Travel'],
       status: 'Submitted',
-      total_amount: this.getAllocationTotal(),
+      total_amount: allocationTotal,
       claimDetails: this.allocationRows
         .filter((row) => row.selected)
         .map((row) => ({
@@ -725,6 +738,10 @@ export class ClaimDetailsComponent {
 
   private formatMoney(value: number): string {
     return (Number(value) || 0).toFixed(2);
+  }
+
+  private formatCurrency(value: number): string {
+    return `R ${this.formatMoney(value)}`;
   }
 
   private padDatePart(value: number): string {

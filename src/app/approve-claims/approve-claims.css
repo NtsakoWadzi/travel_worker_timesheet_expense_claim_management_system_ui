@@ -143,10 +143,10 @@
 
 .table-row {
   display: grid;
-  grid-template-columns: 140px 150px 130px minmax(180px, 1fr) 110px 130px 130px;
+  grid-template-columns: 130px 170px 130px 130px 130px 110px 130px 130px;
   gap: 12px;
   align-items: center;
-  min-width: 1120px;
+  min-width: 1180px;
   padding: 14px 16px;
   border-bottom: 1px solid #eee;
 }
