@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { forkJoin, of } from 'rxjs';
-import { catchError, finalize } from 'rxjs/operators';
-import { BankDetails, Claim, ClaimCalculationResponse, ClaimDetail, ClaimTimesheet } from '../Model/claim.model';
-import { AdminService } from '../services/admin-service';
+import { forkJoin } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { Claim, ClaimCalculationResponse, ClaimDetail } from '../Model/claim.model';
 import { AuthService } from '../services/auth';
 import { ClaimsService } from '../services/claims-service';
 
@@ -39,14 +38,11 @@ export class ApproveClaims implements OnInit {
   calculationDetails: ClaimDetail[] = [];
   calculationClaim?: Claim;
   selectedClaim?: Claim;
-  reviewTimesheets: ClaimTimesheet[] = [];
-  reviewBankDetails?: BankDetails;
   managerDecisionMessage = '';
   isUpdatingStatus = false;
 
   constructor(
     private claimsService: ClaimsService,
-    private adminService: AdminService,
     private authService: AuthService,
     private router: Router
   ) {
@@ -125,8 +121,6 @@ export class ApproveClaims implements OnInit {
     if (claim.localSubmitted) {
       this.closeReviewDialog();
       this.selectedClaim = claim;
-      this.reviewTimesheets = claim.timesheetDetails || [];
-      this.reviewBankDetails = claim.bankDetails;
       this.imagePreviews = [];
       this.imageDialogTitle = `Claim ${claim.claimReference || claim.claimId} review`;
       this.imageDialogMessage = 'No supporting images are attached to this claim.';
@@ -154,27 +148,11 @@ export class ApproveClaims implements OnInit {
     const reviewClaim = {
       ...claim,
       claimDetails: claim.claimDetails?.length ? claim.claimDetails : pendingReview?.claimDetails,
-      timesheetDetails: claim.timesheetDetails?.length ? claim.timesheetDetails : pendingReview?.timesheetDetails,
-      bankDetails: claim.bankDetails || pendingReview?.bankDetails,
     };
     this.selectedClaim = reviewClaim;
 
-    forkJoin({
-      images: this.claimsService.getClaimImages(claim.claimId).pipe(catchError(() => of([]))),
-      timesheets: this.adminService.getTimesheets().pipe(catchError(() => of([]))),
-      bankDetails: this.adminService.getBankDetails().pipe(catchError(() => of([]))),
-    }).subscribe({
-      next: ({ images, timesheets, bankDetails }) => {
-        this.reviewTimesheets = (reviewClaim.timesheetDetails?.length ? reviewClaim.timesheetDetails : timesheets || [])
-          .filter((timesheet) => Number(timesheet.userId) === Number(claim.userId));
-        this.reviewBankDetails = reviewClaim.bankDetails || (bankDetails || []).find((bank) => {
-          if (bank.claimId && claim.claimId) {
-            return Number(bank.claimId) === Number(claim.claimId);
-          }
-
-          return Number(bank.userId) === Number(claim.userId);
-        });
-
+    this.claimsService.getClaimImages(claim.claimId).subscribe({
+      next: (images) => {
         if (!images.length) {
           this.isLoadingImages = false;
           this.isLoadingReview = false;
@@ -231,8 +209,6 @@ export class ApproveClaims implements OnInit {
     this.isLoadingReview = false;
     this.isUpdatingStatus = false;
     this.selectedClaim = undefined;
-    this.reviewTimesheets = [];
-    this.reviewBankDetails = undefined;
     this.managerDecisionMessage = '';
   }
 
@@ -395,14 +371,6 @@ export class ApproveClaims implements OnInit {
     return Array.isArray(categories) ? categories.join(', ') : categories || '-';
   }
 
-  getTimesheetTotalHours(timesheet: ClaimTimesheet): string {
-    return `${Number(timesheet.total_hours || 0).toFixed(2)} h`;
-  }
-
-  getTimesheetTrackKey(timesheet: ClaimTimesheet): string {
-    return String(timesheet.timesheetId || `${timesheet.workDate}-${timesheet.startTime}-${timesheet.location}`);
-  }
-
   formatCurrency(value: number | undefined): string {
     return `R ${(value || 0).toFixed(2)}`;
   }
@@ -513,6 +481,11 @@ export class ApproveClaims implements OnInit {
   }
 
   goToApprovals(): void {
+    if (this.router.url === '/approve-claims') {
+      this.loadClaims();
+      return;
+    }
+
     this.router.navigate(['/approve-claims']);
   }
 

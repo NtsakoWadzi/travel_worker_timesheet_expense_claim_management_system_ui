@@ -66,15 +66,23 @@ export class AuthService {
 // Check if the current user has a "manager" role
 // auth.service.ts
 isManager(): boolean {
-  const user = this.getUser();
-  if (!user || !user.role || !Array.isArray(user.role)) return false;
-  return user.role.some((r: any) => r.roleName === 'Manager');
+  return this.hasRole('Manager');
 }
 
 isAdmin(): boolean {
+  return this.hasRole('Admin');
+}
+
+isFinance(): boolean {
+  return this.hasRole('Finance');
+}
+
+hasRole(roleName: string): boolean {
   const user = this.getUser();
   if (!user || !user.role || !Array.isArray(user.role)) return false;
-  return user.role.some((r: any) => r.roleName === 'Admin');
+
+  const targetRole = this.normalizeRoleName(roleName);
+  return user.role.some((role: any) => this.normalizeRoleName(this.getRoleName(role)) === targetRole);
 }
 
 getPrimaryRole(): string {
@@ -82,5 +90,14 @@ getPrimaryRole(): string {
   if (!user || !user.role || user.role.length === 0) return '';
   // Adjust based on your role structure
   return user.role[0]?.authority || user.role[0];
+}
+
+private getRoleName(role: any): string {
+  if (typeof role === 'string') return role;
+  return role?.roleName || role?.authority || role?.name || '';
+}
+
+private normalizeRoleName(roleName: string): string {
+  return String(roleName || '').replace(/^ROLE_/i, '').trim().toLowerCase();
 }
 }

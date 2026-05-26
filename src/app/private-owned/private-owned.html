@@ -48,37 +48,37 @@
             <tr>
               <th scope="row">CLAIMED BY</th>
               <td colspan="2">
-                <input class="table-input" type="text" aria-label="Claimed by" [(ngModel)]="claimedBy" />
+                <input class="table-input" type="text" aria-label="Claimed by" [(ngModel)]="claimedBy" (ngModelChange)="savePrivateMotorDraft()" />
               </td>
               <th scope="row">Department Of:</th>
               <td colspan="2">
-                <input class="table-input" type="text" aria-label="Department Of" [(ngModel)]="departmentOf" />
+                <input class="table-input" type="text" aria-label="Department Of" [(ngModel)]="departmentOf" (ngModelChange)="savePrivateMotorDraft()" />
               </td>
             </tr>
             <tr>
               <th scope="row">Rank</th>
               <td colspan="5">
-                <input class="table-input" type="text" aria-label="Rank" [(ngModel)]="rank" />
+                <input class="table-input" type="text" aria-label="Rank" [(ngModel)]="rank" (ngModelChange)="savePrivateMotorDraft()" />
               </td>
             </tr>
             <tr>
               <th scope="row" rowspan="2">Address<br>(to which warrant voucher must be sent)</th>
               <td rowspan="2">
-                <textarea class="table-input table-textarea" aria-label="Address" [(ngModel)]="address"></textarea>
+                <textarea class="table-input table-textarea" aria-label="Address" [(ngModel)]="address" (ngModelChange)="savePrivateMotorDraft()"></textarea>
               </td>
               <th scope="row">Month</th>
               <td>
-                <input class="table-input" type="text" aria-label="Month" [(ngModel)]="month" />
+                <input class="table-input" type="text" aria-label="Month" [(ngModel)]="month" (ngModelChange)="savePrivateMotorDraft()" />
               </td>
               <th scope="row" rowspan="2">/for Account Claim No</th>
               <td rowspan="2">
-                <input class="table-input" type="text" aria-label="Account Claim Number" [(ngModel)]="accountClaimNo" />
+                <input class="table-input" type="text" aria-label="Account Claim Number" [(ngModel)]="accountClaimNo" (ngModelChange)="savePrivateMotorDraft()" />
               </td>
             </tr>
             <tr>
               <th scope="row">Headquarters</th>
               <td>
-                <input class="table-input" type="text" aria-label="Headquarters" [(ngModel)]="headquarters" />
+                <input class="table-input" type="text" aria-label="Headquarters" [(ngModel)]="headquarters" (ngModelChange)="savePrivateMotorDraft()" />
               </td>
             </tr>
             <tr>
@@ -94,22 +94,22 @@
             </tr>
             <tr>
               <td>
-                <input class="table-input" type="text" aria-label="Make and Model" [(ngModel)]="makeAndModel" />
+                <input class="table-input" type="text" aria-label="Make and Model" [(ngModel)]="makeAndModel" (ngModelChange)="savePrivateMotorDraft()" />
               </td>
               <td>
-                <input class="table-input" type="text" aria-label="Category" [(ngModel)]="category" />
+                <input class="table-input" type="text" aria-label="Category" [(ngModel)]="category" (ngModelChange)="savePrivateMotorDraft()" />
               </td>
               <td>
-                <input class="table-input" type="text" aria-label="Year of manufacture" [(ngModel)]="yearOfManufacture" />
+                <input class="table-input" type="text" aria-label="Year of manufacture" [(ngModel)]="yearOfManufacture" (ngModelChange)="savePrivateMotorDraft()" />
               </td>
               <td>
-                <input class="table-input" type="text" aria-label="Vehicle type" [(ngModel)]="vehicleType" />
+                <input class="table-input" type="text" aria-label="Vehicle type" [(ngModel)]="vehicleType" (ngModelChange)="savePrivateMotorDraft()" />
               </td>
               <td>
-                <input class="table-input" type="text" aria-label="Registration number" [(ngModel)]="registrationNumber" />
+                <input class="table-input" type="text" aria-label="Registration number" [(ngModel)]="registrationNumber" (ngModelChange)="savePrivateMotorDraft()" />
               </td>
               <td>
-                <input class="table-input" type="text" aria-label="Engine swept volume group" [(ngModel)]="engineSweptVolumeGroup" />
+                <input class="table-input" type="text" aria-label="Engine swept volume group" [(ngModel)]="engineSweptVolumeGroup" (ngModelChange)="savePrivateMotorDraft()" />
               </td>
             </tr>
           </tbody>

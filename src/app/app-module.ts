@@ -28,22 +28,17 @@ import { App } from './app';
 
 import { LoginComponent } from './login/login.component';
 
-import { Timesheet } from './timesheet/timesheet';
-
 import { MatIconModule } from '@angular/material/icon';
 
 import { MatTimepickerModule } from '@angular/material/timepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
-import { Claims } from './claims/claims';
 import { MatListModule } from '@angular/material/list';
 import { DragDirective } from './drag/drag';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ApproveClaims } from './approve-claims/approve-claims';
 import { HttpClientModule } from '@angular/common/http';
 import { ClaimStatus } from './claim-status/claim-status';
-import { BankDetailsComponent } from './bank-details/bank-details';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard';
 import { ClaimDetailsComponent } from './claim-details/claim-details';
 import { GenerateReportsComponent } from './generate-reports/generate-reports';
 import { PayClaimsComponent } from './pay-claims/pay-claims';
@@ -54,7 +49,7 @@ import { AuthorisationComponent } from './authorisation/authorisation';
 import { SntWorkspaceComponent } from './snt-workspace/snt-workspace';
 
 @NgModule({
-  declarations: [App, LoginComponent, Timesheet, Claims, DragDirective, ApproveClaims, ClaimStatus, BankDetailsComponent, AdminDashboardComponent, ClaimDetailsComponent, GenerateReportsComponent, PayClaimsComponent, PrivateOwnedComponent, DetailsOfJourneyComponent, SubsistenceTravelClaimFormComponent, AuthorisationComponent, SntWorkspaceComponent],
+  declarations: [App, LoginComponent, DragDirective, ApproveClaims, ClaimStatus, ClaimDetailsComponent, GenerateReportsComponent, PayClaimsComponent, PrivateOwnedComponent, DetailsOfJourneyComponent, SubsistenceTravelClaimFormComponent, AuthorisationComponent, SntWorkspaceComponent],
 
   imports: [
     BrowserModule,

@@ -41,81 +41,174 @@
       </div>
     </header>
 
-    <section class="journey-panel">
-      <div class="journey-table-wrap">
-        <table class="journey-table" aria-label="Details of journey">
-          <thead>
-            <tr>
-              <th scope="colgroup" colspan="2">Details of Journey(point to point)*</th>
-              <th scope="colgroup" colspan="3">Comparision Kilometers(compulsory)</th>
-              <th scope="colgroup" colspan="4">Official Kilometers</th>
-              <th scope="colgroup" colspan="3">Kilometer Distance</th>
-              <th scope="col" rowspan="2">Action</th>
-            </tr>
-            <tr>
-              <th scope="col">1.Date</th>
-              <th scope="col">2.Reason</th>
-              <th scope="col">3.Total Kilometers Home to Destination</th>
-              <th scope="col">4.Total Kilometers DPW Office to destination</th>
-              <th scope="col">5.Claimable Kilometers</th>
-              <th scope="col">6.Departure from:</th>
-              <th scope="col">7.Departure Time:</th>
-              <th scope="col">8.Arrival at:</th>
-              <th scope="col">9.Arrival time:</th>
-              <th scope="col">10.Speedometer reading at commencement of Journey</th>
-              <th scope="col">11.Speedometer reading at end of journey</th>
-              <th scope="col">12.Total traveled</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (row of journeyRows; track $index) {
-            <tr>
-              <td>
-                <input class="table-input" type="date" aria-label="Date" [(ngModel)]="row.date" />
-              </td>
-              <td>
-                <input class="table-input" type="text" aria-label="Reason" [(ngModel)]="row.reason" />
-              </td>
-              <td>
-                <input class="table-input" type="number" min="0" aria-label="Total Kilometers Home to Destination" [(ngModel)]="row.homeToDestinationKm" />
-              </td>
-              <td>
-                <input class="table-input" type="number" min="0" aria-label="Total Kilometers DPW Office to destination" [(ngModel)]="row.officeToDestinationKm" />
-              </td>
-              <td>
-                <input class="table-input" type="number" min="0" aria-label="Claimable Kilometers" [(ngModel)]="row.claimableKm" />
-              </td>
-              <td>
-                <input class="table-input" type="text" aria-label="Departure from" [(ngModel)]="row.departureFrom" />
-              </td>
-              <td>
-                <input class="table-input" type="time" aria-label="Departure Time" [(ngModel)]="row.departureTime" />
-              </td>
-              <td>
-                <input class="table-input" type="text" aria-label="Arrival at" [(ngModel)]="row.arrivalAt" />
-              </td>
-              <td>
-                <input class="table-input" type="time" aria-label="Arrival time" [(ngModel)]="row.arrivalTime" />
-              </td>
-              <td>
-                <input class="table-input" type="number" min="0" aria-label="Speedometer reading at commencement of Journey" [(ngModel)]="row.speedometerStart" />
-              </td>
-              <td>
-                <input class="table-input" type="number" min="0" aria-label="Speedometer reading at end of journey" [(ngModel)]="row.speedometerEnd" />
-              </td>
-              <td>
-                <input class="table-input" type="number" min="0" aria-label="Total traveled" [(ngModel)]="row.totalTraveled" />
-              </td>
-              <td class="journey-action-cell">
-                <button type="button" mat-stroked-button color="primary" (click)="addJourneyRow()">
-                  Add
-                </button>
-              </td>
-            </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-    </section>
+    @if (successMessage) {
+      <p class="success-message">{{ successMessage }}</p>
+    }
+    @if (errorMessage) {
+      <p class="error-message">{{ errorMessage }}</p>
+    }
+
+    <mat-stepper #journeyStepper class="journey-stepper" orientation="horizontal" [linear]="false">
+      <mat-step label="Journey & Comparison">
+        <ng-template matStepContent>
+          <section class="journey-panel">
+            <div class="journey-table-wrap">
+              <table class="journey-table journey-step-one-table" aria-label="Journey and comparison kilometers">
+                <thead>
+                  <tr>
+                    <th scope="colgroup" colspan="2">Details of Journey(point to point)*</th>
+                    <th scope="colgroup" colspan="3">Comparision Kilometers(compulsory)</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">1.Date</th>
+                    <th scope="col">2.Reason</th>
+                    <th scope="col">3.Total Kilometers Home to Destination</th>
+                    <th scope="col">4.Total Kilometers DPW Office to destination</th>
+                    <th scope="col">5.Claimable Kilometers</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (row of journeyRows; track $index) {
+                    <tr>
+                      <td>
+                        <input class="table-input" type="date" aria-label="Date" [(ngModel)]="row.date" (ngModelChange)="saveJourneyDraft()" />
+                      </td>
+                      <td>
+                        <input class="table-input" type="text" aria-label="Reason" [(ngModel)]="row.reason" (ngModelChange)="saveJourneyDraft()" />
+                      </td>
+                      <td>
+                        <input class="table-input" type="number" min="0" aria-label="Total Kilometers Home to Destination" [(ngModel)]="row.homeToDestinationKm" (ngModelChange)="saveJourneyDraft()" />
+                      </td>
+                      <td>
+                        <input class="table-input" type="number" min="0" aria-label="Total Kilometers DPW Office to destination" [(ngModel)]="row.officeToDestinationKm" (ngModelChange)="saveJourneyDraft()" />
+                      </td>
+                      <td>
+                        <input class="table-input" type="number" min="0" aria-label="Claimable Kilometers" [(ngModel)]="row.claimableKm" (ngModelChange)="saveJourneyDraft()" />
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+            <div class="journey-actions">
+              <button type="button" mat-raised-button color="primary" matStepperNext>Next</button>
+            </div>
+          </section>
+        </ng-template>
+      </mat-step>
+
+      <mat-step label="Official Kilometers">
+        <ng-template matStepContent>
+          <section class="journey-panel">
+            <div class="journey-table-wrap">
+              <table class="journey-table journey-step-two-table" aria-label="Official kilometers and distance">
+                <thead>
+                  <tr>
+                    <th scope="colgroup" colspan="4">Official Kilometers</th>
+                    <th scope="colgroup" colspan="3">Kilometer Distance</th>
+                    <th scope="col" rowspan="2">Action</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">6.Departure from:</th>
+                    <th scope="col">7.Departure Time:</th>
+                    <th scope="col">8.Arrival at:</th>
+                    <th scope="col">9.Arrival time:</th>
+                    <th scope="col">10.Speedometer reading at commencement of Journey</th>
+                    <th scope="col">11.Speedometer reading at end of journey</th>
+                    <th scope="col">12.Total traveled</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (row of journeyRows; track $index) {
+                    <tr>
+                      <td>
+                        <input class="table-input" type="text" aria-label="Departure from" [(ngModel)]="row.departureFrom" (ngModelChange)="saveJourneyDraft()" />
+                      </td>
+                      <td>
+                        <input class="table-input" type="time" aria-label="Departure Time" [(ngModel)]="row.departureTime" (ngModelChange)="saveJourneyDraft()" />
+                      </td>
+                      <td>
+                        <input class="table-input" type="text" aria-label="Arrival at" [(ngModel)]="row.arrivalAt" (ngModelChange)="saveJourneyDraft()" />
+                      </td>
+                      <td>
+                        <input class="table-input" type="time" aria-label="Arrival time" [(ngModel)]="row.arrivalTime" (ngModelChange)="saveJourneyDraft()" />
+                      </td>
+                      <td>
+                        <input class="table-input" type="number" min="0" aria-label="Speedometer reading at commencement of Journey" [(ngModel)]="row.speedometerStart" (ngModelChange)="saveJourneyDraft()" />
+                      </td>
+                      <td>
+                        <input class="table-input" type="number" min="0" aria-label="Speedometer reading at end of journey" [(ngModel)]="row.speedometerEnd" (ngModelChange)="saveJourneyDraft()" />
+                      </td>
+                      <td>
+                        <input class="table-input" type="number" min="0" aria-label="Total traveled" [(ngModel)]="row.totalTraveled" (ngModelChange)="saveJourneyDraft()" />
+                      </td>
+                      <td class="journey-action-cell">
+                        <button type="button" mat-stroked-button color="primary" (click)="addJourneyRow()">
+                          Add
+                        </button>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+            <div class="journey-actions">
+              <button type="button" mat-stroked-button color="primary" matStepperPrevious>Back</button>
+              <button type="button" mat-raised-button color="primary" matStepperNext>Next</button>
+            </div>
+          </section>
+        </ng-template>
+      </mat-step>
+
+      <mat-step label="Documents">
+        <ng-template matStepContent>
+          <section class="journey-panel">
+            <div class="journey-document-grid">
+              @for (type of requiredDocumentTypes; track type) {
+                <section class="journey-document-card">
+                  <header>
+                    <h2>{{ type }}</h2>
+                    <label class="upload-button">
+                      <input type="file" accept="image/*,application/pdf" multiple (change)="onJourneyDocumentSelected(type, $event)" />
+                      Upload
+                    </label>
+                  </header>
+
+                  @if (getJourneyDocuments(type).length > 0) {
+                    <div class="journey-document-previews">
+                      @for (document of getJourneyDocuments(type); track document.url) {
+                        <figure class="journey-document-preview">
+                          @if (document.isImage) {
+                            <img [src]="document.url" [alt]="document.fileName" />
+                          } @else {
+                            <div class="pdf-preview">
+                              <mat-icon>picture_as_pdf</mat-icon>
+                              <span>PDF</span>
+                            </div>
+                          }
+                          <figcaption>{{ document.fileName }}</figcaption>
+                          <div class="document-actions">
+                            <a [href]="document.url" target="_blank" rel="noopener">View</a>
+                            <button type="button" mat-button color="warn" (click)="removeJourneyDocument(document)">Remove</button>
+                          </div>
+                        </figure>
+                      }
+                    </div>
+                  } @else {
+                    <p class="document-empty">No document uploaded yet.</p>
+                  }
+                </section>
+              }
+            </div>
+            <div class="journey-actions">
+              <button type="button" mat-stroked-button color="primary" matStepperPrevious>Back</button>
+              <button type="button" mat-raised-button color="primary" [disabled]="isSubmitting" (click)="submitPrivateMotorClaim()">
+                {{ isSubmitting ? 'Saving...' : 'Submit Private Motor Claim' }}
+              </button>
+            </div>
+          </section>
+        </ng-template>
+      </mat-step>
+    </mat-stepper>
   </main>
 </div>

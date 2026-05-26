@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth';
 import { ClaimsService } from '../services/claims-service';
 import { Claim } from '../Model/claim.model';
-import { Timesheet } from '../timesheet/timesheet';
 
 type ClaimDetailsStep = 'timesheet' | 'claims' | 'bank-details' | 'status';
 
@@ -22,6 +21,14 @@ interface AllocationOption {
   sarsCode: string;
 }
 
+interface UploadedDocument {
+  category: string;
+  file: File;
+  fileName: string;
+  url: string;
+  isImage: boolean;
+}
+
 @Component({
   selector: 'app-claim-details',
   standalone: false,
@@ -30,9 +37,18 @@ interface AllocationOption {
 })
 export class ClaimDetailsComponent {
   @ViewChild('claimStepper') claimStepper?: MatStepper;
-  @ViewChild('timesheetForm') timesheetForm?: Timesheet;
 
   employeeName = 'Employee';
+  personalParticulars = {
+    persalNumber: '',
+    initials: '',
+    surname: '',
+    department: '',
+    directorate: '',
+    region: '',
+    supervisor: '',
+    costCentre: '',
+  };
   claimDraft: Claim = {
     ClaimDate: new Date(),
     categories: [],
@@ -45,6 +61,21 @@ export class ClaimDetailsComponent {
   claimValidationMessage = '';
   allocationValidationMessage = '';
   allocationSuccessMessage = '';
+  selectedAllocationDescriptionTitle = '';
+  selectedAllocationDescriptionText = '';
+  isAllocationDescriptionDialogOpen = false;
+  selectedRank = '';
+  receiptUploads: UploadedDocument[] = [];
+  signatureFile?: UploadedDocument;
+  signatureDateTime = '';
+  isSubmittingClaim = false;
+  submissionSuccessMessage = '';
+  ranks = [
+    'SMS (Senior Management Service) official',
+    'Structured MMS official (Middle Management Service)',
+    'Non-structured MMS official',
+    'Other officials',
+  ];
   allocationOptions: AllocationOption[] = [
     { persalCode: '0436', description: 'T&S Allowance Not Exceeding Amount Set By SARS', sarsCode: '3705' },
     { persalCode: '0717', description: 'T&S Allowance Exceeding Amount Set By SARS', sarsCode: '3704' },
@@ -85,6 +116,7 @@ export class ClaimDetailsComponent {
       : user?.userName || 'Employee';
 
     this.claimDraft = this.claimsService.getClaimDraft() || this.claimDraft;
+    this.selectedRank = (this.claimDraft as any).rank || '';
   }
 
   selectStep(step: ClaimDetailsStep): void {
@@ -109,11 +141,27 @@ export class ClaimDetailsComponent {
   }
 
   continueToClaimStep(): void {
-    if (!this.timesheetForm?.validatePersonalParticulars()) {
+    if (!this.validatePersonalParticulars()) {
       return;
     }
 
     this.selectStep('claims');
+  }
+
+  validatePersonalParticulars(): boolean {
+    const missingFields: string[] = [];
+
+    if (!this.selectedRank) missingFields.push('rank');
+    if (!this.personalParticulars.persalNumber.trim()) missingFields.push('PERSAL number');
+    if (!this.personalParticulars.initials.trim()) missingFields.push('initials');
+    if (!this.personalParticulars.surname.trim()) missingFields.push('surname');
+    if (!this.personalParticulars.department.trim()) missingFields.push('department');
+
+    this.claimValidationMessage = missingFields.length
+      ? `Please complete ${missingFields.join(', ')}.`
+      : '';
+
+    return missingFields.length === 0;
   }
 
   continueToAllocationStep(): void {
@@ -122,6 +170,23 @@ export class ClaimDetailsComponent {
     }
 
     this.selectStep('bank-details');
+  }
+
+  continueToReceiptsStep(): void {
+    if (!this.validateAllocationStep()) {
+      return;
+    }
+
+    if (this.claimStepper) {
+      this.claimStepper.selectedIndex = 3;
+    }
+  }
+
+  continueToSignatureStep(): void {
+    if (this.claimStepper) {
+      this.signatureDateTime = this.signatureDateTime || new Date().toLocaleString();
+      this.claimStepper.selectedIndex = 4;
+    }
   }
 
   getAllocationSubTotal(): number {
@@ -140,6 +205,7 @@ export class ClaimDetailsComponent {
 
     row.description = option.description;
     row.sarsCode = option.sarsCode;
+    this.openAllocationDescription(option);
   }
 
   addAllocationRow(): void {
@@ -159,7 +225,52 @@ export class ClaimDetailsComponent {
     this.allocationRows = [...this.allocationRows, this.createAllocationRow()];
   }
 
+  closeAllocationDescriptionDialog(): void {
+    this.isAllocationDescriptionDialogOpen = false;
+  }
+
+  private openAllocationDescription(option: AllocationOption): void {
+    this.selectedAllocationDescriptionTitle = option.description;
+    this.selectedAllocationDescriptionText = this.getAllocationDescription(option);
+    this.isAllocationDescriptionDialogOpen = true;
+  }
+
+  private getAllocationDescription(option: AllocationOption): string {
+    const descriptions: Record<string, string> = {
+      '0436': 'Use this when the travel and subsistence allowance is within the SARS-approved limit.',
+      '0717': 'Use this when the travel and subsistence allowance is above the SARS-approved limit.',
+      '0462': 'Use this when other transport, such as Gautrain, was used during local official travel.',
+      '0463': 'Use this when other transport, such as Gautrain, was used during local official travel.',
+      '0497': 'Use this for road transport costs during local official travel.',
+      '0498': 'Use this for parking fees paid during local official travel.',
+      '0499': 'Use this for toll gate fees paid during official travel.',
+      '0469': 'Use this for claiming kilometers travelled using your own vehicle for local official travel.',
+      '0470': 'Use this for additional own-vehicle kilometer allowance where applicable.',
+      '0515': 'Use this for fuel costs related to local official travel.',
+      '0494': 'Use this when claiming actual accommodation and meal expenses for local travel.',
+      '0588': 'Use this for food and beverage expenses during local official travel.',
+      '0674': 'Use this for local air travel costs.',
+      '0514': 'Use this for travel document costs such as visas and passports.',
+      '0476': 'Use this for accommodation costs during foreign official travel.',
+      '0477': 'Use this for road transport costs during foreign official travel.',
+      '0473': 'Use this when overseas travel allowance is within the SARS-approved limit.',
+      '0444': 'Use this when overseas travel allowance is above the SARS-approved limit.',
+      '0500': 'Use this for airtime or mobile data costs related to official travel.',
+      '0501': 'Use this for foreign accommodation and meal expenses.',
+      '0589': 'Use this for food and beverage expenses during foreign official travel.',
+      '0464': 'Use this for parking expenses during foreign official travel.',
+      '0465': 'Use this for toll fees during foreign official travel.',
+      '0504': 'Use this for railway transport costs during foreign official travel.',
+      '0650': 'Use this for small extra costs during foreign official travel.',
+    };
+
+    return descriptions[option.persalCode] || 'No description is available for this allocation.';
+  }
+
   validateClaimStep(): boolean {
+    this.updateNumberOfDays();
+    this.updateNumberOfHours();
+
     const missingFields: string[] = [];
 
     if (!this.claimDraft.claimDescription?.trim()) {
@@ -234,7 +345,18 @@ export class ClaimDetailsComponent {
       return;
     }
 
+    if (!this.signatureFile) {
+      this.allocationValidationMessage = 'Please upload the applicant signature before submitting.';
+      return;
+    }
+
     const claimNumber = this.generateClaimNumber();
+    const claimForSubmission = this.createSubmittedClaim(claimNumber);
+    this.isSubmittingClaim = true;
+    this.allocationValidationMessage = '';
+    this.allocationSuccessMessage = '';
+    this.submissionSuccessMessage = '';
+
     this.claimsService.saveSubsistenceTravelClaimFormDraft({
       claimNumber,
       capturedBy: this.getCapturedByName(),
@@ -242,15 +364,102 @@ export class ClaimDetailsComponent {
       advanceTaken: this.formatMoney(this.lessAdvanceST || 0),
       amount: this.formatMoney(this.getAllocationTotal()),
     });
-    this.claimsService.saveLocalSubmittedClaim(this.createSubmittedClaim(claimNumber));
-    this.allocationSuccessMessage = 'Claim information submitted successfully.';
+
+    this.claimsService.submitClaim(claimForSubmission).subscribe({
+      next: (savedClaim) => {
+        this.isSubmittingClaim = false;
+        this.submissionSuccessMessage = `Claim saved successfully and sent to the supervisor for authorization. Reference: ${savedClaim.claimReference || claimNumber}`;
+        this.resetClaimFormAfterSubmission();
+      },
+      error: (error) => {
+        this.isSubmittingClaim = false;
+        this.allocationValidationMessage = 'Claim could not be saved to the database. Please confirm the backend is running and try again.';
+        console.error(error);
+      },
+    });
   }
 
   goToPrivateOwned(): void {
     this.router.navigate(['/private-owned']);
   }
 
+  onRankChanged(rank: string): void {
+    this.selectedRank = rank;
+    (this.claimDraft as any).rank = rank;
+    this.saveClaimDraft();
+  }
+
+  isPrivateMotorEligible(): boolean {
+    return [
+      'SMS (Senior Management Service) official',
+      'Structured MMS official (Middle Management Service)',
+    ].includes(this.selectedRank);
+  }
+
+  get selectedReceiptCategories(): string[] {
+    return Array.from(new Set(this.allocationRows
+      .filter((row) => row.selected && row.description)
+      .map((row) => row.description)));
+  }
+
+  getApplicantName(): string {
+    return this.getCapturedByName();
+  }
+
+  getReceiptUploads(category: string): UploadedDocument[] {
+    return this.receiptUploads.filter((receipt) => receipt.category === category);
+  }
+
+  onReceiptSelected(category: string, event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (!input.files?.length) {
+      return;
+    }
+
+    Array.from(input.files).forEach((file) => this.addReceiptFile(category, file));
+    input.value = '';
+  }
+
+  removeReceipt(receipt: UploadedDocument): void {
+    URL.revokeObjectURL(receipt.url);
+    this.receiptUploads = this.receiptUploads.filter((item) => item !== receipt);
+  }
+
+  onSignatureSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (!input.files?.length) {
+      return;
+    }
+
+    this.setSignatureFile(input.files[0]);
+    input.value = '';
+  }
+
+  onSignatureDragOver(event: DragEvent): void {
+    event.preventDefault();
+  }
+
+  onSignatureDropped(event: DragEvent): void {
+    event.preventDefault();
+    const file = event.dataTransfer?.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    this.setSignatureFile(file);
+  }
+
+  removeSignature(): void {
+    if (this.signatureFile) {
+      URL.revokeObjectURL(this.signatureFile.url);
+    }
+    this.signatureFile = undefined;
+  }
+
   saveClaimDraft(): void {
+    this.updateNumberOfDays();
+    this.updateNumberOfHours();
+
     const existingDraft = this.claimsService.getClaimDraft();
     this.claimsService.saveClaimDraft({
       ...existingDraft,
@@ -259,6 +468,7 @@ export class ClaimDetailsComponent {
       categories: existingDraft?.categories || this.claimDraft.categories || [],
       claimImages: existingDraft?.claimImages || this.claimDraft.claimImages || [],
       claimDetails: existingDraft?.claimDetails || this.claimDraft.claimDetails || [],
+      rank: this.selectedRank,
     });
   }
 
@@ -270,13 +480,94 @@ export class ClaimDetailsComponent {
     this.router.navigate(['/']);
   }
 
+  onClaimDateChanged(field: 'departureDate' | 'arrivalDateTime', value: string): void {
+    this.claimDraft[field] = value;
+    this.updateNumberOfDays();
+    this.saveClaimDraft();
+  }
+
+  onClaimTimeChanged(field: 'departureTime' | 'arrivalTime', value: string): void {
+    this.claimDraft[field] = this.getTimeInputValue(value);
+    this.updateNumberOfHours();
+    this.saveClaimDraft();
+  }
+
+  getTimeInputValue(value: string | undefined): string {
+    if (!value) {
+      return '';
+    }
+
+    const timeMatch = String(value).match(/(\d{1,2}):(\d{2})/);
+    if (!timeMatch) {
+      return '';
+    }
+
+    const hours = Math.min(Number(timeMatch[1]), 23);
+    const minutes = Math.min(Number(timeMatch[2]), 59);
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+  }
+
+  private updateNumberOfDays(): void {
+    const departureDate = this.getDateOnly(this.claimDraft.departureDate);
+    const arrivalDate = this.getDateOnly(this.claimDraft.arrivalDateTime);
+
+    if (!departureDate || !arrivalDate || arrivalDate < departureDate) {
+      this.claimDraft.dateNumberOfDays = undefined;
+      return;
+    }
+
+    const millisecondsPerDay = 24 * 60 * 60 * 1000;
+    this.claimDraft.dateNumberOfDays = Math.floor((arrivalDate.getTime() - departureDate.getTime()) / millisecondsPerDay) + 1;
+  }
+
+  private updateNumberOfHours(): void {
+    const departureMinutes = this.getMinutesFromTime(this.claimDraft.departureTime);
+    const arrivalMinutes = this.getMinutesFromTime(this.claimDraft.arrivalTime);
+
+    if (departureMinutes === undefined || arrivalMinutes === undefined) {
+      this.claimDraft.numberOfHours = undefined;
+      return;
+    }
+
+    const adjustedArrivalMinutes = arrivalMinutes >= departureMinutes
+      ? arrivalMinutes
+      : arrivalMinutes + (24 * 60);
+    this.claimDraft.numberOfHours = Number(((adjustedArrivalMinutes - departureMinutes) / 60).toFixed(2));
+  }
+
+  private getMinutesFromTime(value: string | undefined): number | undefined {
+    if (!value) {
+      return undefined;
+    }
+
+    const normalizedTime = this.getTimeInputValue(value);
+    const [hours, minutes] = normalizedTime.split(':').map(Number);
+    if (Number.isNaN(hours) || Number.isNaN(minutes)) {
+      return undefined;
+    }
+
+    return (hours * 60) + minutes;
+  }
+
+  private getDateOnly(value: string | undefined): Date | undefined {
+    if (!value) {
+      return undefined;
+    }
+
+    const [year, month, day] = value.split('-').map(Number);
+    if (!year || !month || !day) {
+      return undefined;
+    }
+
+    return new Date(year, month - 1, day);
+  }
+
   private createAllocationRow(): AllocationRow {
-    const option = this.allocationOptions[0];
     return {
       selected: false,
-      persalCode: option.persalCode,
-      description: option.description,
-      sarsCode: option.sarsCode,
+      persalCode: '',
+      description: '',
+      sarsCode: '',
     };
   }
 
@@ -297,7 +588,6 @@ export class ClaimDetailsComponent {
 
     return {
       ...this.claimDraft,
-      claimId: submittedAt.getTime(),
       claimReference: claimNumber,
       ClaimDate: submittedAt,
       claimDate: submittedAt.toISOString(),
@@ -306,7 +596,6 @@ export class ClaimDetailsComponent {
       categories: selectedAllocations.length ? selectedAllocations : ['Subsistence and Travel'],
       status: 'Submitted',
       total_amount: this.getAllocationTotal(),
-      claimImages: [],
       claimDetails: this.allocationRows
         .filter((row) => row.selected)
         .map((row) => ({
@@ -315,9 +604,87 @@ export class ClaimDetailsComponent {
           description: `SARS Code: ${row.sarsCode}`,
           amount: Number(row.amount || 0),
         })),
-      timesheetDetails: this.claimsService.getTimesheetDraft(),
-      localSubmitted: true,
+      claimImages: [
+        ...this.receiptUploads.map((receipt) => ({
+          file: receipt.file,
+          url: receipt.url as any,
+        })),
+        ...(this.signatureFile ? [{
+          file: this.signatureFile.file,
+          url: this.signatureFile.url as any,
+        }] : []),
+      ],
     };
+  }
+
+  private resetClaimFormAfterSubmission(): void {
+    this.receiptUploads.forEach((receipt) => URL.revokeObjectURL(receipt.url));
+    if (this.signatureFile) {
+      URL.revokeObjectURL(this.signatureFile.url);
+    }
+
+    this.claimsService.clearClaimDraft();
+    this.claimsService.clearTimesheetDraft();
+    this.claimDraft = {
+      ClaimDate: new Date(),
+      categories: [],
+      claimImages: [],
+      claimDetails: [],
+    };
+    this.lessAdvanceST = undefined;
+    this.lessAdvanceSelected = false;
+    this.persalTransaction = '';
+    this.selectedRank = '';
+    this.receiptUploads = [];
+    this.signatureFile = undefined;
+    this.signatureDateTime = '';
+    this.allocationRows = [this.createAllocationRow()];
+    this.claimValidationMessage = '';
+    this.allocationValidationMessage = '';
+
+    if (this.claimStepper) {
+      this.claimStepper.selectedIndex = 0;
+    }
+  }
+
+  private addReceiptFile(category: string, file: File): void {
+    if (!this.isAllowedDocument(file)) {
+      this.allocationValidationMessage = 'Only image and PDF receipts are allowed.';
+      return;
+    }
+
+    this.allocationValidationMessage = '';
+    this.receiptUploads = [
+      ...this.receiptUploads,
+      {
+        category,
+        file,
+        fileName: file.name,
+        url: URL.createObjectURL(file),
+        isImage: file.type.startsWith('image/'),
+      },
+    ];
+  }
+
+  private setSignatureFile(file: File): void {
+    if (!this.isAllowedDocument(file)) {
+      this.allocationValidationMessage = 'Only image and PDF signature files are allowed.';
+      return;
+    }
+
+    this.removeSignature();
+    this.signatureDateTime = new Date().toLocaleString();
+    this.signatureFile = {
+      category: 'Applicant signature',
+      file,
+      fileName: file.name,
+      url: URL.createObjectURL(file),
+      isImage: file.type.startsWith('image/'),
+    };
+  }
+
+  private isAllowedDocument(file: File): boolean {
+    return file.type.startsWith('image/') || file.type === 'application/pdf';
   }
 
   private generateClaimNumber(): string {

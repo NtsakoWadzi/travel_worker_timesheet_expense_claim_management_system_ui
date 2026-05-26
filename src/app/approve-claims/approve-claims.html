@@ -88,6 +88,11 @@
           </div>
         }
       </section>
+      <div class="submitted-claims-actions">
+        <button type="button" mat-raised-button color="primary" (click)="goToSubsistenceTravelForm()">
+          Authorize
+        </button>
+      </div>
     }
   </main>
 </div>
@@ -108,34 +113,6 @@
         }
 
         @if (!isLoadingReview && selectedClaim) {
-          <section class="review-section">
-            <h4>Timesheet</h4>
-            @if (reviewTimesheets.length > 0) {
-              <div class="review-table timesheet-review-table">
-                <div class="review-row review-head">
-                  <span>Date</span>
-                  <span>Start</span>
-                  <span>End</span>
-                  <span>Hours</span>
-                  <span>Location</span>
-                  <span>Description</span>
-                </div>
-                @for (timesheet of reviewTimesheets; track getTimesheetTrackKey(timesheet)) {
-                  <div class="review-row">
-                    <span>{{ formatDate(timesheet.workDate) }}</span>
-                    <span>{{ formatDate(timesheet.startTime) }}</span>
-                    <span>{{ formatDate(timesheet.endTime) }}</span>
-                    <span>{{ getTimesheetTotalHours(timesheet) }}</span>
-                    <span>{{ timesheet.location || '-' }}</span>
-                    <span>{{ timesheet.description || '-' }}</span>
-                  </div>
-                }
-              </div>
-            } @else {
-              <p class="review-empty">No timesheet rows were found for this employee.</p>
-            }
-          </section>
-
           <section class="review-section">
             <h4>Claim</h4>
             <div class="claim-review-summary">
@@ -195,19 +172,6 @@
             }
           </section>
 
-          <section class="review-section">
-            <h4>Bank Details</h4>
-            @if (reviewBankDetails) {
-              <div class="bank-detail">
-                <p><strong>Bank:</strong> {{ reviewBankDetails.bankName }}</p>
-                <p><strong>Account number:</strong> {{ reviewBankDetails.accountNumber }}</p>
-                <p><strong>Account type:</strong> {{ reviewBankDetails.accountType }}</p>
-              </div>
-            } @else {
-              <p class="review-empty">No bank details were found for this claim.</p>
-            }
-          </section>
-
           <section class="review-section decision-section">
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Message to employee</mat-label>
@@ -250,15 +214,6 @@
             <small>Total in rands</small>
             <strong>{{ formatCurrency(getCalculationTotal()) }}</strong>
           </div>
-
-          @if (calculation.bankDetails) {
-            <div class="calculation-detail bank-detail">
-              <strong>Bank Details</strong>
-              <p>Bank: {{ calculation.bankDetails.bankName }}</p>
-              <p>Account number: {{ calculation.bankDetails.accountNumber }}</p>
-              <p>Account type: {{ calculation.bankDetails.accountType }}</p>
-            </div>
-          }
 
           @for (detail of calculationDetails; track detail.claimDetailId || detail.category + detail.detailType) {
             <div class="calculation-detail">

@@ -137,6 +137,28 @@
   box-shadow: 0 18px 46px rgba(17, 24, 39, 0.12);
 }
 
+.journey-stepper {
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 18px 46px rgba(17, 24, 39, 0.12);
+}
+
+.journey-stepper ::ng-deep .mat-horizontal-content-container {
+  padding: 18px;
+  background: #f8fafc;
+}
+
+.journey-stepper ::ng-deep .mat-horizontal-stepper-header-container {
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.journey-stepper ::ng-deep .mat-step-icon-selected,
+.journey-stepper ::ng-deep .mat-step-icon-state-edit {
+  background-color: #f58220;
+}
+
 .journey-panel h2 {
   margin: 0 0 16px;
   color: #333;
@@ -154,6 +176,16 @@
   table-layout: fixed;
   border: 1px solid #d1d5db;
   font-size: 10px;
+}
+
+.journey-step-one-table {
+  min-width: 760px;
+  font-size: 12px;
+}
+
+.journey-step-two-table {
+  min-width: 980px;
+  font-size: 11px;
 }
 
 .journey-table th,
@@ -189,6 +221,136 @@
 .journey-action-cell button {
   min-width: 54px;
   padding: 0 8px;
+}
+
+.journey-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.success-message,
+.error-message {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  background: #fff;
+  border-radius: 6px;
+}
+
+.success-message {
+  color: #1b5e20;
+  border-left: 4px solid #1b5e20;
+}
+
+.error-message {
+  color: #b00020;
+  border-left: 4px solid #b00020;
+}
+
+.journey-document-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.journey-document-card {
+  padding: 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.journey-document-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.journey-document-card h2 {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.upload-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: #fff;
+  background: #f58220;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.upload-button input {
+  display: none;
+}
+
+.journey-document-previews {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.journey-document-preview {
+  margin: 0;
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.journey-document-preview img {
+  display: block;
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #f8fafc;
+}
+
+.pdf-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 120px;
+  color: #b00020;
+  background: #fff7f7;
+  border: 1px solid #f1caca;
+  border-radius: 6px;
+}
+
+.journey-document-preview figcaption {
+  margin-top: 8px;
+  color: #555;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.document-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.document-actions a {
+  color: #174ea6;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.document-empty {
+  margin: 0;
+  color: #666;
 }
 
 @media (max-width: 900px) {

@@ -1,92 +1,146 @@
 .snt-shell {
-  min-height: 100vh;
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
-  background: #f5f7fb;
-  color: #172033;
+  grid-template-columns: 260px minmax(0, 1fr);
+  min-height: 100vh;
+  background: #f3f4f6;
+  color: #333;
+  font-size: 15px;
 }
 
 .snt-sidebar {
-  background: #103b66;
-  color: #fff;
-  padding: 20px;
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 16px 16px 34px;
+  background: #4a4a4a;
+  color: #fff;
+  border-right: 4px solid #f58220;
 }
 
 .snt-brand,
-.snt-user {
+.snt-user,
+.snt-nav-item,
+.snt-logout {
   display: flex;
   align-items: center;
-  gap: 12px;
+}
+
+.snt-brand {
+  gap: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .snt-brand img {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   object-fit: contain;
-  background: #fff;
   border-radius: 6px;
+  background: #fff;
 }
 
 .snt-brand strong,
 .snt-user strong {
   display: block;
+  font-size: 16px;
+  line-height: 1.2;
 }
 
 .snt-brand span,
 .snt-user span {
   display: block;
-  font-size: 12px;
-  opacity: 0.78;
+  margin-top: 2px;
+  color: #e8e8e8;
+  font-size: 13px;
 }
 
 .snt-nav {
-  display: grid;
-  gap: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 14px;
 }
 
 .snt-nav-item,
 .snt-logout {
-  color: #fff;
-  text-decoration: none;
+  gap: 9px;
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 10px;
   border: 0;
-  border-radius: 8px;
+  border-radius: 6px;
   background: transparent;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  cursor: pointer;
+  color: #f5f5f5;
   font: inherit;
+  font-size: 14px;
+  line-height: 1.15;
   text-align: left;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-.snt-nav-item.active,
+.snt-nav-item mat-icon,
+.snt-logout mat-icon {
+  flex: 0 0 auto;
+  width: 21px;
+  height: 21px;
+  font-size: 21px;
+}
+
+.snt-nav-item span,
+.snt-logout span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .snt-nav-item:hover,
+.snt-nav-item.active,
 .snt-logout:hover {
-  background: rgba(255, 255, 255, 0.14);
+  background: #f58220;
+  color: #fff;
+}
+
+.snt-logout {
+  color: #ffe0c2;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  border: 1px solid rgba(245, 130, 32, 0.55);
+  background: rgba(245, 130, 32, 0.14);
+  font-weight: 700;
 }
 
 .snt-user {
+  gap: 8px;
+  min-width: 0;
   margin-top: auto;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .snt-main {
-  padding: 28px;
+  width: calc(100% - 48px);
+  max-width: 1380px;
+  margin: 14px auto;
   display: grid;
-  gap: 20px;
+  gap: 12px;
   align-content: start;
 }
 
 .snt-header {
   display: flex;
   justify-content: space-between;
-  gap: 18px;
-  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 18px;
+  color: #fff;
+  background: #4a4a4a;
+  border-top: 4px solid #f58220;
+  border-radius: 8px;
+  box-shadow: 0 14px 32px rgba(17, 24, 39, 0.12);
 }
 
 .snt-header h1,
@@ -94,38 +148,45 @@
   margin: 0;
 }
 
+.snt-header h1 {
+  font-size: 24px;
+  letter-spacing: 0;
+}
+
 .snt-header p {
-  margin: 8px 0 0;
-  color: #5b6575;
+  margin: 4px 0 0;
+  color: #f3f4f6;
   max-width: 820px;
+  font-size: 14px;
 }
 
 .snt-badge {
-  background: #d9ecff;
-  color: #0d4778;
-  border-radius: 999px;
+  align-self: flex-start;
   padding: 6px 12px;
+  border-radius: 999px;
+  color: #fff;
+  background: #f58220;
   font-weight: 700;
+  font-size: 13px;
   white-space: nowrap;
 }
 
 .metric-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
+  gap: 10px;
 }
 
 .metric-card,
 .panel {
   background: #fff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e5e7eb;
   border-radius: 8px;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
 }
 
 .metric-card {
-  padding: 16px;
-  border-left: 5px solid #3b82f6;
+  padding: 14px 16px;
+  border-left: 3px solid #f58220;
 }
 
 .metric-card.warning {
@@ -133,46 +194,54 @@
 }
 
 .metric-card.success {
-  border-left-color: #15803d;
+  border-left-color: #2e7d32;
 }
 
 .metric-card.danger {
-  border-left-color: #b91c1c;
+  border-left-color: #b00020;
 }
 
 .metric-card span {
-  color: #5b6575;
-  font-size: 13px;
+  display: block;
+  color: #666;
+  font-size: 14px;
 }
 
 .metric-card strong {
   display: block;
-  font-size: 28px;
-  margin-top: 8px;
+  margin-top: 5px;
+  color: #333;
+  font-size: 30px;
+  line-height: 1;
 }
 
 .dashboard-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: 18px;
+  gap: 10px;
 }
 
 .panel {
-  padding: 18px;
+  overflow: hidden;
+  padding: 16px;
+}
+
+.panel h2 {
+  font-size: 20px;
 }
 
 .bar-list {
   display: grid;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 7px;
+  margin-top: 9px;
 }
 
 .bar-list span {
   position: relative;
-  background: #edf2f7;
-  border-radius: 6px;
-  padding: 9px 12px;
   overflow: hidden;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #f8fafc;
 }
 
 .bar-list span::before {
@@ -180,108 +249,176 @@
   position: absolute;
   inset: 0 auto 0 0;
   width: var(--bar);
-  background: rgba(16, 59, 102, 0.18);
+  background: rgba(245, 130, 32, 0.18);
 }
 
 .workflow {
-  margin: 16px 0 0;
-  padding-left: 20px;
   display: grid;
-  gap: 10px;
+  gap: 6px;
+  margin: 9px 0 0;
+  padding-left: 18px;
 }
 
 .form-grid {
-  margin-top: 16px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: 8px;
+  margin-top: 8px;
 }
 
 .actions {
   display: flex;
   gap: 10px;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .queue-table {
-  margin-top: 16px;
   display: grid;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
   overflow: hidden;
+  margin-top: 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
 }
 
 .queue-row {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 140px 100px;
-  align-items: center;
   gap: 10px;
-  padding: 10px 12px;
-  border-top: 1px solid #e2e8f0;
+  align-items: center;
+  min-width: 840px;
+  padding: 7px 9px;
+  border-top: 1px solid #eee;
 }
 
 .queue-row.head {
   border-top: 0;
-  background: #f8fafc;
-  font-weight: 700;
+  background: #f58220;
+  color: #fff;
+  font-weight: 600;
 }
 
 .code-list {
-  margin-top: 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-top: 8px;
 }
 
 .code-list span {
-  border: 1px solid #cbd5e1;
+  padding: 3px 7px;
+  border: 1px solid #e5e7eb;
   border-radius: 999px;
-  padding: 6px 10px;
   background: #f8fafc;
 }
 
 .audit-list {
-  margin-top: 16px;
   display: grid;
   gap: 10px;
+  margin-top: 8px;
 }
 
 .audit-list article {
   display: grid;
   grid-template-columns: 36px minmax(0, 1fr) auto;
-  gap: 12px;
+  gap: 8px;
   align-items: center;
-  padding: 12px;
-  border: 1px solid #e2e8f0;
+  padding: 7px;
+  border: 1px solid #e5e7eb;
   border-radius: 8px;
+}
+
+.audit-list span,
+.audit-list time {
+  color: #666;
 }
 
 .audit-list span {
   display: block;
-  color: #5b6575;
 }
 
 .audit-list time {
-  color: #5b6575;
   font-size: 13px;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1100px) {
+  .metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-grid,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 901px) {
+  .snt-shell {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .snt-main {
+    max-height: calc(100vh - 20px);
+    overflow: hidden;
+  }
+
+  .snt-main:has(.metric-grid) {
+    grid-template-rows: auto auto minmax(0, 1fr);
+  }
+
+  .dashboard-grid {
+    min-height: 0;
+  }
+
+  .dashboard-grid .panel {
+    min-height: 0;
+  }
+
+  .snt-sidebar {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 900px) {
   .snt-shell {
     grid-template-columns: 1fr;
   }
 
   .snt-sidebar {
     position: static;
+    min-height: auto;
+    gap: 14px;
   }
 
-  .metric-grid,
-  .dashboard-grid,
-  .form-grid {
+  .snt-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 0;
+  }
+
+  .snt-nav-item,
+  .snt-logout {
+    width: auto;
+  }
+
+  .snt-user {
+    margin-top: 0;
+  }
+
+  .snt-main {
+    width: calc(100% - 32px);
+    margin: 12px auto;
+  }
+
+  .snt-header {
+    flex-direction: column;
+  }
+
+  .metric-grid {
     grid-template-columns: 1fr;
   }
 
-  .queue-row {
-    grid-template-columns: 1fr;
+  .queue-table {
+    overflow-x: auto;
   }
 }

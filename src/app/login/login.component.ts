@@ -49,7 +49,10 @@ export class LoginComponent implements OnInit {
       console.log('Is manager?', this.authService.isManager());
 
       if (this.authService.isAdmin()) {
-        this.router.navigate(['/admin-dashboard']);
+        this.router.navigate(['/dashboard']);
+        this.isLoading = false;
+      } else if (this.authService.isFinance()) {
+        this.router.navigate(['/finance']);
         this.isLoading = false;
       } else if (this.authService.isManager()) {
         console.log('Navigating to approve-claims');

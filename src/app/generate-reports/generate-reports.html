@@ -2,7 +2,7 @@
   <header class="reports-header">
     <div>
       <h3>Generate Reports</h3>
-      <p>Create persisted Excel reports for claims and timesheets.</p>
+      <p>Create persisted Excel reports for claims.</p>
     </div>
     <button type="button" mat-button color="primary" (click)="loadReports()" [disabled]="isLoading">
       <mat-icon>refresh</mat-icon>
@@ -22,10 +22,6 @@
     <button type="button" mat-raised-button color="primary" (click)="generateReport('claims')" [disabled]="activeReportType !== null">
       <mat-icon>receipt_long</mat-icon>
       {{ activeReportType === 'claims' ? 'Generating...' : 'Generate Claims Excel' }}
-    </button>
-    <button type="button" mat-raised-button color="primary" (click)="generateReport('timesheets')" [disabled]="activeReportType !== null">
-      <mat-icon>schedule</mat-icon>
-      {{ activeReportType === 'timesheets' ? 'Generating...' : 'Generate Timesheets Excel' }}
     </button>
   </section>
 
@@ -53,7 +49,7 @@
       @for (report of reports; track report.reportId) {
         <div class="report-item" [class.active]="selectedReport?.reportId === report.reportId">
           <button type="button" class="report-select" (click)="selectReport(report)">
-            <mat-icon>{{ report.reportType === 'TIMESHEETS' ? 'schedule' : 'receipt_long' }}</mat-icon>
+            <mat-icon>receipt_long</mat-icon>
             <span>
               <strong>{{ report.fileName }}</strong>
               <small>{{ getReportLabel(report.reportType) }} · {{ report.recordCount || 0 }} records</small>
@@ -95,7 +91,6 @@
             <mat-label>Report Type</mat-label>
             <mat-select name="reportType" [(ngModel)]="editableReport.reportType">
               <mat-option value="CLAIMS">Claims</mat-option>
-              <mat-option value="TIMESHEETS">Timesheets</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="outline">

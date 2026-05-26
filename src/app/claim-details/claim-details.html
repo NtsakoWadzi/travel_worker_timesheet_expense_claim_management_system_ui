@@ -42,10 +42,61 @@
       </div>
     </header>
 
+    @if (submissionSuccessMessage) {
+      <p class="success-message submission-success">{{ submissionSuccessMessage }}</p>
+    }
+
     <mat-stepper #claimStepper class="claim-details-stepper" orientation="horizontal" [linear]="false">
       <mat-step label="Personal Particulars">
         <ng-template matStepContent>
-          <app-timesheet #timesheetForm [embedded]="true" (stepRequested)="selectStep($event)"></app-timesheet>
+          <section class="claim-step-form" aria-label="Rank selection">
+            <table class="claim-entry-table">
+              <tbody>
+                <tr>
+                  <th scope="row">Rank</th>
+                  <td colspan="5">
+                    <select
+                      class="table-input"
+                      required
+                      aria-label="Rank"
+                      [ngModel]="selectedRank"
+                      (ngModelChange)="onRankChanged($event)"
+                    >
+                      <option value="" disabled>Select rank</option>
+                      @for (rank of ranks; track rank) {
+                        <option [ngValue]="rank">{{ rank }}</option>
+                      }
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">PERSAL Number</th>
+                  <td><input class="table-input" type="text" [(ngModel)]="personalParticulars.persalNumber" /></td>
+                  <th scope="row">Initials</th>
+                  <td><input class="table-input" type="text" [(ngModel)]="personalParticulars.initials" /></td>
+                  <th scope="row">Surname</th>
+                  <td><input class="table-input" type="text" [(ngModel)]="personalParticulars.surname" /></td>
+                </tr>
+                <tr>
+                  <th scope="row">Department</th>
+                  <td><input class="table-input" type="text" [(ngModel)]="personalParticulars.department" /></td>
+                  <th scope="row">Directorate</th>
+                  <td><input class="table-input" type="text" [(ngModel)]="personalParticulars.directorate" /></td>
+                  <th scope="row">Region</th>
+                  <td><input class="table-input" type="text" [(ngModel)]="personalParticulars.region" /></td>
+                </tr>
+                <tr>
+                  <th scope="row">Supervisor</th>
+                  <td colspan="2"><input class="table-input" type="text" [(ngModel)]="personalParticulars.supervisor" /></td>
+                  <th scope="row">Cost Centre</th>
+                  <td colspan="2"><input class="table-input" type="text" [(ngModel)]="personalParticulars.costCentre" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          @if (claimValidationMessage) {
+            <p class="validation-message">{{ claimValidationMessage }}</p>
+          }
           <div class="step-actions">
             <button type="button" mat-raised-button color="primary" (click)="continueToClaimStep()">
               Next
@@ -80,8 +131,8 @@
                       type="date"
                       required
                       aria-label="Departure Date"
-                      [(ngModel)]="claimDraft.departureDate"
-                      (ngModelChange)="saveClaimDraft()"
+                      [ngModel]="claimDraft.departureDate"
+                      (ngModelChange)="onClaimDateChanged('departureDate', $event)"
                     />
                   </td>
                   <th scope="row">Arrival Date</th>
@@ -91,8 +142,8 @@
                       type="date"
                       required
                       aria-label="Arrival Date"
-                      [(ngModel)]="claimDraft.arrivalDateTime"
-                      (ngModelChange)="saveClaimDraft()"
+                      [ngModel]="claimDraft.arrivalDateTime"
+                      (ngModelChange)="onClaimDateChanged('arrivalDateTime', $event)"
                     />
                   </td>
                   <th scope="row">Number of Days</th>
@@ -103,8 +154,8 @@
                       min="0"
                       required
                       aria-label="Number of Days"
+                      [readonly]="true"
                       [(ngModel)]="claimDraft.dateNumberOfDays"
-                      (ngModelChange)="saveClaimDraft()"
                     />
                   </td>
                 </tr>
@@ -114,10 +165,11 @@
                     <input
                       class="table-input"
                       type="time"
+                      step="60"
                       required
                       aria-label="Departure Time"
-                      [(ngModel)]="claimDraft.departureTime"
-                      (ngModelChange)="saveClaimDraft()"
+                      [ngModel]="getTimeInputValue(claimDraft.departureTime)"
+                      (ngModelChange)="onClaimTimeChanged('departureTime', $event)"
                     />
                   </td>
                   <th scope="row">Arrival Time</th>
@@ -125,10 +177,11 @@
                     <input
                       class="table-input"
                       type="time"
+                      step="60"
                       required
                       aria-label="Arrival Time"
-                      [(ngModel)]="claimDraft.arrivalTime"
-                      (ngModelChange)="saveClaimDraft()"
+                      [ngModel]="getTimeInputValue(claimDraft.arrivalTime)"
+                      (ngModelChange)="onClaimTimeChanged('arrivalTime', $event)"
                     />
                   </td>
                   <th scope="row">Number of hours</th>
@@ -139,8 +192,8 @@
                       min="0"
                       required
                       aria-label="Number of Hours"
+                      [readonly]="true"
                       [(ngModel)]="claimDraft.numberOfHours"
-                      (ngModelChange)="saveClaimDraft()"
                     />
                   </td>
                 </tr>
@@ -193,6 +246,7 @@
                           [(ngModel)]="row.persalCode"
                           (ngModelChange)="onAllocationCodeChanged(row)"
                         >
+                          <option value="" disabled>Select description</option>
                           @for (option of allocationOptions; track option.persalCode) {
                             <option [ngValue]="option.persalCode">{{ option.description }}</option>
                           }
@@ -265,6 +319,35 @@
                 </tbody>
               </table>
             </div>
+            @if (isAllocationDescriptionDialogOpen) {
+              <div class="allocation-description-backdrop" role="presentation" (click)="closeAllocationDescriptionDialog()">
+                <section
+                  class="allocation-description-dialog"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="allocation-description-title"
+                  (click)="$event.stopPropagation()"
+                >
+                  <header>
+                    <h2 id="allocation-description-title">{{ selectedAllocationDescriptionTitle }}</h2>
+                    <button
+                      type="button"
+                      class="dialog-close-button"
+                      aria-label="Close description dialog"
+                      (click)="closeAllocationDescriptionDialog()"
+                    >
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </header>
+                  <p>{{ selectedAllocationDescriptionText }}</p>
+                  <footer>
+                    <button type="button" mat-raised-button color="primary" (click)="closeAllocationDescriptionDialog()">
+                      OK
+                    </button>
+                  </footer>
+                </section>
+              </div>
+            }
             @if (allocationValidationMessage) {
               <p class="validation-message">{{ allocationValidationMessage }}</p>
             }
@@ -272,11 +355,153 @@
               <p class="success-message">{{ allocationSuccessMessage }}</p>
             }
             <div class="step-actions allocation-footer-actions">
-              <button type="button" mat-stroked-button color="primary" (click)="goToPrivateOwned()">
-                Private Motor
+              @if (isPrivateMotorEligible()) {
+                <button type="button" mat-stroked-button color="primary" (click)="goToPrivateOwned()">
+                  Private Motor
+                </button>
+              }
+              <button type="button" mat-raised-button color="primary" (click)="continueToReceiptsStep()">
+                Next
               </button>
-              <button type="button" mat-raised-button color="primary" (click)="submitAllocation()">
-                Submit
+            </div>
+          </section>
+        </ng-template>
+      </mat-step>
+
+      <mat-step label="Receipts">
+        <ng-template matStepContent>
+          <section class="receipt-step-form" aria-label="Receipt uploads">
+            <h2>Upload receipts</h2>
+            <p class="step-helper">Upload image or PDF receipts for the selected allocation descriptions.</p>
+
+            @if (selectedReceiptCategories.length === 0) {
+              <p class="validation-message">Select allocation descriptions in Step 3 before uploading receipts.</p>
+            }
+
+            <div class="receipt-category-grid">
+              @for (category of selectedReceiptCategories; track category) {
+                <section class="receipt-card">
+                  <header>
+                    <h3>{{ category }}</h3>
+                    <label class="upload-button">
+                      <input
+                        type="file"
+                        accept="image/*,application/pdf"
+                        multiple
+                        (change)="onReceiptSelected(category, $event)"
+                      />
+                      Upload receipt
+                    </label>
+                  </header>
+
+                  @if (getReceiptUploads(category).length > 0) {
+                    <div class="receipt-preview-grid">
+                      @for (receipt of getReceiptUploads(category); track receipt.url) {
+                        <figure class="receipt-preview">
+                          @if (receipt.isImage) {
+                            <img [src]="receipt.url" [alt]="receipt.fileName" />
+                          } @else {
+                            <div class="pdf-preview">
+                              <mat-icon>picture_as_pdf</mat-icon>
+                              <span>PDF</span>
+                            </div>
+                          }
+                          <figcaption>{{ receipt.fileName }}</figcaption>
+                          <div class="receipt-actions">
+                            <a [href]="receipt.url" target="_blank" rel="noopener">View</a>
+                            <button type="button" mat-button color="warn" (click)="removeReceipt(receipt)">Remove</button>
+                          </div>
+                        </figure>
+                      }
+                    </div>
+                  } @else {
+                    <p class="review-empty">No receipt uploaded for this category.</p>
+                  }
+                </section>
+              }
+            </div>
+
+            @if (allocationValidationMessage) {
+              <p class="validation-message">{{ allocationValidationMessage }}</p>
+            }
+            <div class="step-actions">
+              <button type="button" mat-raised-button color="primary" (click)="continueToSignatureStep()">
+                Next
+              </button>
+            </div>
+          </section>
+        </ng-template>
+      </mat-step>
+
+      <mat-step label="Sign">
+        <ng-template matStepContent>
+          <section class="signature-step-form" aria-label="Applicant signature">
+            <h2>Applicant / Appointee Signature</h2>
+            <div class="allocation-table-wrap">
+              <table class="authorisation-signature-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Applicant/Appointee</th>
+                    <th scope="col">Signature</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="paired-fields">
+                        <label>
+                          <span>Name</span>
+                          <input class="table-input" type="text" aria-label="Applicant name" [value]="getApplicantName()" readonly />
+                        </label>
+                        <label>
+                          <span>Rank</span>
+                          <input class="table-input" type="text" aria-label="Applicant rank" [value]="selectedRank" readonly />
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <div
+                        class="signature-drop-zone"
+                        (dragover)="onSignatureDragOver($event)"
+                        (drop)="onSignatureDropped($event)"
+                      >
+                        <mat-icon>drive_folder_upload</mat-icon>
+                        <span>Drag and drop signature image/PDF here</span>
+                        <label class="upload-button">
+                          <input type="file" accept="image/*,application/pdf" (change)="onSignatureSelected($event)" />
+                          Browse
+                        </label>
+                      </div>
+                      @if (signatureFile) {
+                        <figure class="signature-preview">
+                          @if (signatureFile.isImage) {
+                            <img [src]="signatureFile.url" [alt]="signatureFile.fileName" />
+                          } @else {
+                            <a [href]="signatureFile.url" target="_blank" rel="noopener">{{ signatureFile.fileName }}</a>
+                          }
+                          <figcaption>{{ signatureFile.fileName }}</figcaption>
+                          <button type="button" mat-button color="warn" (click)="removeSignature()">Remove</button>
+                        </figure>
+                      }
+                    </td>
+                    <td>
+                      <input class="table-input" type="text" aria-label="Signature timestamp" [value]="signatureDateTime" readonly />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            @if (allocationValidationMessage) {
+              <p class="validation-message">{{ allocationValidationMessage }}</p>
+            }
+            @if (allocationSuccessMessage) {
+              <p class="success-message">{{ allocationSuccessMessage }}</p>
+            }
+            <div class="step-actions">
+              <button type="button" mat-raised-button color="primary" [disabled]="isSubmittingClaim" (click)="submitAllocation()">
+                {{ isSubmittingClaim ? 'Saving...' : 'Submit' }}
               </button>
             </div>
           </section>

@@ -4,12 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
 
-import { Timesheet } from './timesheet/timesheet';
-import { Claims } from './claims/claims';
 import { ApproveClaims } from './approve-claims/approve-claims';
 import { ClaimStatus } from './claim-status/claim-status';
-import { BankDetailsComponent } from './bank-details/bank-details';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard';
 import { ClaimDetailsComponent } from './claim-details/claim-details';
 import { PayClaimsComponent } from './pay-claims/pay-claims';
 import { PrivateOwnedComponent } from './private-owned/private-owned';
@@ -18,21 +14,23 @@ import { SubsistenceTravelClaimFormComponent } from './subsistence-travel-claim-
 import { AuthorisationComponent } from './authorisation/authorisation';
 import { GenerateReportsComponent } from './generate-reports/generate-reports';
 import { SntWorkspaceComponent } from './snt-workspace/snt-workspace';
+import { AdminAuthGuard } from './services/admin-auth-guard';
+import { FinanceAuthGuard } from './services/finance-auth-guard';
 
  
 
 const routes: Routes = [
 
   { path: '',component: LoginComponent,},
-  { path: 'dashboard', component: SntWorkspaceComponent, data: { section: 'dashboard' } },
-  { path: 'employees', component: SntWorkspaceComponent, data: { section: 'employees' } },
+  { path: 'dashboard', component: SntWorkspaceComponent, canActivate: [AdminAuthGuard], data: { section: 'dashboard' } },
+  { path: 'employees', component: SntWorkspaceComponent, canActivate: [AdminAuthGuard], data: { section: 'employees' } },
   { path: 'travel-authorisations', component: AuthorisationComponent },
   { path: 'mileage', component: PrivateOwnedComponent },
   { path: 'approvals', component: ApproveClaims },
-  { path: 'finance', component: SntWorkspaceComponent, data: { section: 'finance' } },
+  { path: 'finance', component: SntWorkspaceComponent, canActivate: [FinanceAuthGuard], data: { section: 'finance' } },
   { path: 'reports', component: GenerateReportsComponent },
-  { path: 'admin', component: AdminDashboardComponent },
-  { path: 'audit-logs', component: SntWorkspaceComponent, data: { section: 'audit-logs' } },
+  { path: 'admin', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'audit-logs', component: SntWorkspaceComponent, canActivate: [AdminAuthGuard], data: { section: 'audit-logs' } },
   { path: 'claim-details',component: ClaimDetailsComponent, },
   { path: 'timesheet',redirectTo: 'claim-details', pathMatch: 'full',},
   { path: 'claims',component: ClaimDetailsComponent, },
@@ -42,7 +40,7 @@ const routes: Routes = [
   { path: 'subsistence-travel-claim-form',component: SubsistenceTravelClaimFormComponent, },
   { path: 'authorisation',component: AuthorisationComponent, },
   { path: 'pay-claims/:claimId',component: PayClaimsComponent, },
-  { path: 'admin-dashboard',component: AdminDashboardComponent, },
+  { path: 'admin-dashboard',redirectTo: 'dashboard', pathMatch: 'full', },
   { path: 'private-owned',component: PrivateOwnedComponent, },
   { path: 'details-of-journey',component: DetailsOfJourneyComponent, },
 ];

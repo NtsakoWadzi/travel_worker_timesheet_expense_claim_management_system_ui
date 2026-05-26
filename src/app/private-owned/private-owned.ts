@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth';
-import { ClaimsService } from '../services/claims-service';
+import { ClaimsService, PrivateMotorDraft } from '../services/claims-service';
 
 @Component({
   selector: 'app-private-owned',
@@ -34,6 +34,14 @@ export class PrivateOwnedComponent {
     this.employeeName = user?.userFirstName && user?.userLastName
       ? `${user.userFirstName} ${user.userLastName}`
       : user?.userName || 'Employee';
+
+    const draft = this.claimsService.getPrivateMotorDraft();
+    if (draft) {
+      Object.assign(this, draft);
+    } else {
+      this.claimedBy = this.employeeName;
+      this.rank = this.claimsService.getClaimDraft()?.rank || '';
+    }
   }
 
   goToClaimDetails(): void {
@@ -45,7 +53,12 @@ export class PrivateOwnedComponent {
   }
 
   goToDetailsOfJourney(): void {
+    this.savePrivateMotorDraft();
     this.router.navigate(['/details-of-journey']);
+  }
+
+  savePrivateMotorDraft(): void {
+    this.claimsService.savePrivateMotorDraft(this.getPrivateMotorDraft());
   }
 
   logout(): void {
@@ -54,5 +67,23 @@ export class PrivateOwnedComponent {
     this.claimsService.clearClaimStatus();
     this.authService.logout();
     this.router.navigate(['/']);
+  }
+
+  private getPrivateMotorDraft(): PrivateMotorDraft {
+    return {
+      claimedBy: this.claimedBy,
+      departmentOf: this.departmentOf,
+      rank: this.rank,
+      address: this.address,
+      month: this.month,
+      headquarters: this.headquarters,
+      accountClaimNo: this.accountClaimNo,
+      makeAndModel: this.makeAndModel,
+      category: this.category,
+      yearOfManufacture: this.yearOfManufacture,
+      vehicleType: this.vehicleType,
+      registrationNumber: this.registrationNumber,
+      engineSweptVolumeGroup: this.engineSweptVolumeGroup,
+    };
   }
 }

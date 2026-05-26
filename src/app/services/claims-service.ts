@@ -13,6 +13,37 @@ export interface SubsistenceTravelClaimFormDraft {
   amount: string;
 }
 
+export interface PrivateMotorDraft {
+  claimedBy: string;
+  departmentOf: string;
+  rank: string;
+  address: string;
+  month: string;
+  headquarters: string;
+  accountClaimNo: string;
+  makeAndModel: string;
+  category: string;
+  yearOfManufacture: string;
+  vehicleType: string;
+  registrationNumber: string;
+  engineSweptVolumeGroup: string;
+}
+
+export interface PrivateMotorJourneyDraft {
+  date: string;
+  reason: string;
+  homeToDestinationKm?: number;
+  officeToDestinationKm?: number;
+  claimableKm?: number;
+  departureFrom: string;
+  departureTime: string;
+  arrivalAt: string;
+  arrivalTime: string;
+  speedometerStart?: number;
+  speedometerEnd?: number;
+  totalTraveled?: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -22,6 +53,8 @@ export class ClaimsService {
   private readonly pendingPaymentStorageKey = 'pendingClaimPayment';
   private readonly subsistenceTravelClaimFormDraftKey = 'subsistenceTravelClaimFormDraft';
   private readonly localSubmittedClaimsStorageKey = 'localSubmittedClaims';
+  private readonly privateMotorDraftKey = 'privateMotorDraft';
+  private readonly privateMotorJourneyDraftKey = 'privateMotorJourneyDraft';
   private claimDraft?: Claim;
   private timesheetDraft: ClaimTimesheet[] = [];
   private statusRefreshIntervalId?: number;
@@ -106,6 +139,27 @@ export class ClaimsService {
     }
   }
 
+  savePrivateMotorDraft(draft: PrivateMotorDraft): void {
+    localStorage.setItem(this.privateMotorDraftKey, JSON.stringify(draft));
+  }
+
+  getPrivateMotorDraft(): PrivateMotorDraft | undefined {
+    return this.getStoredValue<PrivateMotorDraft>(this.privateMotorDraftKey);
+  }
+
+  savePrivateMotorJourneyDraft(draft: PrivateMotorJourneyDraft[]): void {
+    localStorage.setItem(this.privateMotorJourneyDraftKey, JSON.stringify(draft));
+  }
+
+  getPrivateMotorJourneyDraft(): PrivateMotorJourneyDraft[] {
+    return this.getStoredValue<PrivateMotorJourneyDraft[]>(this.privateMotorJourneyDraftKey) || [];
+  }
+
+  clearPrivateMotorDrafts(): void {
+    localStorage.removeItem(this.privateMotorDraftKey);
+    localStorage.removeItem(this.privateMotorJourneyDraftKey);
+  }
+
   saveLocalSubmittedClaim(claim: Claim): Claim {
     const claims = this.getLocalSubmittedClaims().filter((item) => !this.isSameClaim(item, claim));
     const savedClaim: Claim = {
@@ -167,8 +221,6 @@ export class ClaimsService {
       claimDate: claim.ClaimDate,
       categories: Array.isArray(claim.categories) ? claim.categories.join(', ') : claim.categories,
       status: true,
-      bankDetails: claim.bankDetails,
-      timesheetDetails: claim.timesheetDetails || this.timesheetDraft,
       claimDescription: claim.claimDescription,
       departureDate: claim.departureDate,
       arrivalDateTime: claim.arrivalDateTime,
@@ -184,10 +236,6 @@ export class ClaimsService {
       new Blob([JSON.stringify(claimPayload)], { type: 'application/json' })
     );
     formData.append('details', JSON.stringify(claim.claimDetails || []));
-    formData.append('timesheets', JSON.stringify(claim.timesheetDetails || this.timesheetDraft || []));
-    if (claim.bankDetails) {
-      formData.append('bankDetails', JSON.stringify(claim.bankDetails));
-    }
 
     (claim.claimImages as any[]).forEach((fileHandle) => {
       formData.append('files', fileHandle.file, fileHandle.file.name);
@@ -354,6 +402,19 @@ export class ClaimsService {
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('jwtToken');
     return token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : new HttpHeaders();
+  }
+
+  private getStoredValue<T>(key: string): T | undefined {
+    const value = localStorage.getItem(key);
+    if (!value) {
+      return undefined;
+    }
+
+    try {
+      return JSON.parse(value) as T;
+    } catch {
+      return undefined;
+    }
   }
 
   private savePendingClaimReview(savedClaim: Claim, submittedClaim: Claim): void {

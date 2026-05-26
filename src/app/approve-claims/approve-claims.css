@@ -135,6 +135,12 @@
   border-radius: 8px;
 }
 
+.submitted-claims-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
 .table-row {
   display: grid;
   grid-template-columns: 140px 150px 130px minmax(180px, 1fr) 110px 130px 130px;

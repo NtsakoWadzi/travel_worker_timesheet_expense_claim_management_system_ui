@@ -139,7 +139,7 @@ export class GenerateReportsComponent implements OnInit {
   }
 
   getReportLabel(reportType: ReportType | string): string {
-    return reportType === 'timesheets' || reportType === 'TIMESHEETS' ? 'Timesheets' : 'Claims';
+    return 'Claims';
   }
 
   private getSelectedReportAfterReload(): GeneratedReport | null {

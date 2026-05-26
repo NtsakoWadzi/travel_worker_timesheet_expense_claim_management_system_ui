@@ -22,6 +22,7 @@ export interface Claim{
     userSubmissionCount?: number;
     total_amount?: number;
     claimDescription?: string;
+    rank?: string;
     departureDate?: string;
     arrivalDateTime?: string;
     dateNumberOfDays?: number;

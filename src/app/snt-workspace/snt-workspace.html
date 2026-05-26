@@ -9,11 +9,20 @@
     </div>
 
     <nav class="snt-nav">
-      @for (item of navigation; track item.route) {
-        <a class="snt-nav-item" [class.active]="isActive(item.route)" [routerLink]="item.route">
-          <mat-icon>{{ item.icon }}</mat-icon>
-          <span>{{ item.label }}</span>
-        </a>
+      @if (isFinanceWorkspace) {
+        @for (item of financeNavigation; track item.view) {
+          <button type="button" class="snt-nav-item" [class.active]="financeView === item.view" (click)="selectFinanceView(item.view)">
+            <mat-icon>{{ item.icon }}</mat-icon>
+            <span>{{ item.label }}</span>
+          </button>
+        }
+      } @else {
+        @for (item of navigation; track item.route) {
+          <a class="snt-nav-item" [class.active]="isActive(item.route)" [routerLink]="item.route">
+            <mat-icon>{{ item.icon }}</mat-icon>
+            <span>{{ item.label }}</span>
+          </a>
+        }
       }
     </nav>
 
@@ -21,7 +30,7 @@
       <mat-icon>account_circle</mat-icon>
       <div>
         <strong>{{ userName }}</strong>
-        <span>Role-based access</span>
+        <span>{{ roleLabel }}</span>
       </div>
     </div>
     <button type="button" class="snt-logout" (click)="logout()">
@@ -97,35 +106,160 @@
     }
 
     @if (section === 'finance') {
-      <section class="panel">
-        <h2>Finance queue</h2>
-        <div class="queue-table">
-          <div class="queue-row head">
-            <span>Reference</span>
-            <span>Employee</span>
-            <span>Status</span>
-            <span>Amount</span>
-            <span>Action</span>
-          </div>
-          @for (claim of financeQueue; track claim.reference) {
-            <div class="queue-row">
-              <span>{{ claim.reference }}</span>
-              <span>{{ claim.employee }}</span>
-              <span>{{ claim.status }}</span>
-              <span>{{ claim.amount }}</span>
-              <button type="button" mat-button color="primary">Process</button>
+      @if (financeView === 'dashboard') {
+        <section class="metric-grid" aria-label="Finance dashboard metrics">
+          @for (metric of financeMetrics; track metric.label) {
+            <article
+              class="metric-card"
+              [class.warning]="metric.tone === 'warning'"
+              [class.success]="metric.tone === 'success'"
+              [class.danger]="metric.tone === 'danger'"
+            >
+              <span>{{ metric.label }}</span>
+              <strong>{{ metric.value }}</strong>
+            </article>
+          }
+        </section>
+        <section class="dashboard-grid">
+          <article class="panel">
+            <h2>Claims awaiting finance review</h2>
+            <div class="queue-table">
+              <div class="queue-row head">
+                <span>Reference</span>
+                <span>Employee</span>
+                <span>Status</span>
+                <span>Amount</span>
+                <span>Action</span>
+              </div>
+              @for (claim of financeQueue; track claim.reference) {
+                <div class="queue-row">
+                  <span>{{ claim.reference }}</span>
+                  <span>{{ claim.employee }}</span>
+                  <span>{{ claim.status }}</span>
+                  <span>{{ claim.amount }}</span>
+                  <button type="button" mat-button color="primary" (click)="selectFinanceView('queue')">Review</button>
+                </div>
+              }
             </div>
-          }
-        </div>
-      </section>
-      <section class="panel">
-        <h2>Allocation codes</h2>
-        <div class="code-list">
-          @for (code of allocationCodes; track code) {
-            <span>{{ code }}</span>
-          }
-        </div>
-      </section>
+          </article>
+          <article class="panel">
+            <h2>Payment history</h2>
+            <div class="audit-list">
+              @for (payment of paymentHistory; track payment.reference) {
+                <article>
+                  <mat-icon>paid</mat-icon>
+                  <div>
+                    <strong>{{ payment.reference }}</strong>
+                    <span>{{ payment.employee }} - {{ payment.amount }}</span>
+                  </div>
+                  <time>{{ payment.status }}</time>
+                </article>
+              }
+            </div>
+          </article>
+        </section>
+      }
+
+      @if (financeView === 'queue') {
+        <section class="panel">
+          <h2>Claims awaiting finance review</h2>
+          <div class="queue-table">
+            <div class="queue-row head">
+              <span>Reference</span>
+              <span>Employee</span>
+              <span>Status</span>
+              <span>Amount</span>
+              <span>Action</span>
+            </div>
+            @for (claim of financeQueue; track claim.reference) {
+              <div class="queue-row">
+                <span>{{ claim.reference }}</span>
+                <span>{{ claim.employee }}</span>
+                <span>{{ claim.status }}</span>
+                <span>{{ claim.amount }}</span>
+                <button type="button" mat-button color="primary" (click)="approveFinanceClaim(claim)">Approve</button>
+              </div>
+            }
+          </div>
+        </section>
+      }
+
+      @if (financeView === 'payments') {
+        <section class="panel">
+          <h2>Payment approvals</h2>
+          <div class="queue-table">
+            <div class="queue-row head">
+              <span>Reference</span>
+              <span>Employee</span>
+              <span>Status</span>
+              <span>Amount</span>
+              <span>Action</span>
+            </div>
+            @for (payment of paymentApprovals; track payment.reference) {
+              <div class="queue-row">
+                <span>{{ payment.reference }}</span>
+                <span>{{ payment.employee }}</span>
+                <span>{{ payment.status }}</span>
+                <span>{{ payment.amount }}</span>
+                <button type="button" mat-button color="primary" (click)="payFinanceClaim(payment)">Pay</button>
+              </div>
+            }
+          </div>
+        </section>
+      }
+
+      @if (financeView === 'approved') {
+        <section class="panel">
+          <h2>Approved claims</h2>
+          <div class="queue-table">
+            <div class="queue-row head">
+              <span>Reference</span>
+              <span>Employee</span>
+              <span>Status</span>
+              <span>Amount</span>
+              <span>Action</span>
+            </div>
+            @for (claim of approvedClaims; track claim.reference) {
+              <div class="queue-row">
+                <span>{{ claim.reference }}</span>
+                <span>{{ claim.employee }}</span>
+                <span>{{ claim.status }}</span>
+                <span>{{ claim.amount }}</span>
+                <button type="button" mat-button color="primary">View</button>
+              </div>
+            }
+          </div>
+        </section>
+      }
+
+      @if (financeView === 'reports') {
+        <section class="panel">
+          <h2>Finance reports</h2>
+          <div class="code-list">
+            @for (report of financeReports; track report) {
+              <span>{{ report }}</span>
+            }
+          </div>
+        </section>
+      }
+
+      @if (financeView === 'audit') {
+        <section class="panel">
+          <h2>Audit logs</h2>
+          <div class="audit-list">
+            @for (event of auditEvents; track event.time + event.subject) {
+              <article>
+                <mat-icon>history</mat-icon>
+                <div>
+                  <strong>{{ event.action }}</strong>
+                  <span>{{ event.subject }} by {{ event.actor }}</span>
+                </div>
+                <time>{{ event.time }}</time>
+              </article>
+            }
+          </div>
+        </section>
+      }
     }
 
     @if (section === 'audit-logs') {
