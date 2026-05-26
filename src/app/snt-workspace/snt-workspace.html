@@ -1,0 +1,149 @@
+<div class="snt-shell">
+  <aside class="snt-sidebar" aria-label="S&T navigation">
+    <div class="snt-brand">
+      <img src="logo.jpeg" alt="Department of Public Works and Infrastructure" />
+      <div>
+        <strong>KHOKHA S&amp;T</strong>
+        <span>Management System</span>
+      </div>
+    </div>
+
+    <nav class="snt-nav">
+      @for (item of navigation; track item.route) {
+        <a class="snt-nav-item" [class.active]="isActive(item.route)" [routerLink]="item.route">
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <span>{{ item.label }}</span>
+        </a>
+      }
+    </nav>
+
+    <div class="snt-user">
+      <mat-icon>account_circle</mat-icon>
+      <div>
+        <strong>{{ userName }}</strong>
+        <span>Role-based access</span>
+      </div>
+    </div>
+    <button type="button" class="snt-logout" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </aside>
+
+  <main class="snt-main">
+    <header class="snt-header">
+      <div>
+        <h1>{{ title }}</h1>
+        <p>{{ description }}</p>
+      </div>
+      <span class="snt-badge">BRD aligned</span>
+    </header>
+
+    @if (section === 'dashboard') {
+      <section class="metric-grid" aria-label="Dashboard metrics">
+        @for (metric of metrics; track metric.label) {
+          <article
+            class="metric-card"
+            [class.warning]="metric.tone === 'warning'"
+            [class.success]="metric.tone === 'success'"
+            [class.danger]="metric.tone === 'danger'"
+          >
+            <span>{{ metric.label }}</span>
+            <strong>{{ metric.value }}</strong>
+          </article>
+        }
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel">
+          <h2>Claims by status</h2>
+          <div class="bar-list">
+            <span style="--bar: 72%">Submitted</span>
+            <span style="--bar: 58%">Supervisor Approved</span>
+            <span style="--bar: 46%">Logistics Verified</span>
+            <span style="--bar: 39%">Finance Approved</span>
+            <span style="--bar: 31%">Paid</span>
+          </div>
+        </article>
+        <article class="panel">
+          <h2>Required workflow</h2>
+          <ol class="workflow">
+            <li>Employee submits travel authorisation and claim documents.</li>
+            <li>Supervisor approves or rejects with comments.</li>
+            <li>Logistics validates route, accommodation, and supporting proof.</li>
+            <li>Finance validates allocation codes, totals, advances, and payment.</li>
+            <li>Paid claims close with audit records.</li>
+          </ol>
+        </article>
+      </section>
+    }
+
+    @if (section === 'employees') {
+      <section class="panel">
+        <h2>Employee record</h2>
+        <div class="form-grid">
+          @for (field of employeeFields; track field) {
+            <mat-form-field appearance="outline">
+              <mat-label>{{ field }}</mat-label>
+              <input matInput />
+            </mat-form-field>
+          }
+        </div>
+        <div class="actions">
+          <button type="button" mat-raised-button color="primary">Save employee</button>
+          <button type="button" mat-stroked-button color="primary">Reset</button>
+        </div>
+      </section>
+    }
+
+    @if (section === 'finance') {
+      <section class="panel">
+        <h2>Finance queue</h2>
+        <div class="queue-table">
+          <div class="queue-row head">
+            <span>Reference</span>
+            <span>Employee</span>
+            <span>Status</span>
+            <span>Amount</span>
+            <span>Action</span>
+          </div>
+          @for (claim of financeQueue; track claim.reference) {
+            <div class="queue-row">
+              <span>{{ claim.reference }}</span>
+              <span>{{ claim.employee }}</span>
+              <span>{{ claim.status }}</span>
+              <span>{{ claim.amount }}</span>
+              <button type="button" mat-button color="primary">Process</button>
+            </div>
+          }
+        </div>
+      </section>
+      <section class="panel">
+        <h2>Allocation codes</h2>
+        <div class="code-list">
+          @for (code of allocationCodes; track code) {
+            <span>{{ code }}</span>
+          }
+        </div>
+      </section>
+    }
+
+    @if (section === 'audit-logs') {
+      <section class="panel">
+        <h2>Immutable audit events</h2>
+        <div class="audit-list">
+          @for (event of auditEvents; track event.time + event.subject) {
+            <article>
+              <mat-icon>history</mat-icon>
+              <div>
+                <strong>{{ event.action }}</strong>
+                <span>{{ event.subject }} by {{ event.actor }}</span>
+              </div>
+              <time>{{ event.time }}</time>
+            </article>
+          }
+        </div>
+      </section>
+    }
+  </main>
+</div>

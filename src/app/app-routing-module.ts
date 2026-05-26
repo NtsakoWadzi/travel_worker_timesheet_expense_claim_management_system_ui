@@ -16,15 +16,26 @@ import { PrivateOwnedComponent } from './private-owned/private-owned';
 import { DetailsOfJourneyComponent } from './details-of-journey/details-of-journey';
 import { SubsistenceTravelClaimFormComponent } from './subsistence-travel-claim-form/subsistence-travel-claim-form';
 import { AuthorisationComponent } from './authorisation/authorisation';
+import { GenerateReportsComponent } from './generate-reports/generate-reports';
+import { SntWorkspaceComponent } from './snt-workspace/snt-workspace';
 
  
 
 const routes: Routes = [
 
   { path: '',component: LoginComponent,},
+  { path: 'dashboard', component: SntWorkspaceComponent, data: { section: 'dashboard' } },
+  { path: 'employees', component: SntWorkspaceComponent, data: { section: 'employees' } },
+  { path: 'travel-authorisations', component: AuthorisationComponent },
+  { path: 'mileage', component: PrivateOwnedComponent },
+  { path: 'approvals', component: ApproveClaims },
+  { path: 'finance', component: SntWorkspaceComponent, data: { section: 'finance' } },
+  { path: 'reports', component: GenerateReportsComponent },
+  { path: 'admin', component: AdminDashboardComponent },
+  { path: 'audit-logs', component: SntWorkspaceComponent, data: { section: 'audit-logs' } },
   { path: 'claim-details',component: ClaimDetailsComponent, },
   { path: 'timesheet',redirectTo: 'claim-details', pathMatch: 'full',},
-  { path: 'claims',redirectTo: 'claim-details', pathMatch: 'full', },
+  { path: 'claims',component: ClaimDetailsComponent, },
   { path: 'bank-details',redirectTo: 'claim-details', pathMatch: 'full', },
   { path: 'claim-status',component: ClaimStatus, },
   { path: 'approve-claims',component: ApproveClaims, },
